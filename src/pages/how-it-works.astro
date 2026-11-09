@@ -1,0 +1,122 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/site/PageHero.astro';
+import Icon from '../components/site/Icon.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { PHOTOS } from '../data/photos.js';
+
+const routine = [
+  { icon: 'droplet', title: 'Apply the gel', text: 'Squeeze a small amount of electrode gel onto the skin over the sore spot. The gel carries the microcurrent from the device into your skin.' },
+  { icon: 'zap', title: 'Switch it on', text: 'Press the single on/off button. The laser and the microcurrent start together, so there’s nothing to set up or adjust.' },
+  { icon: 'timer', title: 'Two minutes of strokes', text: 'Hold the head against your skin and move it in slow circles or paint strokes over the area for about two minutes.' },
+  { icon: 'repeat', title: 'Repeat through the day', text: 'Use it up to five times a day on each area. Wipe the gel off the head and your skin when you’re done.' },
+];
+---
+<SiteLayout
+  title="How LaserTouchOne works | Laser Micro Duo"
+  description="How LaserTouchOne combines a 670 nm cold laser and microcurrent in one handheld device, the two-minute routine, what it’s FDA-cleared for, and how to use it safely."
+>
+  <PageHero
+    title="How LaserTouchOne works"
+    lead="Two gentle technologies, one small head, two minutes at a time. Here’s what happens when you switch it on."
+  />
+
+  <section class="section section--tight-top">
+    <div class="container split">
+      <div class="diagram-card">
+        <svg viewBox="0 0 400 300" role="img" aria-labelledby="dia-t dia-d">
+          <title id="dia-t">The LaserTouchOne treatment head</title>
+          <desc id="dia-d">A red laser point in the middle of the head, with a steel microcurrent contact on each side.</desc>
+          <rect x="70" y="95" width="260" height="110" rx="55" fill="#e3eadf" />
+          <circle cx="130" cy="150" r="26" fill="#9aa59f" />
+          <circle cx="270" cy="150" r="26" fill="#9aa59f" />
+          <circle cx="200" cy="150" r="20" fill="#c4122f" />
+          <circle cx="200" cy="150" r="34" fill="none" stroke="#c4122f" stroke-opacity="0.25" stroke-width="8" />
+          <line x1="200" y1="114" x2="200" y2="60" stroke="#5b6660" stroke-width="1.5" />
+          <text x="200" y="48" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">670 nm cold laser</text>
+          <line x1="130" y1="178" x2="130" y2="240" stroke="#5b6660" stroke-width="1.5" />
+          <line x1="270" y1="178" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
+          <text x="200" y="262" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">Two microcurrent contacts</text>
+          <line x1="130" y1="240" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
+        </svg>
+      </div>
+      <div class="split__copy">
+        <h2 class="h2">Two technologies working on one spot</h2>
+        <div class="feature">
+          <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
+          <div>
+            <h3 class="h3">Low-level cold laser</h3>
+            <p>A single 670 nm red laser diode under 1 mW sits in the middle of the head. It’s called a cold laser because it doesn’t heat or burn the skin.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
+          <div>
+            <h3 class="h3">Microcurrent stimulation</h3>
+            <p>Two stainless steel contacts deliver mild, pulsed electrical stimulation through the gel at the same time as the laser, so both reach the same area.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2 class="h2">Your two-minute routine</h2>
+        <p class="lead">No appointments and nothing to wear. Use it on the couch, at your desk or after a workout.</p>
+      </div>
+      <ol class="routine">
+        {routine.map((s, i) => (
+          <li class="routine__step">
+            <span class="step__icon"><Icon name={s.icon} size={28} /><span class="step__num" aria-hidden="true">{i + 1}</span></span>
+            <div>
+              <h3 class="h3">{s.title}</h3>
+              <p>{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="split__copy">
+        <h2 class="h2">What it’s cleared for</h2>
+        <p class="lead">LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116). People use it for:</p>
+        <ul class="checklist checklist--lg">
+          <li><Icon name="check" size={20} />Relief of chronic, long-lasting pain</li>
+          <li><Icon name="check" size={20} />Help with pain after surgery or an injury, alongside your other care</li>
+          <li><Icon name="check" size={20} />Temporary relief of minor neck and shoulder pain</li>
+        </ul>
+        <blockquote class="quote-card">
+          <p>“Symptomatic relief of chronic, intractable pain, and is indicated for adjunctive treatment of post-surgical and post-traumatic acute pain and for adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.”</p>
+          <footer>FDA clearance K100116, indications for use. <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the document</a></footer>
+        </blockquote>
+      </div>
+      <div class="photo-card">
+        <img src={PHOTOS.cyclist.src} width={PHOTOS.cyclist.width} height={PHOTOS.cyclist.height} alt={PHOTOS.cyclist.alt} loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight-top">
+    <div class="container">
+      <div class="safety">
+        <span class="icon-badge icon-badge--lg"><Icon name="shield" size={24} /></span>
+        <div>
+          <h2 class="h3">Use it safely</h2>
+          <ul class="safety__list">
+            <li>Never point the laser at your eyes or anyone else’s.</li>
+            <li>If you are pregnant, or have a heart condition or epilepsy, talk to your doctor first.</li>
+            <li>If your pain is new, severe or unexplained, see a doctor before using any device.</li>
+            <li>Read the user manual before your first session.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Ready to try it?" text="Pick your kit, or text us if you’d like help choosing." />
+</SiteLayout>

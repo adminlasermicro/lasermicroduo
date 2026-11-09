@@ -1,0 +1,67 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/site/PageHero.astro';
+import Icon from '../components/site/Icon.astro';
+import { SITE, textHref } from '../site.config.js';
+---
+<SiteLayout
+  title="Contact us | Laser Micro Duo"
+  description="Text or email Laser Micro Duo with questions about LaserTouchOne, your order or your first session."
+>
+  <PageHero title="We’re here to help" lead={`Questions about LaserTouchOne, your order or your first session? Text or email us. ${SITE.replyHours}`} />
+
+  <section class="section section--tight-top">
+    <div class="container contact-grid">
+      <div class="contact-ways">
+        {SITE.textNumber && (
+          <a class="contact-way" href={textHref}>
+            <span class="icon-badge icon-badge--lg"><Icon name="message" size={24} /></span>
+            <span><span class="contact-way__label">Text us</span><span class="contact-way__value">{SITE.textNumber}</span><span class="contact-way__note">The fastest way to reach us</span></span>
+          </a>
+        )}
+        <a class="contact-way" href={`mailto:${SITE.contactEmail}`}>
+          <span class="icon-badge icon-badge--lg"><Icon name="mail" size={24} /></span>
+          <span><span class="contact-way__label">Email us</span><span class="contact-way__value">{SITE.contactEmail}</span><span class="contact-way__note">For order details and longer questions</span></span>
+        </a>
+      </div>
+
+      <form class="contact-form" data-contact={SITE.contactEmail} novalidate>
+        <h2 class="h3">Send us a message</h2>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone (optional)</label>
+          <input id="c-phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div class="field">
+          <label for="c-msg">How can we help?</label>
+          <textarea id="c-msg" name="message" rows="5" required></textarea>
+        </div>
+        <p class="form-error" data-form-error hidden>Fill in your name, a valid email and your message.</p>
+        <button type="submit" class="btn btn--primary btn--lg">Send message</button>
+        <p class="form-note">This opens your email app with your message ready to send.</p>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector('form[data-contact]');
+    if (form) {
+      const err = form.querySelector('[data-form-error]');
+      form.addEventListener('input', () => { err.hidden = true; });
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { err.hidden = false; form.querySelector(':invalid')?.focus(); return; }
+        const d = new FormData(form);
+        const body = `Name: ${d.get('name')}\nEmail: ${d.get('email')}\nPhone: ${d.get('phone') || '-'}\n\n${d.get('message')}`;
+        window.location.href = `mailto:${form.dataset.contact}?subject=${encodeURIComponent('Question about LaserTouchOne')}&body=${encodeURIComponent(body)}`;
+      });
+    }
+  </script>
+</SiteLayout>

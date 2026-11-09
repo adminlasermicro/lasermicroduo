@@ -1,0 +1,12 @@
+---
+import Icon from './Icon.astro';
+const { items, openFirst = true } = Astro.props;
+---
+<div class="faq">
+  {items.map((f, i) => (
+    <details class="faq__item" open={openFirst && i === 0}>
+      <summary>{f.q}<span class="faq__icon"><Icon name="plus" size={20} /></span></summary>
+      <p>{f.a}</p>
+    </details>
+  ))}
+</div>

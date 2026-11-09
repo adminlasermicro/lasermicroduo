@@ -1,19 +1,61 @@
 ---
-import { members } from '@wix/members';
-import Layout from '../layouts/Layout.astro';
-import AppIsland from '../components/AppIsland.jsx';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/site/PageHero.astro';
+import Icon from '../components/site/Icon.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { PHOTOS } from '../data/photos.js';
 
-let member = null;
-try {
-  const { member: m } = await members.getCurrentMember({ fieldsets: ['FULL'] });
-  if (m) {
-    member = {
-      loginEmail: m.loginEmail ?? null,
-      profile: { nickname: m.profile?.nickname ?? null },
-    };
-  }
-} catch {}
+const promises = [
+  { icon: 'shield', title: 'Genuine devices', text: 'As an authorized reseller, every LaserTouchOne we sell is the real thing, straight from the manufacturer’s supply.' },
+  { icon: 'calendar', title: 'The full warranty and trial', text: 'You get the manufacturer’s warranty and a 30-day in-home trial, and we’ll handle the details if you need them.' },
+  { icon: 'message', title: 'A real person to text', text: 'Questions before you buy, help with your first session, or a quick check-in later. Just text us.' },
+];
 ---
-<Layout title="Our Story — Brand Name">
-  <AppIsland products={[]} member={member} page="about" client:load />
-</Layout>
+<SiteLayout
+  title="About us | Laser Micro Duo"
+  description="Laser Micro Duo is an authorized LaserTouchOne reseller. Genuine devices, the full manufacturer’s warranty and a real person to text."
+>
+  <PageHero
+    title="Real people behind your relief"
+    lead="We’re Laser Micro Duo, an authorized LaserTouchOne reseller. We help people find drug-free pain relief they can use at home, and we stay with you after you buy."
+  />
+
+  <section class="section section--tight-top">
+    <div class="container split">
+      <div class="photo-card photo-card--tall">
+        <img src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} loading="lazy" />
+      </div>
+      <div class="split__copy">
+        <h2 class="h2">Our story</h2>
+        <p class="story story--placeholder">
+          Your story goes here. A few sentences on who you are, how you found LaserTouchOne and why you
+          decided to sell it. Customers trust a real person, so a first name and a photo help.
+        </p>
+        <p class="story story--placeholder">
+          A second paragraph can say who you help (people with everyday chronic pain and active people
+          recovering from training) and what support looks like when they buy from you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container">
+      <div class="section-head section-head--center">
+        <h2 class="h2">Why buy from an authorized reseller</h2>
+        <p class="lead">The same device, with a team in your corner.</p>
+      </div>
+      <div class="promises">
+        {promises.map((p) => (
+          <div class="promise">
+            <span class="icon-badge icon-badge--lg"><Icon name={p.icon} size={24} /></span>
+            <h3 class="h3">{p.title}</h3>
+            <p>{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Say hello" text="Have a question about LaserTouchOne or your order? We’d love to hear from you." />
+</SiteLayout>

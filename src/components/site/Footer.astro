@@ -1,0 +1,52 @@
+---
+import { SITE, textHref } from '../../site.config.js';
+import { PHOTOS } from '../../data/photos.js';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="logo logo--light" href="/">
+          <span class="logo__mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="logo__word">Laser Micro Duo</span>
+        </a>
+        <p>Your authorized LaserTouchOne reseller. Real people, real support, drug-free relief at home.</p>
+        <div class="footer__contact">
+          {SITE.textNumber && <a href={textHref}><Icon name="message" size={18} /> Text {SITE.textNumber}</a>}
+          <a href={`mailto:${SITE.contactEmail}`}><Icon name="mail" size={18} /> {SITE.contactEmail}</a>
+        </div>
+      </div>
+      <nav class="footer__col" aria-label="Shop">
+        <p class="footer__h">Shop</p>
+        <a href="/shop">LaserTouchOne kits</a>
+        <a href="/shop#accessories">Gel and accessories</a>
+        <button type="button" data-open-cart>Cart</button>
+      </nav>
+      <nav class="footer__col" aria-label="Learn">
+        <p class="footer__h">Learn</p>
+        <a href="/how-it-works">How it works</a>
+        <a href="/faq">FAQ</a>
+        <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">FDA clearance (K100116)</a>
+      </nav>
+      <nav class="footer__col" aria-label="Company">
+        <p class="footer__h">Company</p>
+        <a href="/about">About us</a>
+        <a href="/contact">Contact</a>
+        <a href="/api/auth/login?returnUrl=/">Log in</a>
+      </nav>
+    </div>
+    <p class="footer__legal">
+      LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of
+      chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and
+      temporary relief of minor chronic neck and shoulder pain. Laser Micro Duo is an independent authorized
+      reseller; LaserTouchOne is a trademark of its owner. This site does not give medical advice. Read the
+      user manual and talk to your doctor about your pain.
+    </p>
+    <div class="footer__bottom">
+      <p>© {year} {SITE.name}</p>
+      <p class="footer__credits">Photos: {Object.values(PHOTOS).map((p, i) => <>{i > 0 && '; '}<a href={p.page} target="_blank" rel="noopener">{p.credit}</a></>)}</p>
+    </div>
+  </div>
+</footer>

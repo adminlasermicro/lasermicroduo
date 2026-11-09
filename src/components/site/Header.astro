@@ -1,0 +1,43 @@
+---
+import Icon from './Icon.astro';
+import { SITE } from '../../site.config.js';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/shop', label: 'Shop' },
+  { href: '/how-it-works', label: 'How it works' },
+  { href: '/about', label: 'About' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<div class="announce">
+  <div class="container announce__in">
+    {SITE.announcements.map((a, i) => <span class={i > 0 ? 'announce__extra' : ''}>{a}</span>)}
+  </div>
+</div>
+
+<header class="header" data-header>
+  <div class="container header__in">
+    <a class="logo" href="/" aria-label="Laser Micro Duo home">
+      <span class="logo__mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="logo__word">Laser Micro Duo</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      {links.map((l) => <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+    <div class="header__actions">
+      <a class="btn btn--primary btn--sm header__shop" href="/shop">Shop now</a>
+      <button type="button" class="cart-btn" data-open-cart aria-label="Open cart">
+        <Icon name="bag" size={22} />
+        <span class="cart-btn__count" data-cart-count>0</span>
+      </button>
+      <button type="button" class="menu-btn" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <Icon name="menu" size={24} />
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <a class="btn btn--primary" href="/shop">Shop LaserTouchOne</a>
+  </nav>
+</header>

@@ -1,0 +1,17 @@
+---
+import Icon from './Icon.astro';
+import { REVIEWS } from '../../data/reviews.js';
+const { limit } = Astro.props;
+const list = limit ? REVIEWS.slice(0, limit) : REVIEWS;
+---
+<div class="reviews">
+  {list.map((r) => (
+    <figure class={`review ${r.placeholder ? 'review--placeholder' : ''}`}>
+      <div class="stars" aria-label={`${r.stars} out of 5 stars`}>
+        {Array.from({ length: 5 }, (_, i) => <Icon name="star" size={18} class={i < r.stars ? 'on' : 'off'} />)}
+      </div>
+      <blockquote><p>{r.text}</p></blockquote>
+      <figcaption><strong>{r.name}</strong><span>{r.detail}</span></figcaption>
+    </figure>
+  ))}
+</div>

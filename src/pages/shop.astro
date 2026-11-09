@@ -1,0 +1,152 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/site/Icon.astro';
+import ReviewGrid from '../components/site/ReviewGrid.astro';
+import FaqList from '../components/site/FaqList.astro';
+import CtaBand from '../components/site/CtaBand.astro';
+import { loadKits } from '../lib/kits.js';
+import { SITE, textHref } from '../site.config.js';
+
+const { kits, accessories } = await loadKits();
+const details = [
+  { q: 'What’s in the box', a: 'Device + Gel Kit: the LaserTouchOne device, a charging cord, a 5 oz tube of electrode gel, the user manual and the warranty card. Deluxe Travel Kit: the device in a zippered carrying case with its charger and a tube of electrode gel.' },
+  { q: 'How to use it', a: 'Apply a little electrode gel to the sore spot, switch the device on and move the head in slow circles or paint strokes over the area for two minutes. Repeat up to five times a day on each area.' },
+  { q: 'Safety', a: 'Never point the laser at your eyes or anyone else’s. If you are pregnant, or have a heart condition or epilepsy, talk to your doctor before using it. Read the user manual before your first session.' },
+  { q: 'Shipping and returns', a: 'Free shipping on every kit, with tracking by text or email. Every kit has a 30-day in-home trial: if it isn’t right for you, contact us within 30 days and we’ll help you return it.' },
+  { q: 'Warranty', a: 'As an authorized reseller, we sell genuine devices that come with the full manufacturer’s warranty. We’ll help you with any claim.' },
+  { q: 'FDA clearance', a: 'LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and temporary relief of minor chronic neck and shoulder pain.' },
+];
+const first = kits[0];
+---
+<SiteLayout
+  title="Shop LaserTouchOne kits | Laser Micro Duo"
+  description="Choose the LaserTouchOne Device + Gel Kit or Deluxe Travel Kit. FDA-cleared, drug-free pain relief at home, with free shipping, a 30-day trial and HSA/FSA eligibility."
+>
+  <section class="product">
+    <div class="container product__grid">
+      <div class="gallery" data-gallery>
+        <div class="gallery__main" data-photo-slot="product-main">
+          <span class="product-stage__note">Product photo coming soon</span>
+        </div>
+        <div class="gallery__thumbs">
+          {['Device', 'Treatment head', 'Kit contents', 'In use'].map((t, i) => (
+            <button type="button" class={`gallery__thumb ${i === 0 ? 'is-active' : ''}`} aria-label={`Show photo: ${t}`} data-photo-slot={`product-thumb-${i + 1}`}><span>{t}</span></button>
+          ))}
+        </div>
+      </div>
+
+      <div class="buybox" data-buybox>
+        <p class="buybox__brand">Sold by Laser Micro Duo, authorized reseller</p>
+        <h1 class="h2 buybox__title">LaserTouchOne</h1>
+        <p class="lead">Cold laser and microcurrent in one handheld, FDA-cleared device. Drug-free relief, two minutes at a time.</p>
+
+        <fieldset class="kit-pick">
+          <legend class="kit-pick__legend">Choose your kit</legend>
+          {kits.map((k, i) => (
+            <label class="kit-option">
+              <input type="radio" name="kit" value={k.key} checked={i === 0}
+                data-product={k.productId ?? ''} data-variant={k.variantId ?? ''} data-price={k.price ?? ''} />
+              <span class="kit-option__body">
+                <span class="kit-option__top">
+                  <span class="kit-option__name">{k.name}</span>
+                  <span class="kit-option__price">{k.price ?? 'Price on request'}</span>
+                </span>
+                <span class="kit-option__text">{k.blurb} {k.includes.join(', ')}.</span>
+                {k.badge && <span class="kit-option__badge">{k.badge}</span>}
+              </span>
+            </label>
+          ))}
+        </fieldset>
+
+        <div class="buybox__price-row">
+          <p class="buybox__price" data-price-out>{first.price ?? 'Price on request'}</p>
+          <p class="buybox__hsa"><Icon name="wallet" size={18} /> HSA and FSA eligible</p>
+        </div>
+
+        <button type="button" class="btn btn--primary btn--lg btn--full" data-buy
+          data-add-to-cart={first.productId ?? undefined} data-variant={first.variantId ?? ''} hidden={!first.productId}>Add to cart</button>
+        <a class="btn btn--primary btn--lg btn--full" href="/contact" data-ask hidden={!!first.productId}>Ask about price</a>
+
+        <ul class="buybox__perks">
+          <li><Icon name="truck" size={20} /> Free shipping</li>
+          <li><Icon name="calendar" size={20} /> 30-day in-home trial</li>
+          <li><Icon name="shield" size={20} /> Manufacturer’s warranty</li>
+        </ul>
+
+        {SITE.textNumber && (
+          <a class="buybox__help" href={textHref}>
+            <span class="icon-badge"><Icon name="message" /></span>
+            <span><strong>Not sure which kit?</strong><br />Text us at {SITE.textNumber}. A real person replies.</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight-top">
+    <div class="container product-details">
+      <div class="section-head">
+        <h2 class="h2">Product details</h2>
+        <p class="lead">Everything you need to know before your first session.</p>
+      </div>
+      <FaqList items={details} />
+    </div>
+  </section>
+
+  <section class="section section--tint" id="reviews">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h2">Customer reviews</h2>
+        <p class="lead">From people who use LaserTouchOne in their everyday lives.</p>
+      </div>
+      <ReviewGrid />
+    </div>
+  </section>
+
+  {accessories.length > 0 && (
+    <section class="section" id="accessories">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="h2">Gel and accessories</h2>
+          <p class="lead">Keep your routine going with refills and spares.</p>
+        </div>
+        <div class="accessories">
+          {accessories.map((a) => (
+            <article class="accessory">
+              <div class="accessory__media" data-photo-slot={`accessory-${a.key}`}><span>Photo coming soon</span></div>
+              <div class="accessory__body">
+                <h3 class="h3">{a.name}</h3>
+                <p>{a.text}</p>
+                <div class="accessory__foot">
+                  <span class="accessory__price">{a.price}</span>
+                  <button type="button" class="btn btn--primary btn--sm" data-add-to-cart={a.productId} data-variant={a.variantId ?? ''}>Add to cart</button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand title="Still deciding?" />
+
+  <script>
+    const box = document.querySelector('[data-buybox]');
+    if (box) {
+      const out = box.querySelector('[data-price-out]');
+      const buy = box.querySelector('[data-buy]');
+      const ask = box.querySelector('[data-ask]');
+      box.querySelectorAll('input[name="kit"]').forEach((r) => r.addEventListener('change', () => {
+        if (!r.checked) return;
+        out.textContent = r.dataset.price || 'Price on request';
+        const has = !!r.dataset.product;
+        buy.hidden = !has; ask.hidden = has;
+        if (has) { buy.dataset.addToCart = r.dataset.product; buy.dataset.variant = r.dataset.variant; }
+      }));
+    }
+    document.querySelectorAll('[data-gallery] .gallery__thumb').forEach((t, _, all) => t.addEventListener('click', () => {
+      all.forEach((x) => x.classList.toggle('is-active', x === t));
+    }));
+  </script>
+</SiteLayout>
