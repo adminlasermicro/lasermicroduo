@@ -1,0 +1,33 @@
+/* Cart drawer: quantity stepper, remove link and empty state.
+   Colours use the brand tokens from lmd-tokens.css, so they follow light and dark mode. */
+.cartp__row { grid-template-columns: 64px 1fr auto; align-items: start; transition: opacity 0.2s; }
+.cartp__row.is-working { opacity: 0.55; }
+.cartp__info { display: grid; gap: 10px; min-width: 0; }
+.cartp__controls { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.cartp__price { font-weight: 600; color: var(--color-text); white-space: nowrap; }
+
+.qty {
+  display: inline-flex; align-items: center;
+  border-radius: 999px; background: var(--color-surface-muted);
+}
+.qty__btn {
+  width: 36px; height: 36px; border: 0; border-radius: 50%;
+  background: transparent; color: var(--color-brand-strong);
+  font-size: 1.125rem; font-weight: 600; line-height: 1;
+  display: grid; place-items: center;
+  transition: background-color 0.2s;
+}
+.qty__btn:hover:not(:disabled) { background: var(--color-surface-tint); }
+.qty__btn:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.qty__btn:disabled { cursor: progress; }
+.qty__value { min-width: 28px; text-align: center; font-weight: 600; color: var(--color-text); font-variant-numeric: tabular-nums; }
+
+.cartp__remove {
+  border: 0; background: none; padding: 4px 0;
+  font-size: 0.875rem; font-weight: 500; color: var(--color-text-muted);
+  text-decoration: underline; text-underline-offset: 0.2em;
+}
+.cartp__remove:hover:not(:disabled) { color: var(--color-error); }
+.cartp__remove:disabled { cursor: progress; }
+
+.cartp__empty { display: grid; justify-items: start; gap: 16px; color: var(--color-text); }

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { currentCartV2 } from '@wix/ecom';
 import { redirects } from '@wix/redirects';
 import { media } from '@wix/sdk';
+import '../styles/cart.css';
 
 // Connects the homepage's plain HTML buttons to the Wix cart:
 //   [data-add-to-cart="<productId>"] (+ optional data-variant) adds one item and opens the cart
@@ -29,6 +30,8 @@ export default function CartBridge() {
   const [subtotal, setSubtotal] = useState('');
   const [status, setStatus] = useState('');
   const [busy, setBusy] = useState(false);
+  // Id of the line item being changed, so its controls show progress and can't be double-clicked.
+  const [pending, setPending] = useState(null);
 
   const refresh = useCallback(async () => {
     let c = null;
@@ -85,6 +88,36 @@ export default function CartBridge() {
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // Set a line item's quantity. Going below 1 removes the item.
+  async function setQuantity(item, quantity) {
+    if (pending) return;
+    if (quantity < 1) return removeItem(item);
+    setPending(item._id);
+    try {
+      await currentCartV2.updateLineItemsInCurrentCart({
+        lineItems: [{ lineItemId: item._id, quantity: { newQuantity: quantity } }],
+      });
+      setStatus('');
+      await refresh();
+    } catch (err) {
+      console.error(err);
+      setStatus('That quantity could not be updated. Try again in a moment.');
+    } finally { setPending(null); }
+  }
+
+  async function removeItem(item) {
+    if (pending) return;
+    setPending(item._id);
+    try {
+      await currentCartV2.removeLineItemsFromCurrentCart([item._id]);
+      setStatus('');
+      await refresh();
+    } catch (err) {
+      console.error(err);
+      setStatus('That item could not be removed. Try again in a moment.');
+    } finally { setPending(null); }
+  }
+
   async function checkout() {
     setBusy(true);
     try {
@@ -112,17 +145,41 @@ export default function CartBridge() {
         </div>
         {status && <p className="cartp__status">{status}</p>}
         <div className="cartp__items">
-          {!items.length && <p>Your cart is empty. Choose a kit to get started.</p>}
-          {items.map((it, i) => (
-            <div key={it._id ?? i} className="cartp__row">
-              {thumb(it.attributes?.image) ? <img src={thumb(it.attributes?.image)} alt="" width="60" height="60" /> : <span className="cartp__thumb" />}
-              <div>
-                <p className="cartp__name">{it.name?.translated ?? it.name?.original}</p>
-                <p className="cartp__qty">Quantity {it.quantityInfo?.confirmedQuantity}</p>
-              </div>
-              <p className="cartp__price">{formatMoney(it.pricing?.totalPrice, currencyOf(cart))}</p>
+          {!items.length && (
+            <div className="cartp__empty">
+              <p>Your cart is empty.</p>
+              <a className="btn btn--primary" href="/shop" onClick={() => setOpen(false)}>Shop LaserTouchOne</a>
             </div>
-          ))}
+          )}
+          {items.map((it, i) => {
+            const name = it.name?.translated ?? it.name?.original;
+            const qty = it.quantityInfo?.requestedQuantity ?? it.quantityInfo?.confirmedQuantity ?? 1;
+            const fixed = it.quantityInfo?.fixedQuantity;
+            const working = pending === it._id;
+            return (
+              <div key={it._id ?? i} className={`cartp__row ${working ? 'is-working' : ''}`} aria-busy={working}>
+                {thumb(it.attributes?.image) ? <img src={thumb(it.attributes?.image)} alt="" width="60" height="60" /> : <span className="cartp__thumb" />}
+                <div className="cartp__info">
+                  <p className="cartp__name">{name}</p>
+                  <div className="cartp__controls">
+                    {fixed ? (
+                      <p className="cartp__qty">Quantity {qty}</p>
+                    ) : (
+                      <div className="qty" role="group" aria-label={`Quantity of ${name}`}>
+                        <button type="button" className="qty__btn" onClick={() => setQuantity(it, qty - 1)} disabled={!!pending}
+                          aria-label={qty <= 1 ? `Remove ${name}` : `Decrease quantity of ${name}`}>−</button>
+                        <span className="qty__value" aria-live="polite">{qty}</span>
+                        <button type="button" className="qty__btn" onClick={() => setQuantity(it, qty + 1)} disabled={!!pending}
+                          aria-label={`Increase quantity of ${name}`}>+</button>
+                      </div>
+                    )}
+                    <button type="button" className="cartp__remove" onClick={() => removeItem(it)} disabled={!!pending}>Remove</button>
+                  </div>
+                </div>
+                <p className="cartp__price">{formatMoney(it.pricing?.totalPrice ?? it.price, currencyOf(cart))}</p>
+              </div>
+            );
+          })}
         </div>
         {items.length > 0 && (
           <div className="cartp__foot">

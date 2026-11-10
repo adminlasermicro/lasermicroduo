@@ -69,6 +69,8 @@
   --color-warning-bg: var(--gold-50);
   --color-error: var(--red-600);
   --color-error-bg: var(--red-50);
+  --color-header-bg: rgba(245, 245, 241, 0.92);
+  --color-header-bg-scrolled: rgba(255, 255, 255, 0.96);
   --shadow-soft: 0 1px 2px #1f2b260a, 0 8px 24px #1f2b260f;
   --shadow-header: 0 1px 0 #1f2b260f, 0 6px 20px #1f2b260d;
   --shadow-cta-hover: 0 6px 18px #3c6e5b40;
@@ -200,6 +202,9 @@
     --color-warning-bg: #2a2414;
     --color-error: #f09a88;
     --color-error-bg: #2e1b17;
+    --color-header-bg: rgba(19, 26, 23, 0.92);
+    --color-header-bg-scrolled: rgba(27, 36, 32, 0.96);
+    --logo-dot: rgba(255, 255, 255, 0.4);
     --shadow-soft: 0 1px 2px #0000004d, 0 8px 24px #00000059;
     --shadow-header: 0 1px 0 #0000004d, 0 6px 20px #00000040;
     --shadow-cta-hover: 0 6px 18px #00000066;
@@ -234,6 +239,9 @@
   --color-warning-bg: #2a2414;
   --color-error: #f09a88;
   --color-error-bg: #2e1b17;
+  --color-header-bg: rgba(19, 26, 23, 0.92);
+  --color-header-bg-scrolled: rgba(27, 36, 32, 0.96);
+  --logo-dot: rgba(255, 255, 255, 0.4);
   --shadow-soft: 0 1px 2px #0000004d, 0 8px 24px #00000059;
   --shadow-header: 0 1px 0 #0000004d, 0 6px 20px #00000040;
   --shadow-cta-hover: 0 6px 18px #00000066;

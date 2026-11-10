@@ -1,0 +1,18 @@
+---
+// One clinical study, presented plainly: what it found, how big it was, and where to read it.
+// Data comes from src/data/studies.js. Never show a study without its citation and link.
+import Icon from './Icon.astro';
+const { study } = Astro.props;
+---
+<article class="study">
+  <span class="study__kind"><Icon name="file" size={16} /> Clinical study</span>
+  <p class="study__finding">{study.finding}</p>
+  <ul class="study__facts">
+    {study.participants && <li><strong>{study.participants}</strong> participants</li>}
+    {study.condition && <li><strong>{study.condition}</strong></li>}
+    {study.design && <li><strong>{study.design}</strong></li>}
+    {study.year && <li><strong>{study.year}</strong></li>}
+  </ul>
+  {study.note && <p class="study__note">{study.note}</p>}
+  <p class="study__cite">{study.citation} {study.url && <a href={study.url} target="_blank" rel="noopener">Read the study</a>}</p>
+</article>

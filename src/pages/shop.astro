@@ -7,6 +7,8 @@ import FaqList from '../components/site/FaqList.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import { loadStore } from '../lib/kits.js';
 import PriceTag from '../components/site/PriceTag.astro';
+import ResellerSeal from '../components/site/ResellerSeal.astro';
+import StudyList from '../components/site/StudyList.astro';
 import { SITE, textHref } from '../site.config.js';
 
 const { kit, accessories } = await loadStore();
@@ -60,6 +62,8 @@ const details = [
           <li><Icon name="shield" size={20} /> Manufacturer’s warranty</li>
         </ul>
 
+        <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
+
         {SITE.textNumber && (
           <a class="buybox__help" href={textHref}>
             <span class="icon-badge"><Icon name="message" /></span>
@@ -79,6 +83,8 @@ const details = [
       <FaqList items={details} />
     </div>
   </section>
+
+  <StudyList limit={2} tight title="What the research says" />
 
   {REAL_REVIEWS.length > 0 && (
   <section class="section section--tint" id="reviews">

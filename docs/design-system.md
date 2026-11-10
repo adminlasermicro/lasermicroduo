@@ -1,7 +1,7 @@
 # Design system: Laser Micro Duo
 
 Source of truth: the "Laser Micro Duo" design system artifact. Its tokens live in
-`src/styles/lmd-tokens.css` (loaded before `src/styles/site.css`). Logo files are in `public/brand/`.
+`src/styles/lmd-tokens.css` (loaded before `src/styles/site.css` and `src/styles/trust.css`). Logo files are in `public/brand/`.
 Never hard-code a hex value, font size, radius or shadow in new CSS.
 
 ## Color rules
@@ -10,9 +10,8 @@ Never hard-code a hex value, font size, radius or shadow in new CSS.
   `--color-cta`, `--color-cta-hover`, `--color-on-cta`, `--color-link`, `--color-border`,
   `--color-border-strong`, `--color-focus`, and the status tokens (`--color-success`, `--color-warning`,
   `--color-error`, each with `-bg`). Raw scales (`--sage-*`, `--ink-*`, `--gold-*`) only inside the token file.
-- The old names (`--sage`, `--sage-dark`, `--ink`, `--ink-2`, `--stone`, `--sage-soft`, `--sage-mist`,
-  `--sage-line`, `--star`) still work as aliases. Use semantic tokens in new code and migrate old rules
-  when you touch them.
+- The old names (`--sage`, `--ink`, `--stone`...) still exist as aliases but do not change in dark mode.
+  Do not use them in new CSS.
 - Text on `--color-cta` is `--color-on-cta`. Never plain "white".
 - One primary (`--color-cta`) button per view. Other actions use a secondary or quiet button.
 - `--color-border` / `--sage-line` (#d3ddd0) is decorative only. Inputs, checkboxes, steppers and outline
@@ -21,9 +20,9 @@ Never hard-code a hex value, font size, radius or shadow in new CSS.
 - Gold is for stars and warnings only. Success, warning and error always carry an icon and a word.
 - Prices, safety information and anything a buyer needs to decide use `--color-text`, never muted.
 - Every text/background pair meets WCAG AA (4.5:1; 3:1 for 24px+ text and UI marks).
-- Dark mode: the tokens include a dark set, but the site is pinned to light with `data-theme="light"` on
-  `<html>` because `site.css` still uses the old names. Remove that attribute only after every rule uses
-  semantic tokens and dark mode has been checked page by page.
+- Dark mode: the site follows the visitor's system setting. Every rule in `site.css` uses semantic tokens,
+  so check both themes whenever you add or change styles. To pin the site to light, put
+  `data-theme="light"` on `<html>` in `src/layouts/SiteLayout.astro`.
 - Never use the manufacturer's (LaserTouchOne) logo or colors in our UI, red "laser" glows, gradients or
   neon accents.
 
@@ -45,3 +44,10 @@ Never hard-code a hex value, font size, radius or shadow in new CSS.
   "FDA-approved". No cure, heal, miracle or guaranteed.
 - Reviews are real and attributed, with "Individual results vary."
 - Keep the legal footer line on every page.
+
+## Trust components
+- `ResellerSeal.astro`: `<ResellerSeal />` (authorized reseller, links to About) and `<ResellerSeal kind="fda" />`
+  (links to the FDA document). At most two together, near the buy button.
+- `StudyList.astro` / `StudyReference.astro`: clinical studies from `src/data/studies.js`. The section is hidden
+  while that list is empty. Never add placeholder or unlinked studies.
+- `ReviewGrid.astro`: stars always show the score as text, and the grid ends with "Individual results vary."

@@ -1,0 +1,21 @@
+---
+// A section of clinical studies. Renders nothing while src/data/studies.js is empty.
+import StudyReference from './StudyReference.astro';
+import { STUDIES } from '../../data/studies.js';
+const { limit, title = 'What the research says', lead = 'Published studies, in plain words, with links so you can read them yourself.', tight = false } = Astro.props;
+const list = limit ? STUDIES.slice(0, limit) : STUDIES;
+---
+{list.length > 0 && (
+  <section class={`section ${tight ? 'section--tight-top' : ''}`} id="studies">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h2">{title}</h2>
+        <p class="lead">{lead}</p>
+      </div>
+      <div class="studies">
+        {list.map((study) => <StudyReference study={study} />)}
+      </div>
+      <p class="reviews__note">Studies describe results for the people who took part. Individual results vary. This is not medical advice.</p>
+    </div>
+  </section>
+)}

@@ -7,11 +7,15 @@ const list = limit ? REAL_REVIEWS.slice(0, limit) : REAL_REVIEWS;
 <div class="reviews">
   {list.map((r) => (
     <figure class={`review ${r.placeholder ? 'review--placeholder' : ''}`}>
-      <div class="stars" role="img" aria-label={`${r.stars} out of 5 stars`}>
-        {Array.from({ length: 5 }, (_, i) => <Icon name="star" size={18} class={i < r.stars ? 'on' : 'off'} />)}
+      <div class="stars">
+        <span class="stars__icons" aria-hidden="true">
+          {Array.from({ length: 5 }, (_, i) => <Icon name="star" size={18} class={i < r.stars ? 'on' : 'off'} />)}
+        </span>
+        <span class="stars__text">{r.stars} out of 5</span>
       </div>
       <blockquote><p>{r.text}</p></blockquote>
       <figcaption><strong>{r.name}</strong><span>{r.detail}</span></figcaption>
     </figure>
   ))}
 </div>
+{list.length > 0 && <p class="reviews__note">Reviews are from real customers. Individual results vary.</p>}

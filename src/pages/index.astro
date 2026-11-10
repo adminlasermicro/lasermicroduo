@@ -9,6 +9,7 @@ import FaqList from '../components/site/FaqList.astro';
 import ReviewGrid from '../components/site/ReviewGrid.astro';
 import { REAL_REVIEWS } from '../data/reviews.js';
 import CtaBand from '../components/site/CtaBand.astro';
+import ResellerSeal from '../components/site/ResellerSeal.astro';
 
 const { kit } = await loadStore();
 
@@ -183,6 +184,7 @@ const steps = [
               : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
           </div>
           <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
+          <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
         </div>
       </article>
     </div>
