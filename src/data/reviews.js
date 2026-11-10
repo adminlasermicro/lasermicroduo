@@ -9,3 +9,6 @@ export const REVIEWS = [
   { name: 'Customer name', detail: 'City, state', stars: 5, placeholder: true,
     text: 'Your customer’s review goes here. Mention the support they got from you, like the setup help or a quick text reply.' },
 ];
+
+// Only real reviews are shown. While this list is empty, the review sections are hidden.
+export const REAL_REVIEWS = REVIEWS.filter((r) => !r.placeholder);

@@ -45,12 +45,12 @@ export const FAQ_GROUPS = [
   {
     title: 'Buying, shipping and returns',
     items: [
-      { top: true, q: 'Can I pay with my HSA or FSA?',
-        a: 'Yes. You can use your health savings or flexible spending card at checkout, or keep your receipt to claim it back.' },
+      { top: true, q: 'How much is shipping?',
+        a: 'Shipping within the US is one flat rate, shown at checkout. We also ship internationally; the cost depends on your country and is shown at checkout before you pay.' },
       { top: true, q: 'What if it doesn’t work for me?',
         a: 'Every kit comes with a 30-day in-home trial. If it isn’t right for you, text or email us within 30 days and we’ll help you return it.' },
-      { q: 'How fast does it ship?',
-        a: 'Orders ship free. We’ll text or email you tracking details as soon as your kit is on its way.' },
+      { q: 'Will I get tracking?',
+        a: 'Yes. We’ll text or email you tracking details as soon as your order is on its way.' },
       { q: 'Is there a warranty?',
         a: 'Yes. Because we are an authorized reseller, your device comes with the manufacturer’s warranty, and we’ll help you with any claim.' },
       { q: 'Why buy from Laser Micro Duo?',

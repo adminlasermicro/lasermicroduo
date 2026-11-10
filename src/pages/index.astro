@@ -1,19 +1,21 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/site/Icon.astro';
-import { loadKits } from '../lib/kits.js';
+import { loadStore } from '../lib/kits.js';
+import PriceTag from '../components/site/PriceTag.astro';
 import { PHOTOS } from '../data/photos.js';
 import { TOP_FAQS } from '../data/faq.js';
 import FaqList from '../components/site/FaqList.astro';
 import ReviewGrid from '../components/site/ReviewGrid.astro';
+import { REAL_REVIEWS } from '../data/reviews.js';
 import CtaBand from '../components/site/CtaBand.astro';
 
-const { kits, fromPrice } = await loadKits();
+const { kit } = await loadStore();
 
 const trust = [
   { icon: 'shield', label: 'FDA-cleared', sub: 'Over the counter, K100116' },
   { icon: 'leaf', label: 'Drug-free', sub: 'No pills, no needles' },
-  { icon: 'wallet', label: 'HSA and FSA', sub: 'Use your health funds' },
+  { icon: 'truck', label: 'Flat-rate shipping', sub: 'US and international' },
   { icon: 'calendar', label: '30-day trial', sub: 'Try it at home' },
   { icon: 'message', label: 'Text support', sub: 'A real person helps you' },
 ];
@@ -25,7 +27,7 @@ const steps = [
 ---
 <SiteLayout
   title="LaserTouchOne, drug-free pain relief at home | Laser Micro Duo"
-  description="Shop LaserTouchOne from Laser Micro Duo, an authorized reseller. An FDA-cleared handheld device that pairs a cold laser with microcurrent for pain relief at home. HSA and FSA eligible."
+  description="Shop LaserTouchOne from Laser Micro Duo, an authorized reseller. An FDA-cleared handheld device that pairs a cold laser with microcurrent for pain relief at home."
 >
   <!-- Hero -->
   <section class="hero">
@@ -41,7 +43,7 @@ const steps = [
           <a class="link-arrow" href="/how-it-works">See how it works <Icon name="arrow" size={18} /></a>
         </div>
         <p class="hero__meta">
-          {fromPrice ? <>Kits from <strong>{fromPrice}</strong></> : <>Two kits to choose from</>}
+          {kit.price ? <PriceTag kit={kit} size="sm" /> : <>Carrying case included</>}
           <span class="dot" aria-hidden="true"></span> Sold and supported by an authorized reseller
         </p>
       </div>
@@ -146,6 +148,7 @@ const steps = [
   </section>
 
   <!-- Reviews -->
+  {REAL_REVIEWS.length > 0 && (
   <section class="section">
     <div class="container">
       <div class="section-head section-head--row">
@@ -155,34 +158,33 @@ const steps = [
       <ReviewGrid />
     </div>
   </section>
+  )}
 
-  <!-- Kits -->
+  <!-- The kit -->
   <section class="section section--tint" id="kits">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2 class="h2">Choose your kit</h2>
-        <p class="lead">Both kits include the 30-day in-home trial, the manufacturer’s warranty and support from us.</p>
+        <h2 class="h2">Everything in one kit</h2>
+        <p class="lead">One price, with the carrying case included. Every order comes with the 30-day in-home trial, the manufacturer’s warranty and support from us.</p>
       </div>
-      <div class="kits">
-        {kits.map((k) => (
-          <article class={`kit ${k.badge ? 'kit--featured' : ''}`}>
-            {k.badge && <span class="kit__badge">{k.badge}</span>}
-            <div class="kit__media" data-photo-slot={`kit-${k.key}`}><span>Kit photo coming soon</span></div>
-            <h3 class="h3 kit__name">{k.name}</h3>
-            <p class="kit__blurb">{k.blurb}</p>
-            <ul class="checklist">
-              {k.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
-            </ul>
-            <div class="kit__foot">
-              <p class="kit__price">{k.price ?? <span class="kit__ask">Price on request</span>}</p>
-              {k.productId
-                ? <button type="button" class="btn btn--primary" data-add-to-cart={k.productId} data-variant={k.variantId ?? ''}>Add to cart</button>
-                : <a class="btn btn--primary" href="/contact">Ask about price</a>}
-            </div>
-          </article>
-        ))}
-      </div>
-      <p class="kits__note"><Icon name="truck" size={18} /> Free shipping on every kit. Pay with HSA or FSA at checkout.</p>
+      <article class="offer">
+        <div class="offer__media" data-photo-slot="kit-main"><span>Kit photo coming soon</span></div>
+        <div class="offer__body">
+          <span class="kit__badge kit__badge--inline">Carrying case included</span>
+          <h3 class="h2 offer__name">{kit.name}</h3>
+          <p class="kit__blurb">{kit.blurb}</p>
+          <ul class="checklist">
+            {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
+          </ul>
+          <div class="offer__foot">
+            {kit.price ? <PriceTag kit={kit} /> : <p class="kit__ask">Price on request</p>}
+            {kit.productId
+              ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''}>Add to cart</button>
+              : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
+          </div>
+          <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
+        </div>
+      </article>
     </div>
   </section>
 

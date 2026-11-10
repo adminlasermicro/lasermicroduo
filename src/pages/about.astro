@@ -4,6 +4,7 @@ import PageHero from '../components/site/PageHero.astro';
 import Icon from '../components/site/Icon.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import { PHOTOS } from '../data/photos.js';
+import { STORY } from '../data/about.js';
 
 const promises = [
   { icon: 'shield', title: 'Genuine devices', text: 'As an authorized reseller, every LaserTouchOne we sell is the real thing, straight from the manufacturer’s supply.' },
@@ -20,6 +21,7 @@ const promises = [
     lead="We’re Laser Micro Duo, an authorized LaserTouchOne reseller. We help people find drug-free pain relief they can use at home, and we stay with you after you buy."
   />
 
+  {STORY.length > 0 && (
   <section class="section section--tight-top">
     <div class="container split">
       <div class="photo-card photo-card--tall">
@@ -27,17 +29,11 @@ const promises = [
       </div>
       <div class="split__copy">
         <h2 class="h2">Our story</h2>
-        <p class="story story--placeholder">
-          Your story goes here. A few sentences on who you are, how you found LaserTouchOne and why you
-          decided to sell it. Customers trust a real person, so a first name and a photo help.
-        </p>
-        <p class="story story--placeholder">
-          A second paragraph can say who you help (people with everyday chronic pain and active people
-          recovering from training) and what support looks like when they buy from you.
-        </p>
+        {STORY.map((para) => <p class="story">{para}</p>)}
       </div>
     </div>
   </section>
+  )}
 
   <section class="section band">
     <div class="container">

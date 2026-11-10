@@ -1,0 +1,11 @@
+---
+// Selling price, with the crossed-out regular price and the saving when Wix has a compare-at price.
+const { kit, size = 'lg' } = Astro.props;
+const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+const saving = kit.compareAt && kit.compareAmount > kit.amount ? fmt(kit.compareAmount - kit.amount) : null;
+---
+<p class={`price-tag price-tag--${size}`}>
+  <strong class="price-tag__now">{kit.price}</strong>
+  {kit.compareAt && <s class="price-tag__was"><span class="sr">Regular price </span>{kit.compareAt}</s>}
+  {saving && size === 'lg' && <span class="price-tag__save">You save {saving}</span>}
+</p>

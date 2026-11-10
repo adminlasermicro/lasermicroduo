@@ -1,0 +1,241 @@
+/* Laser Micro Duo design tokens (from the Laser Micro Duo design system, 2026-11-09).
+   Loaded before site.css by SiteLayout.astro. The font is linked in the layout.
+   Use the semantic --color-* tokens in new CSS; the old names (--sage, --ink, --stone...) are aliases at the bottom. */
+
+:root {
+  /* Raw palette */
+  --sage-50: #f4f7f2;
+  --sage-100: #eef2eb;
+  --sage-200: #e3eadf;
+  --sage-300: #d3ddd0;
+  --sage-400: #9cbfae;
+  --sage-500: #5f907c;
+  --sage-600: #3c6e5b;
+  --sage-700: #2e5747;
+  --sage-800: #234237;
+  --sage-900: #1a3129;
+  --ink-50: #f5f5f1;
+  --ink-100: #ecede8;
+  --ink-200: #dce0db;
+  --ink-300: #c4cfc9;
+  --ink-400: #9fada6;
+  --ink-500: #7f8e87;
+  --ink-600: #5b6660;
+  --ink-700: #47524c;
+  --ink-800: #333d38;
+  --ink-900: #1f2b26;
+  --gold-50: #fdf8ec;
+  --gold-100: #faefd3;
+  --gold-200: #f4dea6;
+  --gold-300: #ecc76a;
+  --gold-400: #e0a526;
+  --gold-500: #c48d1c;
+  --gold-600: #a37518;
+  --gold-700: #8a6416;
+  --gold-800: #6b4e0f;
+  --gold-900: #47340a;
+  --green-50: #f1f7ee;
+  --green-600: #3d6e2c;
+  --green-700: #2f5722;
+  --red-50: #fcefec;
+  --red-600: #a63d2c;
+  --red-700: #862f21;
+  --white: #ffffff;
+
+  /* Semantic, light (default) */
+  --color-bg: var(--ink-50);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--sage-100);
+  --color-surface-tint: var(--sage-200);
+  --color-surface-inverse: var(--ink-900);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-600);
+  --color-text-on-inverse: var(--ink-300);
+  --color-heading-on-inverse: #ffffff;
+  --color-brand: var(--sage-600);
+  --color-brand-strong: var(--sage-700);
+  --color-cta: var(--sage-600);
+  --color-cta-hover: var(--sage-700);
+  --color-on-cta: #ffffff;
+  --color-link: var(--sage-700);
+  --color-border: var(--sage-300);
+  --color-border-strong: var(--ink-500);
+  --color-focus: var(--sage-600);
+  --color-announce-bg: var(--sage-700);
+  --color-star: var(--gold-400);
+  --color-success: var(--green-600);
+  --color-success-bg: var(--green-50);
+  --color-warning: var(--gold-700);
+  --color-warning-bg: var(--gold-50);
+  --color-error: var(--red-600);
+  --color-error-bg: var(--red-50);
+  --shadow-soft: 0 1px 2px #1f2b260a, 0 8px 24px #1f2b260f;
+  --shadow-header: 0 1px 0 #1f2b260f, 0 6px 20px #1f2b260d;
+  --shadow-cta-hover: 0 6px 18px #3c6e5b40;
+
+  /* Type */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-display: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
+  --lh-display: 1.06;
+  --fw-display: 700;
+  --ls-display: -0.02em;
+  --fs-h2: clamp(1.875rem, 1.4rem + 1.7vw, 2.75rem);
+  --lh-h2: 1.15;
+  --fw-h2: 700;
+  --ls-h2: -0.02em;
+  --fs-h3: clamp(1.1875rem, 1.1rem + .35vw, 1.375rem);
+  --lh-h3: 1.3;
+  --fw-h3: 600;
+  --ls-h3: -0.01em;
+  --fs-lead: clamp(1.0625rem, 1rem + .3vw, 1.25rem);
+  --lh-lead: 1.6;
+  --fw-lead: 400;
+  --ls-lead: 0;
+  --fs-body: 17px;
+  --lh-body: 1.65;
+  --fw-body: 400;
+  --ls-body: 0;
+  --fs-body-strong: 17px;
+  --lh-body-strong: 1.65;
+  --fw-body-strong: 600;
+  --ls-body-strong: 0;
+  --fs-price: 36px;
+  --lh-price: 1.1;
+  --fw-price: 700;
+  --ls-price: -0.02em;
+  --fs-price-card: 28px;
+  --lh-price-card: 1.1;
+  --fw-price-card: 700;
+  --ls-price-card: -0.02em;
+  --fs-button: 16px;
+  --lh-button: 1.2;
+  --fw-button: 600;
+  --ls-button: 0;
+  --fs-small: 15px;
+  --lh-small: 1.6;
+  --fw-small: 400;
+  --ls-small: 0;
+  --fs-eyebrow: 14px;
+  --lh-eyebrow: 1.4;
+  --fw-eyebrow: 700;
+  --ls-eyebrow: 0.06em;
+  --fs-legal: 14px;
+  --lh-legal: 1.6;
+  --fw-legal: 400;
+  --ls-legal: 0;
+
+  /* Space, radius, layout */
+  --space-0-5: 4px;
+  --space-1: 8px;
+  --space-1-5: 12px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+  --radius-xs: 6px;
+  --radius-sm: 14px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+  --container-max: 1200px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section-pad: clamp(72px, 9vw, 128px);
+  --measure: 62ch;
+  --measure-head: 760px;
+  --tap-min: 48px;
+
+  /* Logo */
+  --logo-dot: #b9cbbf;
+  --logo-dot-inverse: rgba(255, 255, 255, 0.4);
+  --logo-center-inverse: var(--sage-400);
+
+  /* Aliases for the current site's variable names */
+  --sage-mist: var(--sage-100);
+  --sage-soft: var(--sage-200);
+  --sage-line: var(--sage-300);
+  --sage: var(--sage-600);
+  --sage-dark: var(--sage-700);
+  --stone: var(--ink-50);
+  --ink-2: var(--ink-600);
+  --ink: var(--ink-900);
+  --star: var(--gold-400);
+  --white: #ffffff;
+  --s1: var(--space-1); --s2: var(--space-2); --s3: var(--space-3); --s4: var(--space-4);
+  --s5: var(--space-5); --s6: var(--space-6); --s7: var(--space-7); --s8: var(--space-8);
+  --r-sm: var(--radius-sm); --r-md: var(--radius-md); --r-lg: var(--radius-lg);
+  --font: var(--font-sans);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  color-scheme: light;
+}
+
+/* Dark: follows the OS unless the page forces light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #131a17;
+    --color-surface: #1b2420;
+    --color-surface-muted: #232e29;
+    --color-surface-tint: #2a3631;
+    --color-surface-inverse: #0e1411;
+    --color-text: #eef2eb;
+    --color-text-muted: #a9b5ae;
+    --color-text-on-inverse: #c4cfc9;
+    --color-heading-on-inverse: #eef2eb;
+    --color-brand: #8fbba7;
+    --color-brand-strong: #b4d3c4;
+    --color-cta: #9cc7b3;
+    --color-cta-hover: #b4d3c4;
+    --color-on-cta: var(--sage-900);
+    --color-link: #9cc7b3;
+    --color-border: #33403a;
+    --color-border-strong: #6b7a73;
+    --color-focus: #9cc7b3;
+    --color-announce-bg: var(--sage-800);
+    --color-star: #e8b443;
+    --color-success: #9fd08a;
+    --color-success-bg: #1c2a1a;
+    --color-warning: #e8b443;
+    --color-warning-bg: #2a2414;
+    --color-error: #f09a88;
+    --color-error-bg: #2e1b17;
+    --shadow-soft: 0 1px 2px #0000004d, 0 8px 24px #00000059;
+    --shadow-header: 0 1px 0 #0000004d, 0 6px 20px #00000040;
+    --shadow-cta-hover: 0 6px 18px #00000066;
+    color-scheme: dark;
+  }
+}
+/* Dark: forced */
+:root[data-theme="dark"] {
+  --color-bg: #131a17;
+  --color-surface: #1b2420;
+  --color-surface-muted: #232e29;
+  --color-surface-tint: #2a3631;
+  --color-surface-inverse: #0e1411;
+  --color-text: #eef2eb;
+  --color-text-muted: #a9b5ae;
+  --color-text-on-inverse: #c4cfc9;
+  --color-heading-on-inverse: #eef2eb;
+  --color-brand: #8fbba7;
+  --color-brand-strong: #b4d3c4;
+  --color-cta: #9cc7b3;
+  --color-cta-hover: #b4d3c4;
+  --color-on-cta: var(--sage-900);
+  --color-link: #9cc7b3;
+  --color-border: #33403a;
+  --color-border-strong: #6b7a73;
+  --color-focus: #9cc7b3;
+  --color-announce-bg: var(--sage-800);
+  --color-star: #e8b443;
+  --color-success: #9fd08a;
+  --color-success-bg: #1c2a1a;
+  --color-warning: #e8b443;
+  --color-warning-bg: #2a2414;
+  --color-error: #f09a88;
+  --color-error-bg: #2e1b17;
+  --shadow-soft: 0 1px 2px #0000004d, 0 8px 24px #00000059;
+  --shadow-header: 0 1px 0 #0000004d, 0 6px 20px #00000040;
+  --shadow-cta-hover: 0 6px 18px #00000066;
+  color-scheme: dark;
+}
