@@ -1,0 +1,28 @@
+---
+import PolicyPage from '../components/site/PolicyPage.astro';
+import { SITE } from '../site.config.js';
+---
+<PolicyPage
+  title="Terms of use"
+  description="The terms for using the Laser Micro Duo website and buying LaserTouchOne."
+  lead="The terms for using this site and buying from us."
+  updated="November 11, 2026"
+>
+  <h2>Who we are</h2>
+  <p>{SITE.name} is an independent authorized reseller of LaserTouchOne. LaserTouchOne is a trademark of its owner.</p>
+
+  <h2>Not medical advice</h2>
+  <p>Information on this site is general and is not medical advice. LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and temporary relief of minor chronic neck and shoulder pain. Read the user manual before use, and talk to your doctor about your pain, especially if it is new, severe or unexplained.</p>
+
+  <h2>Orders and prices</h2>
+  <p>Prices are shown in US dollars and may change. An order is accepted when we confirm it by email. If a price or product is listed in error, we may cancel the order and refund you in full.</p>
+
+  <h2>Returns and warranty</h2>
+  <p>See our <a href="/returns">Returns and 30-day trial</a> policy and <a href="/shipping">Shipping policy</a>.</p>
+
+  <h2>Using this site</h2>
+  <p>Please don’t misuse the site, copy its content for commercial use, or try to interfere with how it works.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about these terms: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</PolicyPage>

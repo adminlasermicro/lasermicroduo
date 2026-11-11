@@ -1,0 +1,33 @@
+---
+import PolicyPage from '../components/site/PolicyPage.astro';
+import { SITE } from '../site.config.js';
+---
+<PolicyPage
+  title="Privacy policy"
+  description="What information Laser Micro Duo collects, how it is used and your choices."
+  lead="What we collect when you use this site or buy from us, and how we use it."
+  updated="November 11, 2026"
+>
+  <h2>What we collect</h2>
+  <ul>
+    <li><strong>Order details:</strong> your name, email, phone, shipping address and what you bought. Payments are processed by Wix’s secure checkout; we don’t see or store your full card number.</li>
+    <li><strong>Messages:</strong> anything you send us by text, email or the contact form.</li>
+    <li><strong>Site usage:</strong> our site is hosted by Wix, which uses cookies and similar technology to run the site, remember your cart and measure visits.</li>
+  </ul>
+
+  <h2>How we use it</h2>
+  <ul>
+    <li>To process, ship and support your order.</li>
+    <li>To answer your questions.</li>
+    <li>To keep the site working and improve it.</li>
+  </ul>
+
+  <h2>Who we share it with</h2>
+  <p>We share information only with the services that run our business, such as Wix (site, checkout and payments) and shipping carriers, and when the law requires it. We don’t sell your personal information.</p>
+
+  <h2>Your choices</h2>
+  <p>You can ask us what information we have about you, or ask us to correct or delete it, by emailing <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+
+  <h2>Contact</h2>
+  <p>{SITE.name}, <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+</PolicyPage>

@@ -1,0 +1,15 @@
+---
+// Bottom "Add to cart" bar for phones and tablets. It appears once the page's main buy area
+// (marked data-buy-anchor) has scrolled out of view, and hides again when it comes back.
+import PriceTag from './PriceTag.astro';
+const { kit } = Astro.props;
+---
+{kit?.productId && (
+  <div class="sticky-buy" data-sticky-buy aria-hidden="true">
+    <div>
+      <p class="sticky-buy__name">LaserTouchOne kit</p>
+      {kit.price && <PriceTag kit={kit} size="sm" />}
+    </div>
+    <button type="button" class="btn btn--primary" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} tabindex="-1">Add to cart</button>
+  </div>
+)}

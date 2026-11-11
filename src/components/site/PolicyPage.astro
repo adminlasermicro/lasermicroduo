@@ -1,0 +1,19 @@
+---
+// Shared layout for the policy pages (shipping, returns, privacy, terms).
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from './PageHero.astro';
+import CtaBand from './CtaBand.astro';
+const { title, description, lead, updated } = Astro.props;
+---
+<SiteLayout title={`${title} | Laser Micro Duo`} description={description}>
+  <PageHero title={title} lead={lead} />
+  <section class="section section--tight-top">
+    <div class="container">
+      <div class="prose">
+        <slot />
+        <p class="prose__updated">Last updated {updated}</p>
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Questions about this policy?" text="Text or email us and a real person will help." />
+</SiteLayout>

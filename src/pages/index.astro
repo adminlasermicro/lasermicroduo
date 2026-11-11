@@ -10,6 +10,7 @@ import ReviewGrid from '../components/site/ReviewGrid.astro';
 import { REAL_REVIEWS } from '../data/reviews.js';
 import CtaBand from '../components/site/CtaBand.astro';
 import ResellerSeal from '../components/site/ResellerSeal.astro';
+import StickyBuy from '../components/site/StickyBuy.astro';
 
 const { kit } = await loadStore();
 
@@ -25,45 +26,44 @@ const steps = [
   { icon: 'timer', title: 'Two minutes of strokes', text: 'Switch it on and glide the head in slow circles over the area for two minutes.' },
   { icon: 'repeat', title: 'Repeat up to 5 times a day', text: 'At your desk, after a run or before bed. It fits wherever your day takes you.' },
 ];
+const whyBuy = [
+  { icon: 'file', text: 'Manufacturer’s warranty' },
+  { icon: 'calendar', text: '30-day in-home trial' },
+  { icon: 'message', text: 'Text support' },
+];
 ---
 <SiteLayout
   title="LaserTouchOne, drug-free pain relief at home | Laser Micro Duo"
   description="Shop LaserTouchOne from Laser Micro Duo, an authorized reseller. An FDA-cleared handheld device that pairs a cold laser with microcurrent for pain relief at home."
 >
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero__grid">
-      <div class="hero__copy">
+  <!-- Hero: one full-width photo, text on a soft scrim -->
+  <section class="hero-full">
+    <img class="hero-full__img" src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
+    <div class="container hero-full__in">
+      <div class="hero-full__copy">
         <h1 class="display">Pain relief that keeps you moving</h1>
         <p class="lead">
           LaserTouchOne pairs a gentle cold laser with microcurrent in one handheld, FDA-cleared device.
           No prescription, no pills, just two minutes at a time.
         </p>
-        <div class="hero__actions">
+        <div class="hero-full__actions">
           <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>
           <a class="link-arrow" href="/how-it-works">See how it works <Icon name="arrow" size={18} /></a>
         </div>
-        <p class="hero__meta">
-          {kit.price ? <PriceTag kit={kit} size="sm" /> : <>Carrying case included</>}
-          <span class="dot" aria-hidden="true"></span> Sold and supported by an authorized reseller
-        </p>
-      </div>
-      <div class="hero__media">
-        <img src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
-        <div class="hero__chip">
-          <span class="hero__chip-icon"><Icon name="shield" size={20} /></span>
-          <span><strong>FDA-cleared</strong><br />for over-the-counter use</span>
+        <div class="hero-full__meta">
+          {kit.price && <PriceTag kit={kit} size="sm" />}
+          <span class="hero-full__fact"><Icon name="shield" size={18} /> FDA-cleared for over-the-counter use</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Trust strip -->
+  <!-- Trust row -->
   <section class="trust" aria-label="Why buy from us">
     <div class="container">
       <ul class="trust__list">
-        {trust.map((t) => (
-          <li>
+        {trust.map((t, i) => (
+          <li data-reveal style={`--d:${i * 60}ms`}>
             <span class="icon-badge"><Icon name={t.icon} /></span>
             <span><strong>{t.label}</strong><span class="trust__sub">{t.sub}</span></span>
           </li>
@@ -75,23 +75,23 @@ const steps = [
   <!-- Two technologies -->
   <section class="section">
     <div class="container split">
-      <div class="product-stage" data-photo-slot="product-hero">
+      <div class="product-stage" data-photo-slot="product-hero" data-reveal>
         <span class="product-stage__note">Product photo coming soon</span>
       </div>
       <div class="split__copy">
-        <h2 class="h2">Two technologies, one small device</h2>
-        <p class="lead">
+        <h2 class="h2" data-reveal>Two technologies, one small device</h2>
+        <p class="lead" data-reveal style="--d:80ms">
           Most devices do one thing. LaserTouchOne works on the same spot with two at once, from a
           head small enough to hold like a pen.
         </p>
-        <div class="feature">
+        <div class="feature" data-reveal style="--d:160ms">
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
           <div>
             <h3 class="h3">Cold laser</h3>
             <p>A gentle 670 nm red light from the center of the head. It doesn’t heat or hurt.</p>
           </div>
         </div>
-        <div class="feature">
+        <div class="feature" data-reveal style="--d:220ms">
           <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
           <div>
             <h3 class="h3">Microcurrent</h3>
@@ -103,42 +103,42 @@ const steps = [
     </div>
   </section>
 
-  <!-- Made for your life -->
-  <section class="section section--tight-top">
+  <!-- Made for your life: full-width photo band -->
+  <section aria-labelledby="life-title">
     <div class="container">
       <div class="section-head">
-        <h2 class="h2">Made for the life you want to live</h2>
-        <p class="lead">Whether pain slows down your everyday or your training, LaserTouchOne goes where you go.</p>
+        <h2 class="h2" id="life-title" data-reveal>Made for the life you want to live</h2>
+        <p class="lead" data-reveal style="--d:80ms">Whether pain slows down your everyday or your training, LaserTouchOne goes where you go.</p>
       </div>
-      <div class="life">
-        <article class="life__card">
-          <img src={PHOTOS.everyday.src} width={PHOTOS.everyday.width} height={PHOTOS.everyday.height} alt={PHOTOS.everyday.alt} loading="lazy" />
-          <div class="life__body">
-            <h3 class="h3">For everyday chronic pain</h3>
-            <p>Relief for the aches you live with, without adding another pill to the cabinet. Use it on the couch, at your desk or before bed.</p>
-          </div>
-        </article>
-        <article class="life__card">
-          <img src={PHOTOS.active.src} width={PHOTOS.active.width} height={PHOTOS.active.height} alt={PHOTOS.active.alt} loading="lazy" />
-          <div class="life__body">
-            <h3 class="h3">For active recovery</h3>
-            <p>Bounce back from long runs, rounds of golf and tough workouts. The travel kit fits right in your gym bag.</p>
-          </div>
-        </article>
-      </div>
+    </div>
+    <div class="life-band">
+      <article class="life-band__item">
+        <img src={PHOTOS.everyday.src} width={PHOTOS.everyday.width} height={PHOTOS.everyday.height} alt={PHOTOS.everyday.alt} loading="lazy" />
+        <div class="life-band__cap" data-reveal>
+          <h3 class="h3">For everyday chronic pain</h3>
+          <p>Relief for the aches you live with, without adding another pill to the cabinet. Use it on the couch, at your desk or before bed.</p>
+        </div>
+      </article>
+      <article class="life-band__item">
+        <img src={PHOTOS.active.src} width={PHOTOS.active.width} height={PHOTOS.active.height} alt={PHOTOS.active.alt} loading="lazy" />
+        <div class="life-band__cap" data-reveal style="--d:100ms">
+          <h3 class="h3">For active recovery</h3>
+          <p>Bounce back from long runs, rounds of golf and tough workouts. The carrying case fits right in your gym bag.</p>
+        </div>
+      </article>
     </div>
   </section>
 
   <!-- Steps -->
   <section class="section band">
     <div class="container">
-      <div class="section-head section-head--center">
-        <h2 class="h2">Three steps. Two minutes.</h2>
-        <p class="lead">No appointments, no wires, nothing to wear. Here’s the whole routine.</p>
+      <div class="section-head">
+        <h2 class="h2" data-reveal>Three steps. Two minutes.</h2>
+        <p class="lead" data-reveal style="--d:80ms">No appointments, no wires, nothing to wear. Here’s the whole routine.</p>
       </div>
       <ol class="steps">
         {steps.map((s, i) => (
-          <li class="step">
+          <li class="step" data-reveal style={`--d:${i * 90}ms`}>
             <span class="step__icon"><Icon name={s.icon} size={28} /><span class="step__num" aria-hidden="true">{i + 1}</span></span>
             <h3 class="h3">{s.title}</h3>
             <p>{s.text}</p>
@@ -161,39 +161,35 @@ const steps = [
   </section>
   )}
 
-  <!-- The kit -->
+  <!-- The kit: open split, no floating card -->
   <section class="section section--tint" id="kits">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <h2 class="h2">Everything in one kit</h2>
-        <p class="lead">One price, with the carrying case included. Every order comes with the 30-day in-home trial, the manufacturer’s warranty and support from us.</p>
-      </div>
-      <article class="offer">
-        <div class="offer__media" data-photo-slot="kit-main"><span>Kit photo coming soon</span></div>
-        <div class="offer__body">
-          <span class="kit__badge kit__badge--inline">Carrying case included</span>
-          <h3 class="h2 offer__name">{kit.name}</h3>
-          <p class="kit__blurb">{kit.blurb}</p>
-          <ul class="checklist">
-            {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
-          </ul>
-          <div class="offer__foot">
-            {kit.price ? <PriceTag kit={kit} /> : <p class="kit__ask">Price on request</p>}
-            {kit.productId
-              ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''}>Add to cart</button>
-              : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
-          </div>
-          <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
-          <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
+    <div class="container offer">
+      <div class="offer__media" data-photo-slot="kit-main" data-reveal><span>Kit photo coming soon</span></div>
+      <div class="offer__body">
+        <h2 class="h2 offer__name" data-reveal>Everything in one kit</h2>
+        <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Every order comes with the 30-day in-home trial, the manufacturer’s warranty and support from us.</p>
+        <ul class="checklist" data-reveal style="--d:140ms">
+          {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
+        </ul>
+        <div class="offer__foot" data-buy-anchor>
+          {kit.price ? <PriceTag kit={kit} /> : <p class="kit__ask">Price on request</p>}
+          {kit.productId
+            ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''}>Add to cart</button>
+            : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
         </div>
-      </article>
+        <ul class="why-buy" aria-label="Why buy from us">
+          {whyBuy.map((w) => <li><Icon name={w.icon} size={18} />{w.text}</li>)}
+        </ul>
+        <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
+        <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
+      </div>
     </div>
   </section>
 
   <!-- FDA explained -->
   <section class="section">
     <div class="container split split--reverse">
-      <div class="fda-card">
+      <div class="fda-card" data-reveal>
         <span class="icon-badge icon-badge--lg"><Icon name="file" size={24} /></span>
         <dl>
           <div><dt>Clearance</dt><dd>510(k) K100116</dd></div>
@@ -204,12 +200,12 @@ const steps = [
         <a class="link-arrow" href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
       </div>
       <div class="split__copy">
-        <h2 class="h2">FDA-cleared, explained simply</h2>
-        <p class="lead">
+        <h2 class="h2" data-reveal>FDA-cleared, explained simply</h2>
+        <p class="lead" data-reveal style="--d:80ms">
           “FDA-cleared” means the FDA reviewed LaserTouchOne and cleared it for sale for specific uses.
           For this device, that means:
         </p>
-        <ul class="checklist checklist--lg">
+        <ul class="checklist checklist--lg" data-reveal style="--d:140ms">
           <li><Icon name="check" size={20} />Relief of chronic, intractable pain</li>
           <li><Icon name="check" size={20} />Help with pain after surgery or an injury, alongside other care</li>
           <li><Icon name="check" size={20} />Temporary relief of minor neck and shoulder pain</li>
@@ -219,10 +215,10 @@ const steps = [
   </section>
 
   <!-- FAQ -->
-  <section class="section section--tight-top">
+  <section class="section section--tight-top" data-sticky-stop>
     <div class="container faq-wrap">
       <div class="section-head">
-        <h2 class="h2">Questions, answered</h2>
+        <h2 class="h2" data-reveal>Questions, answered</h2>
         <p class="lead">Can’t find yours? <a href="/faq">See all questions</a> or text us.</p>
       </div>
       <FaqList items={TOP_FAQS} />
@@ -230,4 +226,5 @@ const steps = [
   </section>
 
   <CtaBand />
+  <StickyBuy kit={kit} />
 </SiteLayout>

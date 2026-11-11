@@ -1,0 +1,26 @@
+---
+import PolicyPage from '../components/site/PolicyPage.astro';
+import { SITE, textHref } from '../site.config.js';
+---
+<PolicyPage
+  title="Returns and 30-day trial"
+  description="The 30-day in-home trial, returns and warranty for LaserTouchOne bought from Laser Micro Duo."
+  lead="Try LaserTouchOne at home for 30 days. If it isn’t right for you, we’ll help you return it."
+  updated="November 11, 2026"
+>
+  <h2>The 30-day in-home trial</h2>
+  <p>You have 30 days from delivery to try LaserTouchOne at home. If it isn’t right for you, contact us within those 30 days to start a return.</p>
+
+  <h2>How to start a return</h2>
+  <ul>
+    {SITE.textNumber && <li>Text us at <a href={textHref}>{SITE.textNumber}</a>, or</li>}
+    <li>Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> with your order number.</li>
+  </ul>
+  <p>We’ll reply with return instructions. Please send back the device and everything that came in the kit.</p>
+
+  <h2>Refunds</h2>
+  <p>Once we receive your return, we refund the device price to your original payment method, as set out in the manufacturer’s guarantee. We’ll confirm by email when your refund is on its way.</p>
+
+  <h2>Warranty</h2>
+  <p>Because we are an authorized reseller, your LaserTouchOne comes with the manufacturer’s warranty. If something goes wrong with your device, contact us and we’ll help you with the claim.</p>
+</PolicyPage>

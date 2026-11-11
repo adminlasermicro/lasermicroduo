@@ -1,0 +1,26 @@
+---
+import PolicyPage from '../components/site/PolicyPage.astro';
+import { SITE, textHref } from '../site.config.js';
+---
+<PolicyPage
+  title="Shipping policy"
+  description="How Laser Micro Duo ships LaserTouchOne orders in the US and internationally."
+  lead="How and where we ship your LaserTouchOne order."
+  updated="November 11, 2026"
+>
+  <h2>Shipping in the US</h2>
+  <p>US orders ship at one flat rate, shown at checkout before you pay.</p>
+
+  <h2>International shipping</h2>
+  <p>We also ship outside the US. The shipping cost depends on your country and is calculated at checkout before you pay. Import duties or taxes charged by your country are your responsibility.</p>
+
+  <h2>Tracking</h2>
+  <p>As soon as your order ships, we’ll text or email you a tracking link.</p>
+
+  <h2>Problems with delivery</h2>
+  <p>If your order is late, lost or arrives damaged, contact us right away and we’ll make it right with the carrier.</p>
+  <ul>
+    {SITE.textNumber && <li>Text us at <a href={textHref}>{SITE.textNumber}</a></li>}
+    <li>Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></li>
+  </ul>
+</PolicyPage>

@@ -2,8 +2,8 @@
 /* ── Trust: seals, studies, review score ── */
 .sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .seals { display: flex; flex-wrap: wrap; gap: 12px; }
-.seal { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 20px 8px 8px; border-radius: 999px; background: var(--color-surface); box-shadow: inset 0 0 0 1.5px var(--color-border); color: var(--color-text); text-decoration: none; transition: box-shadow 0.2s; }
-.seal:hover { box-shadow: inset 0 0 0 1.5px var(--color-brand); }
+.seal { display: inline-flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 20px 8px 8px; border-radius: 999px; background: var(--color-surface); color: var(--color-text); text-decoration: none; transition: background-color 0.2s; }
+.seal:hover { background: var(--color-surface-tint); }
 .seal__disc { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--color-cta); color: var(--color-on-cta); }
 .seal__text { display: grid; line-height: 1.3; }
 .seal__text strong { font-size: var(--fs-small); }

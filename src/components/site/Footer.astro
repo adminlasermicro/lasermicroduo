@@ -36,6 +36,13 @@ const year = new Date().getFullYear();
         <a href="/contact">Contact</a>
         <a href="/api/auth/login?returnUrl=/">Log in</a>
       </nav>
+      <nav class="footer__col" aria-label="Policies">
+        <p class="footer__h">Policies</p>
+        <a href="/shipping">Shipping</a>
+        <a href="/returns">Returns and 30-day trial</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
     </div>
     <p class="footer__legal">
       LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of
@@ -45,7 +52,7 @@ const year = new Date().getFullYear();
       user manual and talk to your doctor about your pain.
     </p>
     <div class="footer__bottom">
-      <p>© {year} {SITE.name}</p>
+      <p>© {year} {SITE.name} · <span class="footer__secure"><Icon name="lock" size={16} /> Secure checkout by Wix</span></p>
       <p class="footer__credits">Photos: {Object.values(PHOTOS).map((p, i) => <>{i > 0 && '; '}<a href={p.page} target="_blank" rel="noopener">{p.credit}</a></>)}</p>
     </div>
   </div>

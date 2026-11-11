@@ -7,6 +7,7 @@ import FaqList from '../components/site/FaqList.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import { loadStore } from '../lib/kits.js';
 import PriceTag from '../components/site/PriceTag.astro';
+import StickyBuy from '../components/site/StickyBuy.astro';
 import ResellerSeal from '../components/site/ResellerSeal.astro';
 import StudyList from '../components/site/StudyList.astro';
 import { SITE, textHref } from '../site.config.js';
@@ -39,9 +40,8 @@ const details = [
       </div>
 
       <div class="buybox" data-buybox>
-        <p class="buybox__brand">Sold by Laser Micro Duo, authorized reseller</p>
         <h1 class="h2 buybox__title">LaserTouchOne</h1>
-        <p class="lead">Cold laser and microcurrent in one handheld, FDA-cleared device. Drug-free relief, two minutes at a time.</p>
+        <p class="lead">Cold laser and microcurrent in one handheld, FDA-cleared device. Drug-free relief, two minutes at a time. Sold and supported by Laser Micro Duo, an authorized reseller.</p>
 
         <ul class="checklist buybox__includes">
           {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
@@ -53,7 +53,7 @@ const details = [
         </div>
 
         {kit.productId
-          ? <button type="button" class="btn btn--primary btn--lg btn--full" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''}>Add to cart</button>
+          ? <button type="button" class="btn btn--primary btn--lg btn--full" data-buy-anchor data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''}>Add to cart</button>
           : <a class="btn btn--primary btn--lg btn--full" href="/contact">Ask about price</a>}
 
         <ul class="buybox__perks">
@@ -125,6 +125,7 @@ const details = [
   )}
 
   <CtaBand title="Still deciding?" />
+  <StickyBuy kit={kit} />
 
   <script>
     document.querySelectorAll('[data-gallery] .gallery__thumb').forEach((t, _, all) => t.addEventListener('click', () => {
