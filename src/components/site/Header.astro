@@ -19,8 +19,7 @@ const links = [
 <header class="header" data-header>
   <div class="container header__in">
     <a class="logo" href="/" aria-label="Laser Micro Duo home">
-      <span class="logo__mark" aria-hidden="true"><span></span><span></span><span></span></span>
-      <span class="logo__word">Laser Micro Duo</span>
+      <img class="logo__img" src="/brand/lmd-logo-horizontal.svg" alt="" width="386" height="56" />
     </a>
     <nav class="nav" aria-label="Main">
       {links.map((l) => <a href={l.href} aria-current={path === l.href ? 'page' : undefined}>{l.label}</a>)}

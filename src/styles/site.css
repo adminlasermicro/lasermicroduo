@@ -120,7 +120,7 @@ button { cursor: pointer; }
 .cart-btn:hover, .menu-btn:hover { background: var(--color-surface-tint); }
 .cart-btn__count {
   position: absolute; top: -2px; right: -2px; min-width: 20px; height: 20px; padding: 0 5px;
-  border-radius: 999px; background: var(--color-cta); color: var(--color-on-cta);
+  border-radius: 999px; background: var(--color-brand); color: var(--color-heading-on-inverse);
   font-size: 0.75rem; font-weight: 700; line-height: 20px; text-align: center;
 }
 .menu-btn { display: none; }
@@ -156,7 +156,7 @@ button { cursor: pointer; }
   font-size: 0.875rem; line-height: 1.35; color: var(--color-text-muted);
 }
 .hero__chip strong { color: var(--color-text); font-size: 0.9375rem; }
-.hero__chip-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-cta); color: var(--color-on-cta); }
+.hero__chip-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-brand); color: var(--color-heading-on-inverse); }
 
 /* ── Trust strip ────────────────────────── */
 .trust { padding: var(--s5) 0; background: var(--color-surface); }
@@ -204,7 +204,7 @@ button { cursor: pointer; }
 }
 .step__num {
   position: absolute; top: -2px; right: -2px; width: 30px; height: 30px; border-radius: 50%;
-  background: var(--color-cta); color: var(--color-on-cta); font-weight: 700; font-size: var(--fs-small); display: grid; place-items: center;
+  background: var(--color-brand); color: var(--color-heading-on-inverse); font-weight: 700; font-size: var(--fs-small); display: grid; place-items: center;
   border: 3px solid var(--color-surface);
 }
 
@@ -224,7 +224,7 @@ button { cursor: pointer; }
 .kits { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); max-width: 980px; margin-inline: auto; }
 .kit { position: relative; display: flex; flex-direction: column; gap: var(--s2); padding: var(--s4); background: var(--color-surface); border-radius: var(--r-lg); }
 .kit--featured { box-shadow: 0 0 0 2px var(--color-brand); }
-.kit__badge { position: absolute; top: var(--s4); right: var(--s4); z-index: 1; background: var(--color-cta); color: var(--color-on-cta); font-size: 0.8125rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
+.kit__badge { position: absolute; top: var(--s4); right: var(--s4); z-index: 1; background: var(--color-brand); color: var(--color-heading-on-inverse); font-size: 0.8125rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
 .kit__media { aspect-ratio: 16 / 10; border-radius: var(--r-md); background: var(--color-surface-muted); display: grid; place-items: center; margin-bottom: var(--s1); }
 .kit__blurb { color: var(--color-text-muted); }
 .checklist { display: grid; gap: 10px; }
@@ -265,7 +265,7 @@ button { cursor: pointer; }
   padding: clamp(32px, 5vw, 64px); border-radius: var(--r-lg); background: var(--color-announce-bg); color: var(--white);
 }
 .cta > div:first-child { display: grid; gap: 12px; max-width: 560px; }
-.cta p { color: var(--sage-200); }
+.cta p { color: var(--color-on-band-muted); }
 .cta__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* ── Footer ─────────────────────────────── */
@@ -279,9 +279,9 @@ button { cursor: pointer; }
 .footer__h { color: var(--color-heading-on-inverse); font-weight: 600; margin-bottom: 4px; }
 .footer__col a, .footer__col button { color: var(--color-text-on-inverse); text-decoration: none; background: none; border: 0; padding: 0; text-align: left; font-size: var(--fs-small); }
 .footer a:hover, .footer__col button:hover { color: var(--color-heading-on-inverse); }
-.footer__legal { margin-top: var(--s6); font-size: var(--fs-small); line-height: 1.6; max-width: 70ch; color: var(--ink-400); }
-.footer__bottom { display: flex; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s3); font-size: var(--fs-small); color: var(--ink-400); }
-.footer__credits a { color: var(--ink-400); }
+.footer__legal { margin-top: var(--s6); font-size: var(--fs-small); line-height: 1.6; max-width: 70ch; color: var(--color-text-on-inverse-muted); }
+.footer__bottom { display: flex; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s3); font-size: var(--fs-small); color: var(--color-text-on-inverse-muted); }
+.footer__credits a { color: var(--color-text-on-inverse-muted); }
 .footer__credits { max-width: 720px; }
 
 /* ── Cart drawer ────────────────────────── */
@@ -491,12 +491,12 @@ button { cursor: pointer; }
 .hero-full .lead { color: rgba(255, 255, 255, 0.86); max-width: 46ch; }
 .hero-full__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); margin-top: var(--s1); }
 .hero-full .link-arrow { color: var(--white); }
-.hero-full .link-arrow:hover { color: var(--sage-200); }
+.hero-full .link-arrow:hover { color: var(--color-on-band-muted); }
 .hero-full__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); font-size: var(--fs-small); color: rgba(255, 255, 255, 0.86); }
 .hero-full__meta .price-tag__now { color: var(--white); }
 .hero-full__meta .price-tag__was { color: rgba(255, 255, 255, 0.7); }
 .hero-full__fact { display: inline-flex; align-items: center; gap: 8px; }
-.hero-full__fact .icon { color: var(--sage-200); }
+.hero-full__fact .icon { color: var(--color-on-band-muted); }
 
 /* Full-width photo band: two photos edge to edge with captions on them. */
 .life-band { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
@@ -552,3 +552,8 @@ button { cursor: pointer; }
   .js [data-reveal] { opacity: 1; transform: none; }
   .hero-full__img { animation: none; transform: scale(-1, 1); }
 }
+
+/* ── Logo (Sunrise Seal icon + Fraunces wordmark, outlined SVG) ── */
+.logo__img { display: block; height: 40px; width: auto; }
+.footer .logo__img { height: 44px; }
+@media (max-width: 640px) { .logo__img { height: 32px; } }

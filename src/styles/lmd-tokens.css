@@ -1,4 +1,4 @@
-/* Laser Micro Duo design tokens (from the Laser Micro Duo design system, 2026-11-09).
+/* Laser Micro Duo design tokens. Palette: Ink & Copper (2026-11-11). The older sage scales below are kept only so nothing breaks; do not use them.
    Loaded before site.css by SiteLayout.astro. The font is linked in the layout.
    Use the semantic --color-* tokens in new CSS; the old names (--sage, --ink, --stone...) are aliases at the bottom. */
 
@@ -42,38 +42,58 @@
   --red-700: #862f21;
   --white: #ffffff;
 
+  /* Ink & Copper palette (chosen 2026-11-11). Contrast checked: text 16.6:1, muted text 7.7:1,
+     white on buy button 5.7:1, navy on page 12.7:1, field borders 3.7:1. */
+  --navy-100: #e7eaf2;
+  --navy-200: #d6dcee;
+  --navy-700: #1f2d5c;
+  --navy-800: #172247;
+  --copper-600: #b5401f;
+  --copper-700: #962f12;
+  --amber-400: #e8a33d;
+  --paper-50: #fbfaf7;
+  --paper-100: #f1f0ec;
+  --paper-300: #dedbd3;
+  --slate-200: #c9cdd8;
+  --slate-300: #9aa0b2;
+  --slate-400: #7d8190;
+  --slate-600: #4a5061;
+  --night-900: #161a26;
+
   /* Semantic, light (default) */
-  --color-bg: var(--ink-50);
+  --color-bg: var(--paper-50);
   --color-surface: #ffffff;
-  --color-surface-muted: var(--sage-100);
-  --color-surface-tint: var(--sage-200);
-  --color-surface-inverse: var(--ink-900);
-  --color-text: var(--ink-900);
-  --color-text-muted: var(--ink-600);
-  --color-text-on-inverse: var(--ink-300);
+  --color-surface-muted: var(--paper-100);
+  --color-surface-tint: var(--navy-100);
+  --color-surface-inverse: var(--night-900);
+  --color-text: var(--night-900);
+  --color-text-muted: var(--slate-600);
+  --color-text-on-inverse: var(--slate-200);
   --color-heading-on-inverse: #ffffff;
-  --color-brand: var(--sage-600);
-  --color-brand-strong: var(--sage-700);
-  --color-cta: var(--sage-600);
-  --color-cta-hover: var(--sage-700);
+  --color-brand: var(--navy-700);
+  --color-brand-strong: var(--navy-800);
+  --color-cta: var(--copper-600);
+  --color-cta-hover: var(--copper-700);
   --color-on-cta: #ffffff;
-  --color-link: var(--sage-700);
-  --color-border: var(--sage-300);
-  --color-border-strong: var(--ink-500);
-  --color-focus: var(--sage-600);
-  --color-announce-bg: var(--sage-700);
-  --color-star: var(--gold-400);
+  --color-link: var(--navy-700);
+  --color-border: var(--paper-300);
+  --color-border-strong: var(--slate-400);
+  --color-focus: var(--navy-700);
+  --color-announce-bg: var(--navy-700);
+  --color-star: var(--amber-400);
   --color-success: var(--green-600);
   --color-success-bg: var(--green-50);
   --color-warning: var(--gold-700);
   --color-warning-bg: var(--gold-50);
   --color-error: var(--red-600);
   --color-error-bg: var(--red-50);
-  --color-header-bg: rgba(245, 245, 241, 0.92);
+  --color-header-bg: rgba(251, 250, 247, 0.92);
   --color-header-bg-scrolled: rgba(255, 255, 255, 0.96);
-  --shadow-soft: 0 1px 2px #1f2b260a, 0 8px 24px #1f2b260f;
-  --shadow-header: 0 1px 0 #1f2b260f, 0 6px 20px #1f2b260d;
-  --shadow-cta-hover: 0 6px 18px #3c6e5b40;
+  --shadow-soft: 0 1px 2px #161a260a, 0 8px 24px #161a2612;
+  --shadow-header: 0 1px 0 #161a2610, 0 6px 20px #161a260d;
+  --shadow-cta-hover: 0 6px 18px #b5401f40;
+  --color-on-band-muted: var(--navy-200);
+  --color-text-on-inverse-muted: var(--slate-300);
 
   /* Type */
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
