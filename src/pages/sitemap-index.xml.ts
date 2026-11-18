@@ -9,6 +9,8 @@ const pageFiles = import.meta.glob('./**/*.astro');
 const routes = Object.keys(pageFiles)
   .map((file) => file.replace(/^\.\//, '').replace(/\.astro$/, ''))
   .filter((p) => !p.includes('[') && !p.split('/').some((seg) => seg.startsWith('_')))
+  // Ad landing pages (/lp/...) are noindex and stay out of the sitemap.
+  .filter((p) => !p.startsWith('lp/'))
   .map((p) => (p === 'index' ? '/' : '/' + p.replace(/\/index$/, '')))
   .sort((a, b) => (a === '/' ? -1 : b === '/' ? 1 : a.localeCompare(b)));
 

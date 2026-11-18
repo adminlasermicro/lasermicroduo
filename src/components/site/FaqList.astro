@@ -1,12 +1,12 @@
 ---
-import Icon from './Icon.astro';
-const { items, openFirst = true } = Astro.props;
+// Accordion of questions. Answers may contain simple HTML (links).
+const { items, openFirst = false } = Astro.props;
 ---
 <div class="faq">
   {items.map((f, i) => (
-    <details class="faq__item" open={openFirst && i === 0}>
-      <summary>{f.q}<span class="faq__icon"><Icon name="plus" size={20} /></span></summary>
-      <p>{f.a}</p>
+    <details open={openFirst && i === 0}>
+      <summary>{f.q}</summary>
+      <div class="faq__a"><p set:html={f.a} /></div>
     </details>
   ))}
 </div>

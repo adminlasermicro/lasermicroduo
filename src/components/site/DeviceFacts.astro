@@ -1,0 +1,12 @@
+---
+// The "Device facts" panel, laid out like the Drug Facts label on a pharmacy box.
+// Pass rows as [{ label, value }]; `value` may contain simple HTML.
+const { title = 'Device facts', rows = [], note, id } = Astro.props;
+---
+<section class="facts" aria-labelledby={id}>
+  <h2 class="facts__title" id={id}>{title}</h2>
+  <dl>
+    {rows.map((r) => <div class="facts__row"><dt>{r.label}</dt><dd set:html={r.value} /></div>)}
+  </dl>
+  {note && <p class="facts__note" set:html={note} />}
+</section>

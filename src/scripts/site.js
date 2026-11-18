@@ -1,3 +1,5 @@
+import { track } from '../lib/track.js';
+
 // Shared site behaviour: mobile menu and sticky-header state.
 const toggle = document.querySelector('[data-menu-toggle]');
 const menu = document.getElementById('mobile-menu');
@@ -20,26 +22,6 @@ if (header) {
   window.addEventListener('scroll', onScroll, { passive: true });
 }
 
-// Gentle scroll-in motion. Elements marked data-reveal rise in once. If this script never runs,
-// the CSS leaves them visible (it only hides them under html.js).
-// Inner pages get the same motion without hand-tagging every element.
-document.querySelectorAll('.page-hero__in > *, main .section-head > *, .faq__item, .routine__step, .promise, .contact-way, .prose > *, .product-details .section-head, .accessory, .diagram-card, .photo-card, .safety')
-  .forEach((el, i) => { if (!el.hasAttribute('data-reveal')) { el.setAttribute('data-reveal', ''); el.style.setProperty('--d', `${(i % 4) * 70}ms`); } });
-const revealEls = document.querySelectorAll('[data-reveal]');
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (revealEls.length) {
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealEls.forEach((el) => el.classList.add('is-in'));
-  } else {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach((el) => io.observe(el));
-    // Safety net: never leave anything hidden for long.
-    setTimeout(() => revealEls.forEach((el) => el.classList.add('is-in')), 4000);
-  }
-}
-
 // Sticky buy bar: show it once the main buy area has scrolled out of view, below the first screen.
 const bar = document.querySelector('[data-sticky-buy]');
 const anchor = document.querySelector('[data-buy-anchor]');
@@ -58,3 +40,7 @@ if (bar && anchor && 'IntersectionObserver' in window) {
   window.addEventListener('scroll', update, { passive: true });
   update();
 }
+
+// ViewContent for the product, once per page view, on pages that carry [data-view-content].
+const view = document.querySelector('[data-view-content]');
+if (view) track('ViewContent', { id: view.dataset.id, name: 'LaserTouchOne kit', price: Number(view.dataset.price) || undefined, category: 'Devices' });

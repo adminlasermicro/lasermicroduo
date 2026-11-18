@@ -1,0 +1,13 @@
+---
+// Average rating and review count. Renders nothing until real reviews exist in reviews.js.
+import Icon from './Icon.astro';
+import { REAL_REVIEWS } from '../../data/reviews.js';
+const n = REAL_REVIEWS.length;
+const avg = n ? REAL_REVIEWS.reduce((s, r) => s + r.stars, 0) / n : 0;
+---
+{n > 0 && (
+  <p class="rating-summary">
+    <span aria-hidden="true" style="display:inline-flex">{Array.from({ length: 5 }, (_, i) => <Icon name="star" size={20} class={i < Math.round(avg) ? 'on' : 'off'} />)}</span>
+    <span>{avg.toFixed(1)} out of 5, from {n} {n === 1 ? 'review' : 'reviews'}</span>
+  </p>
+)}

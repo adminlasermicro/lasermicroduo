@@ -1,0 +1,9 @@
+---
+// A product photo or video from src/data/media.js, or a labelled placeholder until it's supplied.
+const { item, eager = false, class: cls = '' } = Astro.props;
+---
+{item.src
+  ? (item.src.endsWith('.mp4')
+      ? <video class={cls} src={item.src} poster={item.poster} controls muted playsinline preload="none" style="border-radius:var(--r-media);width:100%">{item.captions && <track kind="captions" src={item.captions} srclang="en" label="English" default />}</video>
+      : <img class={cls} src={item.src} alt={item.alt} width="1200" height={item.ratio === '4x5' ? 1500 : item.ratio === '16x9' ? 675 : 1200} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} style="border-radius:var(--r-media)" />)
+  : <div class={`slot slot--${item.ratio} ${cls}`} role="img" aria-label={`Placeholder: ${item.label}`}><span><b>{item.label}</b>{item.ratio === '16x9' ? 'Video' : 'Photo'} needed, {item.size}</span></div>}

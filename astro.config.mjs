@@ -18,4 +18,6 @@ export default defineConfig({
   },
 
   output: "server",
+  // /guarantee is a friendly address for the returns and money-back guarantee page.
+  redirects: { '/guarantee': '/returns' },
 });

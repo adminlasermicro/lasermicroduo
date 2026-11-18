@@ -1,0 +1,14 @@
+---
+// The trust lines that sit directly under every Add to cart button.
+// The rating line and the HSA/FSA line stay hidden until they are real (see reviews.js and site.config.js).
+import Icon from './Icon.astro';
+import RatingSummary from './RatingSummary.astro';
+import { SITE, textHref } from '../../site.config.js';
+---
+<ul class="assure">
+  <li><Icon name="shield" size={24} /><span><strong>Money-back guarantee</strong>, backed by the manufacturer. <a href="/returns">See the details</a></span></li>
+  <li><Icon name="file" size={24} /><span>Made by <strong>{SITE.manufacturer}</strong>, Scottsdale, AZ</span></li>
+  {SITE.textNumber && <li><Icon name="message" size={24} /><span>Text a real person: <a href={textHref}>{SITE.textNumber}</a></span></li>}
+  {SITE.hsaFsa && <li><Icon name="wallet" size={24} /><span class="hsa-line">May be HSA/FSA eligible</span></li>}
+</ul>
+<RatingSummary />

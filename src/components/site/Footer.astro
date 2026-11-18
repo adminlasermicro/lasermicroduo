@@ -1,58 +1,61 @@
 ---
+// Site footer: contact details with hours, the policy set, the FDA indication, the manufacturer and
+// the legal business. In `bare` mode (ad landing pages) it keeps the legal text and policy links only.
 import { SITE, textHref } from '../../site.config.js';
 import { PHOTOS } from '../../data/photos.js';
-import Icon from './Icon.astro';
+const { bare = false } = Astro.props;
 const year = new Date().getFullYear();
+const credits = Object.values(PHOTOS).filter((p) => p.credit && p.used !== false);
 ---
 <footer class="footer">
   <div class="container">
-    <div class="footer__top">
-      <div class="footer__brand">
-        <a class="logo logo--light" href="/" aria-label="Laser Micro Duo home">
-          <img class="logo__img" src="/brand/lmd-logo-horizontal-on-dark.svg" alt="" width="386" height="56" loading="lazy" />
-        </a>
-        <p>Your authorized LaserTouchOne reseller. Real people, real support, drug-free relief at home.</p>
-        <div class="footer__contact">
-          {SITE.textNumber && <a href={textHref}><Icon name="message" size={18} /> Text {SITE.textNumber}</a>}
-          <a href={`mailto:${SITE.contactEmail}`}><Icon name="mail" size={18} /> {SITE.contactEmail}</a>
+    {!bare && (
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="/brand/lmd-logo-horizontal-on-dark.svg" alt="Laser Micro Duo" width="386" height="56" loading="lazy" style="width:220px" />
+          <p>An independent authorized reseller of LaserTouchOne. Real people, at-home support.</p>
+          <p>
+            {SITE.textNumber && <>Text <a href={textHref}>{SITE.textNumber}</a><br /></>}
+            Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a><br />
+            {SITE.replyHours}
+          </p>
         </div>
+        <nav class="footer__col" aria-label="Shop">
+          <p class="footer__h">Shop</p>
+          <a href="/shop">LaserTouchOne kit</a>
+          <a href="/how-it-works">How it works</a>
+          <a href="/faq">FAQ</a>
+        </nav>
+        <nav class="footer__col" aria-label="Company">
+          <p class="footer__h">Company</p>
+          <a href="/about">About us</a>
+          <a href="/fda-clearance">FDA clearance</a>
+          <a href="/contact">Contact</a>
+        </nav>
+        <nav class="footer__col" aria-label="Policies">
+          <p class="footer__h">Policies</p>
+          <a href="/shipping">Shipping</a>
+          <a href="/returns">Returns and guarantee</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </nav>
       </div>
-      <nav class="footer__col" aria-label="Shop">
-        <p class="footer__h">Shop</p>
-        <a href="/shop">LaserTouchOne kits</a>
-                <button type="button" data-open-cart>Cart</button>
-      </nav>
-      <nav class="footer__col" aria-label="Learn">
-        <p class="footer__h">Learn</p>
-        <a href="/how-it-works">How it works</a>
-        <a href="/faq">FAQ</a>
-        <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">FDA clearance (K100116)</a>
-      </nav>
-      <nav class="footer__col" aria-label="Company">
-        <p class="footer__h">Company</p>
-        <a href="/about">About us</a>
-        <a href="/contact">Contact</a>
-        <a href="/api/auth/login?returnUrl=/">Log in</a>
-      </nav>
-      <nav class="footer__col" aria-label="Policies">
-        <p class="footer__h">Policies</p>
-        <a href="/shipping">Shipping</a>
-        <a href="/returns">Returns and guarantee</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/terms">Terms</a>
-      </nav>
-    </div>
-    <p class="footer__legal">
-      LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of
-      chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and
-      adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal
-      origin. LaserTouchOne is made by Laser Health Technologies LLC, Scottsdale, Arizona. Laser Micro Duo
-      (Pinestone Investments LLC) is an independent authorized reseller; LaserTouchOne is a trademark of its owner. This site does not give medical advice. Read the
-      user manual and talk to your doctor about your pain.
-    </p>
-    <div class="footer__bottom">
-      <p>© {year} {SITE.name} · <span class="footer__secure"><Icon name="lock" size={16} /> Secure checkout by Wix</span></p>
-      <p class="footer__credits">Photos: {Object.values(PHOTOS).map((p, i) => <>{i > 0 && '; '}<a href={p.page} target="_blank" rel="noopener">{p.credit}</a></>)}</p>
+    )}
+    <div class={`footer__legal ${bare ? 'footer__legal--bare' : ''}`}>
+      <p>
+        LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic,
+        intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and adjunctive use in
+        providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin. It is made by
+        {SITE.manufacturer} LLC, {SITE.manufacturerPlace}. {SITE.name} ({SITE.legalName}) is an independent authorized
+        reseller; LaserTouchOne is a trademark of its owner. This site does not give medical advice. Read the user
+        manual and talk to your doctor about your pain.
+      </p>
+      {bare && (
+        <nav class="footer__inline" aria-label="Policies">
+          <a href="/returns">Returns and guarantee</a><a href="/shipping">Shipping</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+        </nav>
+      )}
+      <p>© {year} {SITE.legalName}. Secure checkout by Wix.{credits.length > 0 && <> Photos: {credits.map((p, i) => <>{i > 0 && '; '}<a href={p.page} target="_blank" rel="noopener">{p.credit}</a></>)}</>}</p>
     </div>
   </div>
 </footer>

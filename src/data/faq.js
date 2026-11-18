@@ -1,62 +1,67 @@
-// All FAQ content. `top: true` items also appear on the homepage.
+// All FAQ content, led by the questions that stop people buying. `top: true` items also appear
+// on the homepage and the ad landing page (keep it to 6). Answers may contain simple links.
+// Every answer stays inside the FDA-cleared indication (510(k) K100116). Text in [NEEDS NOA: ...]
+// is waiting for facts from the user manual or the business, and must be filled in before publishing.
 export const FAQ_GROUPS = [
   {
-    title: 'About the device',
+    title: 'Before you buy',
     items: [
-      { top: true, q: 'What is LaserTouchOne cleared for?',
-        a: 'It is FDA-cleared for over-the-counter use for symptomatic relief of chronic, intractable pain, for adjunctive treatment of post-surgical and post-traumatic acute pain, and for adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.' },
-      { q: 'How does it work?',
-        a: 'The head of the device has a 670 nm low-level (cold) laser in the middle and two stainless steel contacts either side that deliver mild TENS electrical stimulation. Both work on the same spot at the same time.' },
-      { q: 'Does the laser get hot?',
-        a: 'No. It is a low-level laser under 1 mW, often called a cold laser. It doesn’t heat the skin.' },
-      { q: 'Is it rechargeable?',
-        a: 'Yes. It runs on a built-in rechargeable battery. Charge it fully before the first use, as the user manual describes.' },
+      { top: true, q: 'Does it hurt?',
+        a: 'The laser is a low-level laser under 1 mW, often called a cold laser, so it doesn’t heat the skin. [NEEDS NOA: how the user manual describes the feel of the electrical stimulation, and whether it can be adjusted]' },
+      { top: true, q: 'How long is a session?',
+        a: 'About two minutes per area. Apply a little electrode gel, switch it on and move the head in slow circles over the spot. You can repeat it up to five times a day per area, as the user manual describes.' },
+      { top: true, q: 'Is it safe? Who shouldn’t use it?',
+        a: 'Never point the laser at your eyes or anyone else’s. If you are pregnant, or have a heart condition or epilepsy, talk to your doctor before using it. If your pain is new, severe or unexplained, see a doctor before using any device. [NEEDS NOA: the full list of warnings and who shouldn’t use it, from the user manual]' },
+      { top: true, q: 'What if it isn’t right for me?',
+        a: 'Every kit is covered by the manufacturer’s money-back guarantee from Laser Health Technologies. Text or email us and we’ll walk you through the return. You get a full refund of the device price; you pay the return shipping. <a href="/returns">See how returns work</a>.' },
+      { q: 'Can I use it instead of my pain medication?',
+        a: 'LaserTouchOne is cleared as an add-on (adjunctive) treatment for some of its uses, so it isn’t a replacement for the care your doctor recommends. Don’t stop or change any medicine without talking to your doctor.' },
+      { q: 'Do I need a prescription?',
+        a: 'No. LaserTouchOne is cleared for over-the-counter sale, so you can order it yourself.' },
     ],
   },
   {
     title: 'Using it',
     items: [
-      { q: 'How long is a session?',
-        a: 'About two minutes per area. Apply a little electrode gel, switch it on and move the head in slow circles or paint strokes over the spot.' },
-      { q: 'How often can I use it?',
-        a: 'Follow the user manual for how often to use it on each area. Many people build it into their routine, like at their desk or before bed.' },
+      { top: true, q: 'How long does a tube of gel last?',
+        a: 'Each kit includes a tube of electrode gel. [NEEDS NOA: roughly how many sessions a tube lasts, and when refills can be bought]' },
+      { q: 'Is it rechargeable?',
+        a: 'Yes. It runs on a built-in rechargeable battery. Charge it fully before the first use, as the user manual describes.' },
       { q: 'Why do I need the gel?',
-        a: 'The electrode gel helps the electrical stimulation pass from the steel contacts into your skin. Each kit includes a tube.' },
+        a: 'The electrode gel helps the electrical stimulation pass from the two steel contacts into your skin.' },
     ],
   },
   {
-    title: 'Safety',
+    title: 'FDA clearance',
     items: [
-      { top: true, q: 'Is it safe for everyone?',
-        a: 'Never point the laser at your eyes or anyone else’s. If you are pregnant, or have a heart condition or epilepsy, talk to your doctor before using it. Always follow the user manual.' },
-      { q: 'Should I talk to my doctor first?',
-        a: 'If your pain is new, severe or unexplained, see a doctor before using any device. LaserTouchOne is for relief of pain, not for diagnosing what causes it.' },
-    ],
-  },
-  {
-    title: 'FDA status',
-    items: [
-      { top: true, q: 'Do I need a prescription?',
-        a: 'No. LaserTouchOne is cleared for over-the-counter sale, so you can order it yourself.' },
+      { q: 'What is LaserTouchOne cleared for?',
+        a: 'It is FDA-cleared for over-the-counter use for symptomatic relief of chronic, intractable pain, for adjunctive treatment of post-surgical and post-traumatic acute pain, and for adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin. <a href="/fda-clearance">Read the clearance</a>.' },
       { q: 'Is it FDA-approved?',
-        a: 'It is FDA-cleared, which is the correct term for this type of device. Its over-the-counter clearance is 510(k) K100116, dated April 15, 2010.' },
+        a: '“FDA-cleared” is the correct term for this type of device. The FDA cleared LaserTouchOne for over-the-counter sale under 510(k) K100116 on April 15, 2010. <a href="/fda-clearance">What “cleared” means</a>.' },
     ],
   },
   {
-    title: 'Buying, shipping and returns',
+    title: 'Shipping, returns and warranty',
     items: [
-      { top: true, q: 'How much is shipping?',
-        a: 'Shipping within the US is one flat rate, shown at checkout. We also ship internationally; the cost depends on your country and is shown at checkout before you pay.' },
-      { top: true, q: 'What if it doesn’t work for me?',
-        a: 'Every kit is covered by the manufacturer’s money-back guarantee from Laser Health Technologies. If it isn’t right for you, text or email us and we’ll walk you through the return. You pay the return shipping. See our returns page for the details.' },
-      { q: 'Will I get tracking?',
-        a: 'Yes. We’ll text or email you tracking details as soon as your order is on its way.' },
+      { top: true, q: 'How long does shipping take?',
+        a: 'US orders ship at one flat rate, shown at checkout, and we text or email you tracking as soon as it ships. [NEEDS NOA: typical processing time and delivery time]' },
       { q: 'Is there a warranty?',
-        a: 'Yes. Because we are an authorized reseller, your device comes with the warranty from the manufacturer, Laser Health Technologies of Scottsdale, Arizona, and we’ll help you with any claim.' },
-      { q: 'Why buy from Laser Micro Duo?',
-        a: 'You get a genuine device with the full manufacturer’s warranty, plus a real person to text with questions before and after you buy.' },
+        a: 'Yes. Your device comes with the warranty from the manufacturer, Laser Health Technologies of Scottsdale, Arizona, and we’ll help you with any claim. [NEEDS NOA: warranty length]' },
+      { q: 'Who makes LaserTouchOne, and who are you?',
+        a: 'LaserTouchOne is made by Laser Health Technologies LLC in Scottsdale, Arizona. Laser Micro Duo is an independent authorized reseller owned by Vicki Oei in Arizona. <a href="/about">About us</a>.' },
     ],
   },
 ];
 
-export const TOP_FAQS = FAQ_GROUPS.flatMap((g) => g.items).filter((i) => i.top);
+export const ALL_FAQS = FAQ_GROUPS.flatMap((g) => g.items);
+export const TOP_FAQS = ALL_FAQS.filter((i) => i.top);
+
+// FAQPage structured data (plain-text answers).
+export const faqSchema = (items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((f) => ({
+    '@type': 'Question', name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<[^>]+>/g, '') },
+  })),
+});

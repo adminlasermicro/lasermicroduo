@@ -1,20 +1,25 @@
 // Business details used across the site. Replace the placeholders before launch.
 export const SITE = {
   name: 'Laser Micro Duo',
+  // The legal business behind the store, and its owner.
+  legalName: 'Pinestone Investments LLC',
+  owner: 'Vicki Oei',
+  ownerPlace: 'Arizona',
+  url: 'https://www.lasermicroduo.com',
   // Support email (shown in the header bar, footer and contact page).
   contactEmail: 'info@lasermicroduo.com',
   // Number customers can text. Leave '' to hide.
   textNumber: '(480) 734-4877',
   // Shown under the contact details.
   replyHours: 'We reply Monday to Friday, 9am to 5pm Arizona time (MST).',
-  // Offers in the top announcement bar. Confirm each one is true for you.
-  announcements: ['Flat-rate US shipping', 'Manufacturer’s money-back guarantee', 'Text support from real people'],
   // The company that makes LaserTouchOne. We are an independent authorized reseller.
   manufacturer: 'Laser Health Technologies',
   manufacturerPlace: 'Scottsdale, Arizona',
   // Number of days in the manufacturer's money-back guarantee. Leave null until confirmed;
   // the site then says "money-back guarantee" without a number.
   guaranteeDays: null,
+  // Turn on only once HSA/FSA eligibility is confirmed. Shows "May be HSA/FSA eligible" in the buy box.
+  hsaFsa: false,
   // Matched against your Wix Stores product name to find the LaserTouchOne kit.
   product: /laser\s*touch\s*one/i,
 };

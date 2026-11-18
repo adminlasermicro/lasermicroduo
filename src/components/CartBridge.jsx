@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { currentCartV2 } from '@wix/ecom';
 import { redirects } from '@wix/redirects';
 import { media } from '@wix/sdk';
-import '../styles/cart.css';
+import { track } from '../lib/track.js';
 
 // Connects the homepage's plain HTML buttons to the Wix cart:
 //   [data-add-to-cart="<productId>"] (+ optional data-variant) adds one item and opens the cart
@@ -39,6 +39,7 @@ export default function CartBridge() {
     setCart(c);
     const n = countOf(c);
     document.querySelectorAll('[data-cart-count]').forEach((el) => { el.textContent = String(n); });
+    document.querySelectorAll('[data-cart-label]').forEach((el) => { el.setAttribute('aria-label', `Cart, ${n} ${n === 1 ? 'item' : 'items'}`); });
     if (c?.lineItems?.length) {
       try {
         const est = await currentCartV2.estimateCurrentCart();
@@ -57,14 +58,19 @@ export default function CartBridge() {
         const label = add.textContent;
         add.disabled = true; add.textContent = 'Adding…';
         try {
-          const variantId = add.dataset.variant;
-          await currentCartV2.addLineItemsToCurrentCart({
-            catalogItems: [{ quantity: 1, catalogReference: {
-              catalogItemId: add.dataset.addToCart,
-              appId: WIX_STORES_APP_ID,
-              ...(variantId ? { options: { variantId } } : {}),
-            } }],
-          });
+          // Optional: data-quantity-from="<selector>" reads the quantity from a field, and
+          // data-addon-from="<selector>" adds a second product (e.g. the gel 3-pack) when a checked
+          // input with that product id as its value exists.
+          const item = (id, variant, quantity) => ({ quantity, catalogReference: {
+            catalogItemId: id, appId: WIX_STORES_APP_ID, ...(variant ? { options: { variantId: variant } } : {}),
+          } });
+          const qtyEl = add.dataset.quantityFrom && document.querySelector(add.dataset.quantityFrom);
+          const quantity = Math.max(1, Math.min(10, Number(qtyEl?.value) || 1));
+          const catalogItems = [item(add.dataset.addToCart, add.dataset.variant, quantity)];
+          const addon = add.dataset.addonFrom && document.querySelector(add.dataset.addonFrom);
+          if (addon?.value) catalogItems.push(item(addon.value, addon.dataset.variant, quantity));
+          await currentCartV2.addLineItemsToCurrentCart({ catalogItems });
+          catalogItems.forEach((ci) => track('AddToCart', { id: ci.catalogReference.catalogItemId, quantity: ci.quantity, name: add.dataset.trackName || 'LaserTouchOne kit', ...(add.dataset.trackPrice ? { price: Number(add.dataset.trackPrice) } : {}) }));
           setStatus('');
           await refresh();
           setOpen(true);
@@ -122,6 +128,7 @@ export default function CartBridge() {
     setBusy(true);
     try {
       const { cart: c } = await currentCartV2.getCurrentCart();
+      track('InitiateCheckout', { contents: (c?.lineItems ?? []).map((li) => ({ id: li.catalogReference?.catalogItemId, quantity: li.quantity })) });
       const session = await redirects.createRedirectSession({
         ecomCheckout: { checkoutId: c._id },
         callbacks: { postFlowUrl: window.location.origin + '/', thankYouPageUrl: window.location.origin + '/' },

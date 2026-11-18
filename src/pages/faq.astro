@@ -1,32 +1,25 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import PageHero from '../components/site/PageHero.astro';
+import PageHead from '../components/site/PageHead.astro';
 import FaqList from '../components/site/FaqList.astro';
-import CtaBand from '../components/site/CtaBand.astro';
-import { FAQ_GROUPS } from '../data/faq.js';
+import CtaFinal from '../components/site/CtaFinal.astro';
+import { FAQ_GROUPS, ALL_FAQS, faqSchema } from '../data/faq.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+import { loadStore } from '../lib/kits.js';
+const { kit } = await loadStore();
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 ---
-<SiteLayout
-  title="Frequently asked questions | Laser Micro Duo"
-  description="Answers about LaserTouchOne: how it works, how to use it, safety, FDA clearance, shipping, returns and warranty."
->
-  <PageHero title="Questions, answered" lead="Everything people ask us about LaserTouchOne. Can’t find yours? Text or email us." />
-
-  <section class="section section--tight-top">
-    <div class="container faq-page">
-      <nav class="faq-toc" aria-label="FAQ topics">
-        {FAQ_GROUPS.map((g) => <a href={`#${slug(g.title)}`}>{g.title}</a>)}
-      </nav>
-      <div class="faq-groups">
-        {FAQ_GROUPS.map((g) => (
-          <section class="faq-group" id={slug(g.title)} aria-labelledby={`h-${slug(g.title)}`}>
-            <h2 class="h3 faq-group__title" id={`h-${slug(g.title)}`}>{g.title}</h2>
-            <FaqList items={g.items} openFirst={false} />
-          </section>
-        ))}
-      </div>
+<SiteLayout schema={[faqSchema(ALL_FAQS), breadcrumbSchema([{ name: 'FAQ', path: '/faq' }])]}>
+  <PageHead title="Questions and answers" lead="What people ask us before and after they buy. Can’t find yours? Text or email us." crumbs={[{ label: 'FAQ' }]} />
+  <section class="section" style="padding-top:0">
+    <div class="container faq-wrap stack-lg">
+      {FAQ_GROUPS.map((g) => (
+        <section class="stack" aria-labelledby={`h-${slug(g.title)}`}>
+          <h2 class="h2" id={`h-${slug(g.title)}`}>{g.title}</h2>
+          <FaqList items={g.items} />
+        </section>
+      ))}
     </div>
   </section>
-
-  <CtaBand title="Still have a question?" />
+  <CtaFinal kit={kit} title="Still have a question?" text="Text or email us. A real person will answer." />
 </SiteLayout>

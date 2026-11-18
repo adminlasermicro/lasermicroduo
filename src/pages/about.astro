@@ -1,57 +1,46 @@
 ---
+// About: Vicki Oei, Arizona; why we sell LaserTouchOne; the manufacturer. Never invent details:
+// her story comes only from src/data/about.js, in her words.
 import SiteLayout from '../layouts/SiteLayout.astro';
-import PageHero from '../components/site/PageHero.astro';
-import Icon from '../components/site/Icon.astro';
-import CtaBand from '../components/site/CtaBand.astro';
-import { PHOTOS } from '../data/photos.js';
+import PageHead from '../components/site/PageHead.astro';
+import Media from '../components/site/Media.astro';
+import CtaFinal from '../components/site/CtaFinal.astro';
+import { MEDIA } from '../data/media.js';
 import { STORY } from '../data/about.js';
-
-const promises = [
-  { icon: 'shield', title: 'Genuine devices', text: 'As an independent authorized reseller, every LaserTouchOne we sell comes from the manufacturer, Laser Health Technologies of Scottsdale, Arizona.' },
-  { icon: 'calendar', title: 'The manufacturer’s guarantee and warranty', text: 'You get the manufacturer’s warranty and money-back guarantee, and we’ll walk you through the details if you need them.' },
-  { icon: 'message', title: 'A real person to text', text: 'Questions before you buy, help with your first session, or a quick check-in later. Just text us.' },
-];
+import { SITE } from '../site.config.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+import { loadStore } from '../lib/kits.js';
+const { kit } = await loadStore();
 ---
-<SiteLayout
-  title="About us | Laser Micro Duo"
-  description="Laser Micro Duo is an authorized LaserTouchOne reseller. Genuine devices, the full manufacturer’s warranty and a real person to text."
->
-  <PageHero
-    title="Real people behind your relief"
-    lead="We’re Laser Micro Duo, an authorized LaserTouchOne reseller. We help people find drug-free pain relief they can use at home, and we stay with you after you buy."
-  />
-
-  {STORY.length > 0 && (
-  <section class="section section--tight-top">
-    <div class="container split">
-      <div class="photo-card photo-card--tall">
-        <img src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} loading="lazy" />
-      </div>
-      <div class="split__copy">
-        <h2 class="h2">Our story</h2>
-        {STORY.map((para) => <p class="story">{para}</p>)}
+<SiteLayout schema={[breadcrumbSchema([{ name: 'About', path: '/about' }])]}>
+  <PageHead title={`About ${SITE.name}`} lead={`A small ${SITE.ownerPlace} business owned by ${SITE.owner}, and an independent authorized reseller of LaserTouchOne.`} crumbs={[{ label: 'About' }]} />
+  <section class="section" style="padding-top:0">
+    <div class="container owner" style="grid-template-columns:320px 1fr">
+      <Media item={MEDIA.vicki} />
+      <div class="prose">
+        <h2>Meet {SITE.owner}</h2>
+        {STORY.length > 0
+          ? STORY.map((p) => <p>{p}</p>)
+          : <p class="muted">[NEEDS NOA: Vicki’s story, in her words and with her OK: why she sells LaserTouchOne and what customers can expect from her]</p>}
       </div>
     </div>
   </section>
-  )}
-
-  <section class="section band">
-    <div class="container">
-      <div class="section-head section-head--center">
-        <h2 class="h2">Why buy from an authorized reseller</h2>
-        <p class="lead">The same device, with a team in your corner.</p>
+  <section class="section section--mist">
+    <div class="container split split--top">
+      <div class="prose">
+        <h2>Who makes LaserTouchOne</h2>
+        <p>LaserTouchOne is designed and made by {SITE.manufacturer} LLC in {SITE.manufacturerPlace}. It is FDA-cleared for over-the-counter use under 510(k) K100116. <a href="/fda-clearance">See the clearance</a>.</p>
+        <p>{SITE.name} is the trading name of {SITE.legalName}. We’re an independent authorized reseller, so every device we sell is genuine and comes with the manufacturer’s warranty and money-back guarantee.</p>
       </div>
-      <div class="promises">
-        {promises.map((p) => (
-          <div class="promise">
-            <span class="icon-badge icon-badge--lg"><Icon name={p.icon} size={24} /></span>
-            <h3 class="h3">{p.title}</h3>
-            <p>{p.text}</p>
-          </div>
-        ))}
+      <div class="prose">
+        <h2>What you can expect from us</h2>
+        <ul>
+          <li>Answers before you buy, from a real person by text or email.</li>
+          <li>Help with your first session, and with returns or warranty claims if you need them.</li>
+          <li>{SITE.replyHours}</li>
+        </ul>
       </div>
     </div>
   </section>
-
-  <CtaBand title="Say hello" text="Have a question about LaserTouchOne or your order? We’d love to hear from you." />
+  <CtaFinal kit={kit} />
 </SiteLayout>

@@ -17,8 +17,9 @@ const KIT_INFO = {
 };
 
 const ACCESSORY_DEFS = [
-  { key: 'gel-pack', match: /electrode\s*gel/i, name: 'Electrode gel 3-pack', text: 'Three tubes of the gel LaserTouchOne needs, so you never run out mid-routine.' },
-  { key: 'charger', match: /charg/i, name: 'Charging cord', text: 'A spare charger for the office, the car or a second home.' },
+  // Matched against Wix Stores product names. Each shows on /shop#accessories once it exists in Wix.
+  { key: 'gel-pack', match: /electrode\s*gel.*(3|three)|(3|three).*electrode\s*gel/i, name: 'Electrode gel 3-pack', text: 'Three tubes of the electrode gel LaserTouchOne uses.' },
+  { key: 'gel-single', match: /electrode\s*gel/i, name: 'Electrode gel, single tube', text: 'One tube of the electrode gel LaserTouchOne uses.' },
 ];
 
 const toItem = (p) => {
@@ -45,8 +46,10 @@ export async function loadStore() {
   // Only show a crossed-out price when it is really higher than the selling price.
   if (!(kit.compareAmount > kit.amount)) kit.compareAt = null;
 
+  const taken = new Set();
   const accessories = ACCESSORY_DEFS.flatMap((d) => {
-    const p = products.find((x) => x._id !== kit.productId && d.match.test(x.name ?? ''));
+    const p = products.find((x) => x._id !== kit.productId && d.match.test(x.name ?? '') && !taken.has(x._id));
+    if (p) taken.add(p._id);
     return p ? [{ ...d, ...toItem(p) }] : [];
   });
 

@@ -1,0 +1,22 @@
+---
+// The exact cleared indication, in the Device facts panel, with the FDA document link.
+import DeviceFacts from '../site/DeviceFacts.astro';
+import { INDICATION } from '../../site.config.js';
+const { id = 'fda-facts' } = Astro.props;
+const rows = [
+  { label: 'Cleared indication', value: `“${INDICATION}”` },
+  { label: 'FDA clearance', value: '510(k) K100116, April 15, 2010' },
+  { label: 'Sale', value: 'Over the counter, no prescription' },
+  { label: 'Made by', value: 'Laser Health Technologies LLC, Scottsdale, AZ' },
+];
+---
+<section class="section" aria-label="FDA clearance">
+  <div class="container split split--top">
+    <div class="stack">
+      <h2 class="h2">FDA-cleared, word for word</h2>
+      <p class="measure">This is exactly what the FDA cleared LaserTouchOne for. We don’t claim anything beyond it.</p>
+      <p><a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the FDA document (PDF)</a> · <a href="/fda-clearance">What “cleared” means</a></p>
+    </div>
+    <DeviceFacts id={id} title="Device facts" rows={rows} />
+  </div>
+</section>

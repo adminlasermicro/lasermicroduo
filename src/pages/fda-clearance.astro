@@ -1,0 +1,39 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHead from '../components/site/PageHead.astro';
+import DeviceFacts from '../components/site/DeviceFacts.astro';
+import CtaFinal from '../components/site/CtaFinal.astro';
+import { INDICATION } from '../site.config.js';
+import { breadcrumbSchema } from '../lib/schema.js';
+import { loadStore } from '../lib/kits.js';
+const { kit } = await loadStore();
+const PDF = 'https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf';
+const rows = [
+  { label: '510(k) number', value: 'K100116' },
+  { label: 'Cleared', value: 'April 15, 2010' },
+  { label: 'Sale', value: 'Over the counter (OTC), no prescription' },
+  { label: 'Device', value: 'LaserTouchOne, a low-level laser and electrical stimulation (TENS) device' },
+  { label: 'Made by', value: 'Laser Health Technologies LLC, Scottsdale, AZ' },
+];
+---
+<SiteLayout schema={[breadcrumbSchema([{ name: 'FDA clearance', path: '/fda-clearance' }])]}>
+  <PageHead title="LaserTouchOne’s FDA clearance" lead="What the FDA cleared LaserTouchOne for, word for word, and what “cleared” means." crumbs={[{ label: 'FDA clearance' }]} />
+  <section class="section" style="padding-top:0">
+    <div class="container split split--top">
+      <div class="prose">
+        <h2>The cleared indication</h2>
+        <p>This is the exact wording from the FDA clearance. Everything we say about LaserTouchOne stays inside it.</p>
+        <blockquote class="facts" style="padding:var(--s3)"><p>“{INDICATION}”</p></blockquote>
+        <p><a href={PDF} target="_blank" rel="noopener">Read the FDA document, K100116 (PDF)</a></p>
+
+        <h2>Cleared, not approved: what’s the difference?</h2>
+        <p>The FDA reviews medical devices in different ways depending on their risk. For a device like LaserTouchOne, the maker submits a “510(k)” showing the device is substantially equivalent to devices already legally on the market. When the FDA agrees, the device is “cleared” for the specific uses listed. “Approved” is a different process, used mainly for higher-risk devices, so “FDA-cleared” is the correct term here. Clearance covers the uses above, not every kind of pain.</p>
+
+        <h2>What “over the counter” means</h2>
+        <p>LaserTouchOne was cleared for over-the-counter sale, so you can buy it without a prescription. Read the user manual before use, and talk to your doctor about your pain, especially if it is new, severe or unexplained.</p>
+      </div>
+      <DeviceFacts id="clearance-facts" title="Clearance facts" rows={rows} />
+    </div>
+  </section>
+  <CtaFinal kit={kit} />
+</SiteLayout>

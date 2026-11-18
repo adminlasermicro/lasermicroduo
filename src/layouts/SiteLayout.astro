@@ -1,34 +1,87 @@
 ---
-import '../styles/lmd-tokens.css';
-import '../styles/site.css';
-import '../styles/trust.css';
+// Shared page shell. Props:
+//   title, description  page SEO (defaults come from src/data/seo.js by path)
+//   noindex             keep the page out of search (ad landing pages)
+//   bare                ad landing page mode: logo and support line only, no menu, slim footer
+//   schema              extra JSON-LD objects for this page (Product, FAQPage, BreadcrumbList...)
+//   ogImage             social preview image path
+import '@fontsource/atkinson-hyperlegible-next/latin-400.css';
+import '@fontsource/atkinson-hyperlegible-next/latin-700.css';
+import '@fontsource/source-serif-4/latin-600.css';
+import font400 from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-400-normal.woff2?url';
+import font700 from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-700-normal.woff2?url';
+import fontHead from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
+import '../styles/tokens-v2.css';
+import '../styles/v2.css';
 import Header from '../components/site/Header.astro';
 import Footer from '../components/site/Footer.astro';
 import CartBridge from '../components/CartBridge.jsx';
-const { title, description } = Astro.props;
+import { SEO } from '../data/seo.js';
+import { SITE } from '../site.config.js';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const seo = SEO[path] ?? {};
+const {
+  title = seo.title ?? SITE.name,
+  description = seo.description ?? '',
+  noindex = false,
+  bare = false,
+  schema = [],
+  ogImage = '/og/lasermicroduo-share.png',
+  preloadImage,
+} = Astro.props;
+
+// Set to true once the titles in src/data/seo.js are copied into the Wix dashboard
+// (SEO Settings > Main Pages). Wix then injects one title, description and canonical per page.
+const wixSeo = false;
+
+const org = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE.url}/#org`,
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  logo: `${SITE.url}/brand/lmd-logo-horizontal.svg`,
+  email: SITE.contactEmail,
+  telephone: '+1-480-734-4877',
+  address: { '@type': 'PostalAddress', addressRegion: 'AZ', addressCountry: 'US' },
+  contactPoint: [{
+    '@type': 'ContactPoint', contactType: 'customer support', telephone: '+1-480-734-4877', email: SITE.contactEmail,
+    availableLanguage: 'English', hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '17:00' },
+  }],
+};
+const ld = [org, ...schema];
 ---
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    {!wixSeo && <title>{title}</title>}
+    {!wixSeo && <meta name="description" content={description} />}
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta property="og:image" content={new URL(ogImage, SITE.url).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="LaserTouchOne, sold by Laser Micro Duo" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#1f2d5c" />
     <meta name="color-scheme" content="light" />
+    <link rel="preload" href={font400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={fontHead} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={font700} as="font" type="font/woff2" crossorigin />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <script is:inline>document.documentElement.classList.replace("no-js", "js");</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    {ld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
-    <Header />
+    <Header bare={bare} />
     <main id="main"><slot /></main>
-    <Footer />
+    <Footer bare={bare} />
     <CartBridge client:load />
     <script>import '../scripts/site.js';</script>
   </body>
