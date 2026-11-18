@@ -4,18 +4,17 @@ import PageHero from '../components/site/PageHero.astro';
 import Icon from '../components/site/Icon.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import StudyList from '../components/site/StudyList.astro';
-import { PHOTOS } from '../data/photos.js';
 
 const routine = [
-  { icon: 'droplet', title: 'Apply the gel', text: 'Squeeze a small amount of electrode gel onto the skin over the sore spot. The gel carries the microcurrent from the device into your skin.' },
-  { icon: 'zap', title: 'Switch it on', text: 'Press the single on/off button. The laser and the microcurrent start together, so there’s nothing to set up or adjust.' },
-  { icon: 'timer', title: 'Two minutes of strokes', text: 'Hold the head against your skin and move it in slow circles or paint strokes over the area for about two minutes.' },
-  { icon: 'repeat', title: 'Repeat through the day', text: 'Use it up to five times a day on each area. Wipe the gel off the head and your skin when you’re done.' },
+  { icon: 'droplet', title: 'Apply the gel', text: 'Squeeze a small amount of electrode gel onto the skin over the sore spot. The gel carries the electrical stimulation from the device into your skin.' },
+  { icon: 'zap', title: 'Switch it on', text: 'Press the single on/off button. The laser and the TENS electrical stimulation start together, so there’s nothing to set up or adjust.' },
+  { icon: 'timer', title: 'About two minutes', text: 'Hold the head against your skin and move it in slow circles or paint strokes over the area for about two minutes.' },
+  { icon: 'repeat', title: 'Repeat through the day', text: 'Use it as often as the user manual says for each area. Wipe the gel off the head and your skin when you’re done.' },
 ];
 ---
 <SiteLayout
   title="How LaserTouchOne works | Laser Micro Duo"
-  description="How LaserTouchOne combines a 670 nm cold laser and microcurrent in one handheld device, the two-minute routine, what it’s FDA-cleared for, and how to use it safely."
+  description="How LaserTouchOne combines a 670 nm low-level laser and TENS electrical stimulation in one handheld device, the two-minute routine, what it’s FDA-cleared for, and how to use it safely."
 >
   <PageHero
     title="How LaserTouchOne works"
@@ -27,17 +26,17 @@ const routine = [
       <div class="diagram-card">
         <svg viewBox="0 0 400 300" role="img" aria-labelledby="dia-t dia-d">
           <title id="dia-t">The LaserTouchOne treatment head</title>
-          <desc id="dia-d">A red laser point in the middle of the head, with a steel microcurrent contact on each side.</desc>
+          <desc id="dia-d">A red laser point in the middle of the head, with a steel electrical stimulation contact on each side.</desc>
           <rect x="70" y="95" width="260" height="110" rx="55" fill="#e3eadf" />
           <circle cx="130" cy="150" r="26" fill="#9aa59f" />
           <circle cx="270" cy="150" r="26" fill="#9aa59f" />
           <circle cx="200" cy="150" r="20" fill="#c4122f" />
           <circle cx="200" cy="150" r="34" fill="none" stroke="#c4122f" stroke-opacity="0.25" stroke-width="8" />
           <line x1="200" y1="114" x2="200" y2="60" stroke="#5b6660" stroke-width="1.5" />
-          <text x="200" y="48" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">670 nm cold laser</text>
+          <text x="200" y="48" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">670 nm low-level laser</text>
           <line x1="130" y1="178" x2="130" y2="240" stroke="#5b6660" stroke-width="1.5" />
           <line x1="270" y1="178" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
-          <text x="200" y="262" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">Two microcurrent contacts</text>
+          <text x="200" y="262" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">Two TENS contacts</text>
           <line x1="130" y1="240" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
         </svg>
       </div>
@@ -47,13 +46,13 @@ const routine = [
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
           <div>
             <h3 class="h3">Low-level cold laser</h3>
-            <p>A single 670 nm red laser diode under 1 mW sits in the middle of the head. It’s called a cold laser because it doesn’t heat or burn the skin.</p>
+            <p>A single 670 nm red laser diode under 1 mW sits in the middle of the head. It’s often called a cold laser because it doesn’t heat the skin.</p>
           </div>
         </div>
         <div class="feature">
           <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
           <div>
-            <h3 class="h3">Microcurrent stimulation</h3>
+            <h3 class="h3">TENS electrical stimulation</h3>
             <p>Two stainless steel contacts deliver mild, pulsed electrical stimulation through the gel at the same time as the laser, so both reach the same area.</p>
           </div>
         </div>
@@ -65,7 +64,7 @@ const routine = [
     <div class="container">
       <div class="section-head section-head--center">
         <h2 class="h2">Your two-minute routine</h2>
-        <p class="lead">No appointments and nothing to wear. Use it on the couch, at your desk or after a workout.</p>
+        <p class="lead">No appointments and nothing to wear. Use it on the couch, at your desk or before bed.</p>
       </div>
       <ol class="routine">
         {routine.map((s, i) => (
@@ -85,19 +84,19 @@ const routine = [
     <div class="container split">
       <div class="split__copy">
         <h2 class="h2">What it’s cleared for</h2>
-        <p class="lead">LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116). People use it for:</p>
+        <p class="lead">LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116). It is cleared for:</p>
         <ul class="checklist checklist--lg">
-          <li><Icon name="check" size={20} />Relief of chronic, long-lasting pain</li>
-          <li><Icon name="check" size={20} />Help with pain after surgery or an injury, alongside your other care</li>
-          <li><Icon name="check" size={20} />Temporary relief of minor neck and shoulder pain</li>
+          <li><Icon name="check" size={20} />Symptomatic relief of chronic, intractable pain</li>
+          <li><Icon name="check" size={20} />Adjunctive treatment of acute pain after surgery or an injury, alongside your other care</li>
+          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin, alongside your other care</li>
         </ul>
         <blockquote class="quote-card">
           <p>“Symptomatic relief of chronic, intractable pain, and is indicated for adjunctive treatment of post-surgical and post-traumatic acute pain and for adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.”</p>
           <footer>FDA clearance K100116, indications for use. <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the document</a></footer>
         </blockquote>
       </div>
-      <div class="photo-card">
-        <img src={PHOTOS.cyclist.src} width={PHOTOS.cyclist.width} height={PHOTOS.cyclist.height} alt={PHOTOS.cyclist.alt} loading="lazy" />
+      <div class="product-stage" data-photo-slot="hiw-in-use">
+        <span class="product-stage__note">Photo coming soon: LaserTouchOne in use on the neck or shoulder</span>
       </div>
     </div>
   </section>

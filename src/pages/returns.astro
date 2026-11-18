@@ -1,26 +1,48 @@
 ---
 import PolicyPage from '../components/site/PolicyPage.astro';
-import { SITE, textHref } from '../site.config.js';
+import { SITE, textHref, guaranteeName } from '../site.config.js';
+// The guarantee is the manufacturer's (Laser Health Technologies). Its length comes from
+// SITE.guaranteeDays in site.config.js; while that is null, no number of days is shown.
+const days = SITE.guaranteeDays;
 ---
 <PolicyPage
-  title="Returns and 30-day trial"
-  description="The 30-day in-home trial, returns and warranty for LaserTouchOne bought from Laser Micro Duo."
-  lead="Try LaserTouchOne at home for 30 days. If it isn’t right for you, we’ll help you return it."
-  updated="November 11, 2026"
+  title="Returns and money-back guarantee"
+  description={`How the manufacturer’s ${guaranteeName} works for LaserTouchOne bought from Laser Micro Duo, and how to return your device.`}
+  lead={`Every LaserTouchOne kit is covered by the manufacturer’s ${guaranteeName}. Here’s how it works and how to send your device back.`}
+  updated="November 17, 2026"
 >
-  <h2>The 30-day in-home trial</h2>
-  <p>You have 30 days from delivery to try LaserTouchOne at home. If it isn’t right for you, contact us within those 30 days to start a return.</p>
-
-  <h2>How to start a return</h2>
+  <h2>The manufacturer’s money-back guarantee</h2>
+  <p>
+    LaserTouchOne is made by {SITE.manufacturer} LLC of {SITE.manufacturerPlace}, and the money-back
+    guarantee comes from them. As an independent authorized reseller, we handle your return and refund
+    for you under the manufacturer’s guarantee terms.
+  </p>
   <ul>
-    {SITE.textNumber && <li>Text us at <a href={textHref}>{SITE.textNumber}</a>, or</li>}
-    <li>Email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> with your order number.</li>
+    <li><strong>How long you have:</strong> {days ? `${days} days from the day your order is delivered.` : 'contact us to confirm the guarantee period for your order before you send anything back.'}</li>
+    <li><strong>What you get back:</strong> a full refund of the device price, to your original payment method.</li>
+    <li><strong>Return shipping:</strong> you pay the cost of sending the device back to us.</li>
+    <li><strong>Original shipping:</strong> the shipping you paid on your order is not refunded.</li>
   </ul>
-  <p>We’ll reply with return instructions. Please send back the device and everything that came in the kit.</p>
 
-  <h2>Refunds</h2>
-  <p>Once we receive your return, we refund the device price to your original payment method, as set out in the manufacturer’s guarantee. We’ll confirm by email when your refund is on its way.</p>
+  <h2>How to return your device</h2>
+  <ol>
+    <li>
+      <strong>Contact us first.</strong>
+      {SITE.textNumber ? <>Text <a href={textHref}>{SITE.textNumber}</a> or email </> : <>Email </>}
+      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> with your order number{days ? `, within ${days} days of delivery` : ''}.
+    </li>
+    <li><strong>Get your return instructions.</strong> We’ll reply with the return address and anything you need to include. Please don’t send a package before you hear from us.</li>
+    <li><strong>Pack the whole kit.</strong> Send back the device and everything that came with it: the carrying case, charger, gel, user manual and warranty card.</li>
+    <li><strong>Ship it.</strong> Use a carrier with tracking, and keep your receipt. The return shipping cost is yours.</li>
+    <li><strong>Get your refund.</strong> Once the return arrives and is checked, we refund the device price to your original payment method and confirm by email.</li>
+  </ol>
 
   <h2>Warranty</h2>
-  <p>Because we are an authorized reseller, your LaserTouchOne comes with the manufacturer’s warranty. If something goes wrong with your device, contact us and we’ll help you with the claim.</p>
+  <p>
+    Your LaserTouchOne also comes with the warranty from {SITE.manufacturer}. If something goes wrong with
+    your device, contact us and we’ll help you with the claim.
+  </p>
+
+  <h2>Questions</h2>
+  <p>{SITE.replyHours} If anything here isn’t clear, ask us before you buy.</p>
 </PolicyPage>

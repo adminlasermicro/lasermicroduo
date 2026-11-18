@@ -11,40 +11,41 @@ import { REAL_REVIEWS } from '../data/reviews.js';
 import CtaBand from '../components/site/CtaBand.astro';
 import ResellerSeal from '../components/site/ResellerSeal.astro';
 import StickyBuy from '../components/site/StickyBuy.astro';
+import { SITE } from '../site.config.js';
 
 const { kit } = await loadStore();
 
 const trust = [
   { icon: 'shield', label: 'FDA-cleared', sub: 'Over the counter, K100116' },
-  { icon: 'leaf', label: 'Drug-free', sub: 'No pills, no needles' },
+  { icon: 'file', label: 'Genuine device', sub: `Made by ${SITE.manufacturer}, Scottsdale, AZ` },
   { icon: 'truck', label: 'Flat-rate shipping', sub: 'US and international' },
-  { icon: 'calendar', label: '30-day trial', sub: 'Try it at home' },
+  { icon: 'calendar', label: 'Money-back guarantee', sub: 'Backed by the manufacturer' },
   { icon: 'message', label: 'Text support', sub: 'A real person helps you' },
 ];
 const steps = [
-  { icon: 'droplet', title: 'Apply the gel', text: 'A little electrode gel on the sore spot helps the microcurrent reach your skin.' },
-  { icon: 'timer', title: 'Two minutes of strokes', text: 'Switch it on and glide the head in slow circles over the area for two minutes.' },
-  { icon: 'repeat', title: 'Repeat up to 5 times a day', text: 'At your desk, after a run or before bed. It fits wherever your day takes you.' },
+  { icon: 'droplet', title: 'Apply the gel', text: 'A little electrode gel on the sore spot helps the electrical stimulation (TENS) reach your skin.' },
+  { icon: 'timer', title: 'About two minutes', text: 'Switch it on and glide the head in slow circles over the area for about two minutes.' },
+  { icon: 'repeat', title: 'Repeat up to 5 times a day', text: 'At your desk, on the couch or before bed. Follow the user manual for how often to use it.' },
 ];
 const whyBuy = [
   { icon: 'file', text: 'Manufacturer’s warranty' },
-  { icon: 'calendar', text: '30-day in-home trial' },
+  { icon: 'calendar', text: 'Manufacturer’s money-back guarantee' },
   { icon: 'message', text: 'Text support' },
 ];
 ---
 <SiteLayout
   title="LaserTouchOne, drug-free pain relief at home | Laser Micro Duo"
-  description="Shop LaserTouchOne from Laser Micro Duo, an authorized reseller. An FDA-cleared handheld device that pairs a cold laser with microcurrent for pain relief at home."
+  description="Shop LaserTouchOne from Laser Micro Duo, an authorized reseller. An FDA-cleared, drug-free laser and TENS device for minor chronic neck and shoulder pain, used at home."
 >
   <!-- Hero: one full-width photo, text on a soft scrim -->
   <section class="hero-full">
     <img class="hero-full__img" src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
     <div class="container hero-full__in">
       <div class="hero-full__copy">
-        <h1 class="display">Pain relief that keeps you moving</h1>
+        <h1 class="display">FDA-cleared relief for minor chronic neck and shoulder pain, at home in about 2 minutes</h1>
         <p class="lead">
-          LaserTouchOne pairs a gentle cold laser with microcurrent in one handheld, FDA-cleared device.
-          No prescription, no pills, just two minutes at a time.
+          LaserTouchOne combines a low-level laser and TENS electrical stimulation in one handheld device.
+          Drug-free, no prescription, about two minutes per area.
         </p>
         <div class="hero-full__actions">
           <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>
@@ -87,45 +88,19 @@ const whyBuy = [
         <div class="feature" data-reveal style="--d:160ms">
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
           <div>
-            <h3 class="h3">Cold laser</h3>
-            <p>A gentle 670 nm red light from the center of the head. It doesn’t heat or hurt.</p>
+            <h3 class="h3">Low-level laser</h3>
+            <p>A gentle 670 nm red light from the center of the head. It doesn’t heat the skin.</p>
           </div>
         </div>
         <div class="feature" data-reveal style="--d:220ms">
           <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
           <div>
-            <h3 class="h3">Microcurrent</h3>
+            <h3 class="h3">TENS electrical stimulation</h3>
             <p>Mild electrical stimulation through two steel contacts on either side of the laser.</p>
           </div>
         </div>
         <a class="link-arrow" href="/how-it-works">Learn how they work together <Icon name="arrow" size={18} /></a>
       </div>
-    </div>
-  </section>
-
-  <!-- Made for your life: full-width photo band -->
-  <section aria-labelledby="life-title">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="h2" id="life-title" data-reveal>Made for the life you want to live</h2>
-        <p class="lead" data-reveal style="--d:80ms">Whether pain slows down your everyday or your training, LaserTouchOne goes where you go.</p>
-      </div>
-    </div>
-    <div class="life-band">
-      <article class="life-band__item">
-        <img src={PHOTOS.everyday.src} width={PHOTOS.everyday.width} height={PHOTOS.everyday.height} alt={PHOTOS.everyday.alt} loading="lazy" />
-        <div class="life-band__cap" data-reveal>
-          <h3 class="h3">For everyday chronic pain</h3>
-          <p>Relief for the aches you live with, without adding another pill to the cabinet. Use it on the couch, at your desk or before bed.</p>
-        </div>
-      </article>
-      <article class="life-band__item">
-        <img src={PHOTOS.active.src} width={PHOTOS.active.width} height={PHOTOS.active.height} alt={PHOTOS.active.alt} loading="lazy" />
-        <div class="life-band__cap" data-reveal style="--d:100ms">
-          <h3 class="h3">For active recovery</h3>
-          <p>Bounce back from long runs, rounds of golf and tough workouts. The carrying case fits right in your gym bag.</p>
-        </div>
-      </article>
     </div>
   </section>
 
@@ -167,7 +142,7 @@ const whyBuy = [
       <div class="offer__media" data-photo-slot="kit-main" data-reveal><span>Kit photo coming soon</span></div>
       <div class="offer__body">
         <h2 class="h2 offer__name" data-reveal>Everything in one kit</h2>
-        <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Every order comes with the 30-day in-home trial, the manufacturer’s warranty and support from us.</p>
+        <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Made by {SITE.manufacturer} in Scottsdale, Arizona. Every order comes with the manufacturer’s money-back guarantee, the manufacturer’s warranty and support from us.</p>
         <ul class="checklist" data-reveal style="--d:140ms">
           {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
         </ul>
@@ -195,7 +170,8 @@ const whyBuy = [
           <div><dt>Clearance</dt><dd>510(k) K100116</dd></div>
           <div><dt>Cleared</dt><dd>April 15, 2010</dd></div>
           <div><dt>Use</dt><dd>Over the counter, no prescription</dd></div>
-          <div><dt>Technology</dt><dd>670 nm low-level laser and microcurrent</dd></div>
+          <div><dt>Maker</dt><dd>{SITE.manufacturer}, Scottsdale, AZ</dd></div>
+          <div><dt>Technology</dt><dd>670 nm low-level laser and TENS (electrical stimulation)</dd></div>
         </dl>
         <a class="link-arrow" href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
       </div>
@@ -206,9 +182,9 @@ const whyBuy = [
           For this device, that means:
         </p>
         <ul class="checklist checklist--lg" data-reveal style="--d:140ms">
-          <li><Icon name="check" size={20} />Relief of chronic, intractable pain</li>
-          <li><Icon name="check" size={20} />Help with pain after surgery or an injury, alongside other care</li>
-          <li><Icon name="check" size={20} />Temporary relief of minor neck and shoulder pain</li>
+          <li><Icon name="check" size={20} />Symptomatic relief of chronic, intractable pain</li>
+          <li><Icon name="check" size={20} />Adjunctive treatment of acute pain after surgery or an injury, alongside your other care</li>
+          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin, alongside your other care</li>
         </ul>
       </div>
     </div>

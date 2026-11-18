@@ -8,7 +8,7 @@ const KIT_INFO = {
   name: 'LaserTouchOne kit',
   blurb: 'Everything you need to start at home, with the carrying case included.',
   includes: [
-    'LaserTouchOne device',
+    'LaserTouchOne device, made by Laser Health Technologies',
     'Zippered carrying case (a $25 value, included)',
     'Charger',
     'Electrode gel',

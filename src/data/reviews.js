@@ -5,7 +5,7 @@ export const REVIEWS = [
   { name: 'Customer name', detail: 'City, state', stars: 5, placeholder: true,
     text: 'Your customer’s review goes here. Two or three sentences about what they use LaserTouchOne for and how it fits their day.' },
   { name: 'Customer name', detail: 'City, state', stars: 5, placeholder: true,
-    text: 'Your customer’s review goes here. Reviews from active customers, like runners or golfers, work well next to everyday ones.' },
+    text: 'Your customer’s review goes here. Keep it to what LaserTouchOne is cleared for, such as minor neck and shoulder pain.' },
   { name: 'Customer name', detail: 'City, state', stars: 5, placeholder: true,
     text: 'Your customer’s review goes here. Mention the support they got from you, like the setup help or a quick text reply.' },
 ];

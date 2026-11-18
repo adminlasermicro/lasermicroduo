@@ -8,7 +8,8 @@ import wixHostingAdapter from "@wix/astro-wix-hosting-adapter";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [wix(), wixPages(), react()],
+  // robots: false: we serve our own robots.txt (src/pages/robots.txt.ts) so it can point at /sitemap-index.xml.
+  integrations: [wix({ robots: false }), wixPages(), react()],
   security: { checkOrigin: false },
   adapter: wixHostingAdapter(),
 

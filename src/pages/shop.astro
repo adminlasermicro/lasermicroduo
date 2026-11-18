@@ -15,16 +15,16 @@ import { SITE, textHref } from '../site.config.js';
 const { kit, accessories } = await loadStore();
 const details = [
   { q: 'What’s in the box', a: `${kit.includes.join(', ')}.` },
-  { q: 'How to use it', a: 'Apply a little electrode gel to the sore spot, switch the device on and move the head in slow circles or paint strokes over the area for two minutes. Repeat up to five times a day on each area.' },
+  { q: 'How to use it', a: 'Apply a little electrode gel to the sore spot, switch the device on and move the head in slow circles or paint strokes over the area for about two minutes. Follow the user manual for how often to use it.' },
   { q: 'Safety', a: 'Never point the laser at your eyes or anyone else’s. If you are pregnant, or have a heart condition or epilepsy, talk to your doctor before using it. Read the user manual before your first session.' },
-  { q: 'Shipping and returns', a: 'Flat-rate shipping within the US, and international shipping calculated at checkout, with tracking by text or email. Every kit has a 30-day in-home trial: if it isn’t right for you, contact us within 30 days and we’ll help you return it.' },
-  { q: 'Warranty', a: 'As an authorized reseller, we sell genuine devices that come with the full manufacturer’s warranty. We’ll help you with any claim.' },
-  { q: 'FDA clearance', a: 'LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and temporary relief of minor chronic neck and shoulder pain.' },
+  { q: 'Shipping and returns', a: 'Flat-rate shipping within the US, and international shipping calculated at checkout, with tracking by text or email. Every kit is covered by the manufacturer’s money-back guarantee. If it isn’t right for you, contact us and we’ll walk you through the return; you pay the return shipping. See our returns page for details.' },
+  { q: 'Warranty', a: 'As an authorized reseller, we sell genuine devices that come with the full warranty from the manufacturer, Laser Health Technologies of Scottsdale, Arizona. We’ll help you with any claim.' },
+  { q: 'FDA clearance', a: 'LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.' },
 ];
 ---
 <SiteLayout
   title="Shop the LaserTouchOne kit | Laser Micro Duo"
-  description="Buy the LaserTouchOne kit with the carrying case included. FDA-cleared, drug-free pain relief at home, with flat-rate US shipping and a 30-day in-home trial."
+  description="Buy the LaserTouchOne kit with the carrying case included. FDA-cleared, drug-free laser and TENS device, with flat-rate US shipping and the manufacturer’s money-back guarantee."
 >
   <section class="product">
     <div class="container product__grid">
@@ -41,7 +41,7 @@ const details = [
 
       <div class="buybox" data-buybox>
         <h1 class="h2 buybox__title">LaserTouchOne</h1>
-        <p class="lead">Cold laser and microcurrent in one handheld, FDA-cleared device. Drug-free relief, two minutes at a time. Sold and supported by Laser Micro Duo, an authorized reseller.</p>
+        <p class="lead">Low-level laser and TENS electrical stimulation in one handheld, FDA-cleared device, made by Laser Health Technologies. Drug-free, about two minutes per area. Sold and supported by Laser Micro Duo, an authorized reseller.</p>
 
         <ul class="checklist buybox__includes">
           {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
@@ -58,7 +58,7 @@ const details = [
 
         <ul class="buybox__perks">
           <li><Icon name="truck" size={20} /> Flat-rate US shipping</li>
-          <li><Icon name="calendar" size={20} /> 30-day in-home trial</li>
+          <li><Icon name="calendar" size={20} /> Manufacturer’s money-back guarantee</li>
           <li><Icon name="shield" size={20} /> Manufacturer’s warranty</li>
         </ul>
 
