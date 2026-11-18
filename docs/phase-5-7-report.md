@@ -1,5 +1,14 @@
 # Phases 5–7: build and QA report
 
+> **Update, Nov 17, 2026 (later):** the owner preferred the original design, so the v2 look was set aside
+> (it's kept under git tag `phase5-7-preview`). The current preview, https://ocel3u-admin7493477.wixsite.com,
+> is the original Ink & Copper design with the full-width photo hero, plus the new extras: /fda-clearance,
+> /lp/home, the homepage guarantee section, per-page SEO and structured data, the share image, the cart
+> quantity picker, tracking events and faster loading. Phone Lighthouse on the homepage: Performance 99–100,
+> Accessibility 100, SEO 100, LCP about 1.5 s (live today: 74 and 6.1 s). The QA checks below were rerun on
+> this version and still pass, except that the Device facts panel, comparison table and hidden testimonial
+> videos were v2-only and are not in this version.
+
 Nov 17, 2026. Preview: https://mdh4ue-admin7493477.wixsite.com (not published). Code: branch `site-redesign`.
 Rollback: git tag `live-2026-11-17` is what's live today.
 

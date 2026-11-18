@@ -8,7 +8,7 @@ import { loadStore } from '../../lib/kits.js';
 import { PHOTOS } from '../../data/photos.js';
 const { kit } = await loadStore();
 ---
-<SiteLayout bare noindex preloadImage={PHOTOS.hero.src}>
+<SiteLayout bare noindex preloadImage={PHOTOS.hero}>
   <span hidden data-view-content data-id={kit.productId} data-price={kit.amount}></span>
   <SalesPage kit={kit} lp />
 </SiteLayout>

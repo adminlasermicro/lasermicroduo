@@ -5,6 +5,6 @@ import { loadStore } from '../lib/kits.js';
 import { PHOTOS } from '../data/photos.js';
 const { kit } = await loadStore();
 ---
-<SiteLayout preloadImage={PHOTOS.hero.src}>
+<SiteLayout preloadImage={PHOTOS.hero}>
   <SalesPage kit={kit} />
 </SiteLayout>

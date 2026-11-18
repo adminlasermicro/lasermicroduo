@@ -2,7 +2,8 @@
 // drop a new file in public/photos and change `src` here.
 export const PHOTOS = {
   hero: {
-    src: '/photos/couple-walking.webp', width: 1024, height: 680,
+    src: '/photos/couple-walking-1024.webp', width: 1024, height: 680,
+    srcset: '/photos/couple-walking-640.webp 640w, /photos/couple-walking-800.webp 800w, /photos/couple-walking-1024.webp 1024w',
     alt: 'An older couple walking arm in arm down a country lane',
     credit: '“Free old couple walking together”, CC0, via rawpixel',
     page: 'https://www.rawpixel.com/image/5903561/photo-image-public-domain-free-couple',
