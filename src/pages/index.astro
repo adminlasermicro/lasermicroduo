@@ -1,35 +1,10 @@
 ---
-// Home: the main sales page for LaserTouchOne. Section order follows the Phase 5 spec.
 import SiteLayout from '../layouts/SiteLayout.astro';
+import SalesPage from '../components/site/SalesPage.astro';
 import { loadStore } from '../lib/kits.js';
-import Hero from '../components/sections/Hero.astro';
-import TrustStrip from '../components/sections/TrustStrip.astro';
-import DemoVideo from '../components/sections/DemoVideo.astro';
-import HowItWorks from '../components/sections/HowItWorks.astro';
-import FirstSession from '../components/sections/FirstSession.astro';
-import Voices from '../components/site/Voices.astro';
-import Compare from '../components/sections/Compare.astro';
-import GuaranteeBlock from '../components/site/GuaranteeBlock.astro';
-import Owner from '../components/sections/Owner.astro';
-import FaqTop from '../components/sections/FaqTop.astro';
-import FdaBlock from '../components/sections/FdaBlock.astro';
-import CtaFinal from '../components/site/CtaFinal.astro';
-import StickyBuy from '../components/site/StickyBuy.astro';
-
+import { PHOTOS } from '../data/photos.js';
 const { kit } = await loadStore();
 ---
-<SiteLayout>
-  <Hero kit={kit} />
-  <TrustStrip />
-  <DemoVideo />
-  <HowItWorks />
-  <FirstSession />
-  <Voices />
-  <Compare />
-  <section class="section"><div class="container"><GuaranteeBlock /></div></section>
-  <Owner />
-  <FaqTop />
-  <FdaBlock />
-  <CtaFinal kit={kit} />
-  <StickyBuy kit={kit} />
+<SiteLayout preloadImage={PHOTOS.hero.src}>
+  <SalesPage kit={kit} />
 </SiteLayout>

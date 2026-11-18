@@ -1,0 +1,13 @@
+---
+// Simple heading block for inner pages.
+const { title, lead } = Astro.props;
+---
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero__in">
+      <h1 class="display page-hero__title">{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      <slot />
+    </div>
+  </div>
+</section>

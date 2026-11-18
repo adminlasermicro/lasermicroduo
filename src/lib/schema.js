@@ -1,12 +1,12 @@
 // JSON-LD builders for Google (Product, Offer, return policy, shipping, breadcrumbs).
 // No aggregateRating until real reviews are shown on the page.
 import { SITE } from '../site.config.js';
-import { MEDIA } from '../data/media.js';
+import { PRODUCT_IMAGES } from '../data/photos.js';
 
 const abs = (p) => new URL(p, SITE.url).href;
 
 export function productSchema(kit) {
-  const images = Object.values(MEDIA).filter((m) => m.src && !m.src.endsWith('.mp4')).map((m) => abs(m.src));
+  const images = PRODUCT_IMAGES.map(abs);
   const offer = {
     '@type': 'Offer',
     url: abs('/shop'),

@@ -1,13 +1,11 @@
 ---
-// Selling price, with the manufacturer's crossed-out list price when Wix has a compare-at price.
+// Selling price, with the manufacturer's crossed-out list price and the saving when Wix has a compare-at price.
 const { kit, size = 'lg' } = Astro.props;
 const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
-const now = Number.isFinite(kit.amount) ? fmt(kit.amount) : kit.price;
-const was = kit.compareAt && Number.isFinite(kit.compareAmount) ? fmt(kit.compareAmount) : kit.compareAt;
 const saving = kit.compareAt && kit.compareAmount > kit.amount ? fmt(kit.compareAmount - kit.amount) : null;
 ---
 <p class={`price-tag price-tag--${size}`}>
-  <strong class="price-tag__now">{now}</strong>
-  {was && <span class="price-tag__was">Manufacturer list price <s>{was}</s></span>}
+  <strong class="price-tag__now">{kit.price}</strong>
+  {kit.compareAt && <span class="price-tag__was">Manufacturer list price <s>{kit.compareAt}</s></span>}
   {saving && size === 'lg' && <span class="price-tag__save">You save {saving}</span>}
 </p>

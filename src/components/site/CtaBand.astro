@@ -1,0 +1,19 @@
+---
+import Icon from './Icon.astro';
+import { SITE, textHref } from '../../site.config.js';
+const { title = 'Questions before you buy?', text = 'Text or email us. A real person will help you decide if LaserTouchOne is right for you.' } = Astro.props;
+---
+<section class="section section--tight-top">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2 class="h2">{title}</h2>
+        <p>{text} {SITE.replyHours}</p>
+      </div>
+      <div class="cta__actions">
+        {SITE.textNumber && <a class="btn btn--light btn--lg" href={textHref}><Icon name="message" size={20} /> Text {SITE.textNumber}</a>}
+        <a class="btn btn--ghost-light btn--lg" href={`mailto:${SITE.contactEmail}`}><Icon name="mail" size={20} /> Email us</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -3,6 +3,7 @@ import { currentCartV2 } from '@wix/ecom';
 import { redirects } from '@wix/redirects';
 import { media } from '@wix/sdk';
 import { track } from '../lib/track.js';
+import '../styles/cart.css';
 
 // Connects the homepage's plain HTML buttons to the Wix cart:
 //   [data-add-to-cart="<productId>"] (+ optional data-variant) adds one item and opens the cart

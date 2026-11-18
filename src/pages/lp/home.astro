@@ -1,29 +1,14 @@
 ---
-// Facebook landing page for people 55+ at home. No main menu, noindex, left out of the sitemap.
-// To make another version (for example /lp/golf), copy this file and change only `headline` and `intro`.
-// Keep it under 1,000 words, keep the slug free of condition words, and stay inside the FDA indication.
+// Facebook landing page for people 55+ at home: same look as the homepage, no menu, noindex,
+// left out of the sitemap. For another audience (e.g. /lp/golf), copy this file. Keep the slug free
+// of condition words and every word inside the FDA-cleared indication.
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import SalesPage from '../../components/site/SalesPage.astro';
 import { loadStore } from '../../lib/kits.js';
-import Hero from '../../components/sections/Hero.astro';
-import TrustStrip from '../../components/sections/TrustStrip.astro';
-import DemoVideo from '../../components/sections/DemoVideo.astro';
-import HowItWorks from '../../components/sections/HowItWorks.astro';
-import GuaranteeBlock from '../../components/site/GuaranteeBlock.astro';
-import FaqTop from '../../components/sections/FaqTop.astro';
-import CtaFinal from '../../components/site/CtaFinal.astro';
-import StickyBuy from '../../components/site/StickyBuy.astro';
-
+import { PHOTOS } from '../../data/photos.js';
 const { kit } = await loadStore();
-const headline = 'FDA-cleared relief for minor chronic neck and shoulder pain, at home in about 2 minutes';
 ---
-<SiteLayout bare noindex>
+<SiteLayout bare noindex preloadImage={PHOTOS.hero.src}>
   <span hidden data-view-content data-id={kit.productId} data-price={kit.amount}></span>
-  <Hero kit={kit} headline={headline} moreHref="#how-title" moreLabel="See how it works" />
-  <TrustStrip />
-  <DemoVideo />
-  <HowItWorks compact />
-  <section class="section"><div class="container"><GuaranteeBlock /></div></section>
-  <FaqTop />
-  <CtaFinal kit={kit} />
-  <StickyBuy kit={kit} />
+  <SalesPage kit={kit} lp />
 </SiteLayout>

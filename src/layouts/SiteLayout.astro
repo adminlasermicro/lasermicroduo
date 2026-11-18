@@ -1,18 +1,20 @@
 ---
-// Shared page shell. Props:
+// Shared page shell (original Ink & Copper design). Props:
 //   title, description  page SEO (defaults come from src/data/seo.js by path)
 //   noindex             keep the page out of search (ad landing pages)
-//   bare                ad landing page mode: logo and support line only, no menu, slim footer
-//   schema              extra JSON-LD objects for this page (Product, FAQPage, BreadcrumbList...)
+//   bare                ad landing page mode: logo and text-us line only, no menu
+//   schema              extra JSON-LD objects for this page
 //   ogImage             social preview image path
-import '@fontsource/atkinson-hyperlegible-next/latin-400.css';
-import '@fontsource/atkinson-hyperlegible-next/latin-700.css';
-import '@fontsource/source-serif-4/latin-600.css';
-import font400 from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-400-normal.woff2?url';
-import font700 from '@fontsource/atkinson-hyperlegible-next/files/atkinson-hyperlegible-next-latin-700-normal.woff2?url';
-import fontHead from '@fontsource/source-serif-4/files/source-serif-4-latin-600-normal.woff2?url';
-import '../styles/tokens-v2.css';
-import '../styles/v2.css';
+//   preloadImage        hero image to fetch first (speeds up the first screen)
+import '@fontsource/plus-jakarta-sans/latin-400.css';
+import '@fontsource/plus-jakarta-sans/latin-500.css';
+import '@fontsource/plus-jakarta-sans/latin-600.css';
+import '@fontsource/plus-jakarta-sans/latin-700.css';
+import font400 from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-400-normal.woff2?url';
+import font700 from '@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2?url';
+import '../styles/lmd-tokens.css';
+import '../styles/site.css';
+import '../styles/trust.css';
 import Header from '../components/site/Header.astro';
 import Footer from '../components/site/Footer.astro';
 import CartBridge from '../components/CartBridge.jsx';
@@ -71,7 +73,6 @@ const ld = [org, ...schema];
     <meta name="theme-color" content="#1f2d5c" />
     <meta name="color-scheme" content="light" />
     <link rel="preload" href={font400} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={fontHead} as="font" type="font/woff2" crossorigin />
     <link rel="preload" href={font700} as="font" type="font/woff2" crossorigin />
     {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <script is:inline>document.documentElement.classList.replace("no-js", "js");</script>

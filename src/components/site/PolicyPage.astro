@@ -1,18 +1,13 @@
 ---
 // Shared layout for the policy pages (shipping, returns, privacy, terms).
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import PageHead from './PageHead.astro';
-const { title, lead, updated, schema = [] } = Astro.props;
-const path = Astro.url.pathname.replace(/\/$/, '');
-const crumbs = [{ label: title }];
-const breadcrumb = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-  { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.lasermicroduo.com/' },
-  { '@type': 'ListItem', position: 2, name: title, item: `https://www.lasermicroduo.com${path}` },
-] };
+import PageHero from './PageHero.astro';
+import CtaBand from './CtaBand.astro';
+const { title, description, lead, updated } = Astro.props;
 ---
-<SiteLayout schema={[breadcrumb, ...schema]}>
-  <PageHead title={title} lead={lead} crumbs={crumbs} />
-  <section class="section" style="padding-top:0">
+<SiteLayout>
+  <PageHero title={title} lead={lead} />
+  <section class="section section--tight-top">
     <div class="container">
       <div class="prose">
         <slot />
@@ -20,4 +15,5 @@ const breadcrumb = { '@context': 'https://schema.org', '@type': 'BreadcrumbList'
       </div>
     </div>
   </section>
+  <CtaBand title="Questions about this policy?" text="Text or email us and a real person will help." />
 </SiteLayout>

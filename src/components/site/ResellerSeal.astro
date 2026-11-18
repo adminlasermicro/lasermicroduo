@@ -1,0 +1,16 @@
+---
+// A small trust seal: icon disc, bold title, one line of proof. Every seal states a checkable fact
+// and links to where a visitor can check it. Usage: <ResellerSeal /> or <ResellerSeal kind="fda" />
+import Icon from './Icon.astro';
+const KINDS = {
+  reseller: { icon: 'shield', title: 'Authorized reseller', sub: 'Sold and supported by Laser Micro Duo', href: '/about' },
+  fda: { icon: 'file', title: 'FDA-cleared', sub: '510(k) K100116, over the counter', href: 'https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf' },
+};
+const { kind = 'reseller' } = Astro.props;
+const s = KINDS[kind] ?? KINDS.reseller;
+const external = s.href.startsWith('http');
+---
+<a class="seal" href={s.href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+  <span class="seal__disc"><Icon name={s.icon} size={22} /></span>
+  <span class="seal__text"><strong>{s.title}</strong><span>{s.sub}</span></span>
+</a>

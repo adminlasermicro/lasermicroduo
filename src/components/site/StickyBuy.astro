@@ -1,15 +1,15 @@
 ---
-// Bottom "Add to cart" bar for phones and tablets. It appears once the page's main buy button
-// (marked data-buy-anchor) has scrolled out of view.
+// Bottom "Add to cart" bar for phones and tablets. It appears once the page's main buy area
+// (marked data-buy-anchor) has scrolled out of view, and hides again when it comes back.
+import PriceTag from './PriceTag.astro';
 const { kit } = Astro.props;
-const price = kit?.price?.replace('.00', '');
 ---
 {kit?.productId && (
   <div class="sticky-buy" data-sticky-buy aria-hidden="true">
     <div>
-      <p class="sticky-buy__name">LaserTouchOne kit, <span class="sticky-buy__price">{price}</span></p>
-      {kit.compareAt && <p class="small muted">List price <s>{kit.compareAt.replace('.00', '')}</s></p>}
+      <p class="sticky-buy__name">LaserTouchOne kit</p>
+      {kit.price && <PriceTag kit={kit} size="sm" />}
     </div>
-    <button type="button" class="btn btn--primary" data-add-to-cart={kit.productId} data-track-price={kit.amount} data-variant={kit.variantId ?? ''} tabindex="-1">Add to cart</button>
+    <button type="button" class="btn btn--primary" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount} tabindex="-1">Add to cart</button>
   </div>
 )}

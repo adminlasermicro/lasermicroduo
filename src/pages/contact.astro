@@ -1,22 +1,24 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import PageHead from '../components/site/PageHead.astro';
-import { breadcrumbSchema } from '../lib/schema.js';
+import PageHero from '../components/site/PageHero.astro';
+import Icon from '../components/site/Icon.astro';
 import { SITE, textHref } from '../site.config.js';
 ---
-<SiteLayout schema={[breadcrumbSchema([{ name: 'Contact', path: '/contact' }])]}>
-  <PageHead title="Text or email a real person" lead={`Questions about LaserTouchOne, your order or your first session? ${SITE.replyHours}`} crumbs={[{ label: 'Contact' }]} />
+<SiteLayout>
+  <PageHero title="We’re here to help" lead={`Questions about LaserTouchOne, your order or your first session? Text or email us. ${SITE.replyHours}`} />
 
-  <section class="section" style="padding-top:0">
-    <div class="container split split--top">
+  <section class="section section--tight-top">
+    <div class="container contact-grid">
       <div class="contact-ways">
         {SITE.textNumber && (
           <a class="contact-way" href={textHref}>
-            <span class="h4">Text us</span><span class="h3">{SITE.textNumber}</span><span class="muted">The fastest way to reach us</span>
+            <span class="icon-badge icon-badge--lg"><Icon name="message" size={24} /></span>
+            <span><span class="contact-way__label">Text us</span><span class="contact-way__value">{SITE.textNumber}</span><span class="contact-way__note">The fastest way to reach us</span></span>
           </a>
         )}
         <a class="contact-way" href={`mailto:${SITE.contactEmail}`}>
-          <span class="h4">Email us</span><span class="h3" style="word-break:break-word">{SITE.contactEmail}</span><span class="muted">For order details and longer questions</span>
+          <span class="icon-badge icon-badge--lg"><Icon name="mail" size={24} /></span>
+          <span><span class="contact-way__label">Email us</span><span class="contact-way__value">{SITE.contactEmail}</span><span class="contact-way__note">For order details and longer questions</span></span>
         </a>
       </div>
 
@@ -39,8 +41,8 @@ import { SITE, textHref } from '../site.config.js';
           <textarea id="c-msg" name="message" rows="5" required></textarea>
         </div>
         <p class="form-error" data-form-error hidden>Fill in your name, a valid email and your message.</p>
-        <button type="submit" class="btn btn--primary btn--block-sm">Send message</button>
-        <p class="small muted">This opens your email app with your message ready to send.</p>
+        <button type="submit" class="btn btn--primary btn--lg">Send message</button>
+        <p class="form-note">This opens your email app with your message ready to send.</p>
       </form>
     </div>
   </section>

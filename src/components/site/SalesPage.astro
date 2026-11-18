@@ -1,0 +1,229 @@
+---
+import Icon from './Icon.astro';
+import PriceTag from './PriceTag.astro';
+import { PHOTOS } from '../../data/photos.js';
+import { TOP_FAQS } from '../../data/faq.js';
+import FaqList from './FaqList.astro';
+import ReviewGrid from './ReviewGrid.astro';
+import { REAL_REVIEWS } from '../../data/reviews.js';
+import CtaBand from './CtaBand.astro';
+import ResellerSeal from './ResellerSeal.astro';
+import StickyBuy from './StickyBuy.astro';
+import { SITE } from '../../site.config.js';
+
+// The homepage's sales sections, shared by / and the ad landing pages (/lp/...).
+// `lp` drops the parts an ad visitor doesn't need and keeps links on the page.
+const { kit, lp = false } = Astro.props;
+
+const trust = [
+  { icon: 'shield', label: 'FDA-cleared', sub: 'Over the counter, K100116' },
+  { icon: 'file', label: 'Genuine device', sub: `Made by ${SITE.manufacturer}, Scottsdale, AZ` },
+  { icon: 'truck', label: 'Flat-rate shipping', sub: 'US and international' },
+  { icon: 'calendar', label: 'Money-back guarantee', sub: 'Backed by the manufacturer' },
+  { icon: 'message', label: 'Text support', sub: 'A real person helps you' },
+];
+const steps = [
+  { icon: 'droplet', title: 'Apply the gel', text: 'A little electrode gel on the sore spot helps the electrical stimulation (TENS) reach your skin.' },
+  { icon: 'timer', title: 'About two minutes', text: 'Switch it on and glide the head in slow circles over the area for about two minutes.' },
+  { icon: 'repeat', title: 'Repeat up to 5 times a day', text: 'At your desk, on the couch or before bed. Follow the user manual for how often to use it.' },
+];
+const whyBuy = [
+  { icon: 'file', text: 'Manufacturer’s warranty' },
+  { icon: 'calendar', text: 'Manufacturer’s money-back guarantee' },
+  { icon: 'message', text: 'Text support' },
+];
+---
+  <!-- Hero: one full-width photo, text on a soft scrim -->
+  <section class="hero-full">
+    <img class="hero-full__img" src={PHOTOS.hero.src} width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
+    <div class="container hero-full__in">
+      <div class="hero-full__copy">
+        <h1 class="display">FDA-cleared relief for minor chronic neck and shoulder pain, at home in about 2 minutes</h1>
+        <p class="lead">
+          LaserTouchOne combines a low-level laser and TENS electrical stimulation in one handheld device.
+          Drug-free, no prescription, about two minutes per area.
+        </p>
+        <div class="hero-full__actions">
+          <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>
+          <a class="link-arrow" href={lp ? '#how' : '/how-it-works'}>See how it works <Icon name="arrow" size={18} /></a>
+        </div>
+        <div class="hero-full__meta">
+          {kit.price && <PriceTag kit={kit} size="sm" />}
+          <span class="hero-full__fact"><Icon name="shield" size={18} /> FDA-cleared for over-the-counter use</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust row -->
+  <section class="trust" aria-label="Why buy from us">
+    <div class="container">
+      <ul class="trust__list">
+        {trust.map((t, i) => (
+          <li data-reveal style={`--d:${i * 60}ms`}>
+            <span class="icon-badge"><Icon name={t.icon} /></span>
+            <span><strong>{t.label}</strong><span class="trust__sub">{t.sub}</span></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Two technologies -->
+  <section class="section" id="how">
+    <div class="container split">
+      <div class="product-stage" data-photo-slot="product-hero" data-reveal>
+        <span class="product-stage__note">Product photo coming soon</span>
+      </div>
+      <div class="split__copy">
+        <h2 class="h2" data-reveal>Two technologies, one small device</h2>
+        <p class="lead" data-reveal style="--d:80ms">
+          Most devices do one thing. LaserTouchOne works on the same spot with two at once, from a
+          head small enough to hold like a pen.
+        </p>
+        <div class="feature" data-reveal style="--d:160ms">
+          <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
+          <div>
+            <h3 class="h3">Low-level laser</h3>
+            <p>A gentle 670 nm red light from the center of the head. It doesn’t heat the skin.</p>
+          </div>
+        </div>
+        <div class="feature" data-reveal style="--d:220ms">
+          <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
+          <div>
+            <h3 class="h3">TENS electrical stimulation</h3>
+            <p>Mild electrical stimulation through two steel contacts on either side of the laser.</p>
+          </div>
+        </div>
+        {!lp && <a class="link-arrow" href="/how-it-works">Learn how they work together <Icon name="arrow" size={18} /></a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="section band">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="h2" data-reveal>Three steps. Two minutes.</h2>
+        <p class="lead" data-reveal style="--d:80ms">No appointments, no wires, nothing to wear. Here’s the whole routine.</p>
+      </div>
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <li class="step" data-reveal style={`--d:${i * 90}ms`}>
+            <span class="step__icon"><Icon name={s.icon} size={28} /><span class="step__num" aria-hidden="true">{i + 1}</span></span>
+            <h3 class="h3">{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  {REAL_REVIEWS.length > 0 && (
+  <section class="section">
+    <div class="container">
+      <div class="section-head section-head--row">
+        <h2 class="h2">What our customers say</h2>
+        <a class="link-arrow" href="/shop#reviews">Read all reviews <Icon name="arrow" size={18} /></a>
+      </div>
+      <ReviewGrid />
+    </div>
+  </section>
+  )}
+
+  <!-- The kit: open split, no floating card -->
+  <section class="section section--tint" id="kits">
+    <div class="container offer">
+      <div class="offer__media" data-photo-slot="kit-main" data-reveal><span>Kit photo coming soon</span></div>
+      <div class="offer__body">
+        <h2 class="h2 offer__name" data-reveal>Everything in one kit</h2>
+        <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Made by {SITE.manufacturer} in Scottsdale, Arizona. Every order comes with the manufacturer’s money-back guarantee, the manufacturer’s warranty and support from us.</p>
+        <ul class="checklist" data-reveal style="--d:140ms">
+          {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
+        </ul>
+        <div class="offer__foot" data-buy-anchor>
+          {kit.price ? <PriceTag kit={kit} /> : <p class="kit__ask">Price on request</p>}
+          {kit.productId
+            ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart</button>
+            : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
+        </div>
+        <ul class="why-buy" aria-label="Why buy from us">
+          {whyBuy.map((w) => <li><Icon name={w.icon} size={18} />{w.text}</li>)}
+        </ul>
+        <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
+        <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
+      </div>
+    </div>
+  </section>
+
+  {!lp && (<>
+  <!-- FDA explained -->
+  <section class="section">
+    <div class="container split split--reverse">
+      <div class="fda-card" data-reveal>
+        <span class="icon-badge icon-badge--lg"><Icon name="file" size={24} /></span>
+        <dl>
+          <div><dt>Clearance</dt><dd>510(k) K100116</dd></div>
+          <div><dt>Cleared</dt><dd>April 15, 2010</dd></div>
+          <div><dt>Use</dt><dd>Over the counter, no prescription</dd></div>
+          <div><dt>Maker</dt><dd>{SITE.manufacturer}, Scottsdale, AZ</dd></div>
+          <div><dt>Technology</dt><dd>670 nm low-level laser and TENS (electrical stimulation)</dd></div>
+        </dl>
+        <a class="link-arrow" href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
+      </div>
+      <div class="split__copy">
+        <h2 class="h2" data-reveal>FDA-cleared, explained simply</h2>
+        <p class="lead" data-reveal style="--d:80ms">
+          “FDA-cleared” means the FDA reviewed LaserTouchOne and cleared it for sale for specific uses.
+          For this device, that means:
+        </p>
+        <ul class="checklist checklist--lg" data-reveal style="--d:140ms">
+          <li><Icon name="check" size={20} />Symptomatic relief of chronic, intractable pain</li>
+          <li><Icon name="check" size={20} />Adjunctive treatment of acute pain after surgery or an injury, alongside your other care</li>
+          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin, alongside your other care</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  </>)}
+
+  <!-- Guarantee -->
+  <section class="section band" aria-labelledby="guarantee-title">
+    <div class="container split">
+      <div class="split__copy">
+        <h2 class="h2" id="guarantee-title">Money-back guarantee, backed by the manufacturer</h2>
+        <p class="lead">Every kit is covered by {SITE.manufacturer}’ money-back guarantee. If LaserTouchOne isn’t right for you, you get a full refund of the device price. You pay the return shipping, and the original shipping isn’t refunded.</p>
+        <a class="link-arrow" href="/returns">Read the full guarantee <Icon name="arrow" size={18} /></a>
+      </div>
+      <ol class="steps steps--compact">
+        {[
+          { icon: 'message', title: 'Text or email us', text: 'Send us your order number and we’ll take it from there.' },
+          { icon: 'file', title: 'Get your instructions', text: 'We reply with the return address and what to include.' },
+          { icon: 'truck', title: 'Ship the kit back', text: 'Send the full kit with tracking. Return shipping is yours.' },
+          { icon: 'wallet', title: 'Get your refund', text: 'We refund the device price to your original payment method.' },
+        ].map((s, i) => (
+          <li class="step">
+            <span class="step__icon"><Icon name={s.icon} size={28} /><span class="step__num" aria-hidden="true">{i + 1}</span></span>
+            <h3 class="h3">{s.title}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--tight-top" data-sticky-stop>
+    <div class="container faq-wrap">
+      <div class="section-head">
+        <h2 class="h2" data-reveal>Questions, answered</h2>
+        <p class="lead">Can’t find yours? <a href="/faq">See all questions</a> or text us.</p>
+      </div>
+      <FaqList items={TOP_FAQS} />
+    </div>
+  </section>
+
+  <CtaBand />
+  <StickyBuy kit={kit} />
