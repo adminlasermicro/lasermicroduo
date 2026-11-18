@@ -333,3 +333,5 @@ strong, b { font-weight: 700; }
   .compare td.is-us { color: var(--ink); font-weight: 700; }
 }
 .cta-final + .footer { border-top: 1px solid #44507a; }
+.lp-header__help { white-space: nowrap; }
+@media (max-width: 420px) { .lp-header .logo__img { width: 150px; } .lp-header__help { font-size: var(--fs-small); } }
