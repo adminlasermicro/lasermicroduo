@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design system v2 | Laser Micro Duo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../src/styles/tokens-v2.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--text); font: 400 var(--fs-body)/var(--lh-body) var(--font-body); }
+  h1, h2, h3 { font-family: var(--font-head); font-weight: 600; color: var(--ink); line-height: var(--lh-head); margin: 0; }
+  h1 { font-size: var(--fs-h1); letter-spacing: -0.01em; }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
+  p { margin: 0; max-width: var(--measure); }
+  a { color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+  .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 var(--gutter); }
+  section { padding: var(--s6) 0; }
+  section.band { background: var(--mist); }
+  .stack { display: grid; gap: var(--s2); }
+  .stack-lg { display: grid; gap: var(--s4); }
+  .sheet-head { border-bottom: 3px solid var(--ink); padding: var(--s5) 0 var(--s3); }
+  .sheet-head p { color: var(--text-muted); margin-top: var(--s1); }
+  .note { font-size: var(--fs-small); color: var(--text-muted); }
+  .grid2 { display: grid; gap: var(--s5); grid-template-columns: 1fr 1fr; align-items: start; }
+  @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+
+  /* Palette */
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--s2); }
+  .sw { border: 1px solid var(--rule); border-radius: var(--r-control); overflow: hidden; }
+  .sw i { display: block; height: 72px; }
+  .sw div { padding: var(--s1) 12px 12px; font-size: var(--fs-small); line-height: 1.4; }
+  .sw b { display: block; color: var(--ink); }
+
+  /* Type specimen */
+  .type-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--s2); align-items: baseline; padding: var(--s2) 0; border-top: 1px solid var(--rule); }
+  .type-row span { font-size: var(--fs-small); color: var(--text-muted); }
+  @media (max-width: 600px) { .type-row { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s1); min-height: var(--btn-h); padding: 0 var(--s4); border-radius: var(--r-control); font: 700 var(--fs-body)/1 var(--font-body); text-decoration: none; cursor: pointer; }
+  .btn-primary { background: var(--amber); color: var(--ink); border: 1.5px solid var(--amber-edge); }
+  .btn-primary:hover { background: var(--amber-hover); }
+  .btn-coral { background: #c2512c; color: #fff; border: 1.5px solid #9a3d1f; }
+  .btn-secondary { background: var(--paper); color: var(--ink); border: 2px solid var(--ink); }
+  .btn-row { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; }
+  .btn.is-focus { outline: 3px solid var(--focus); outline-offset: 3px; }
+  @media (max-width: 600px) { .btn-row .btn { width: 100%; } }
+
+  /* Buy box */
+  .buybox { display: grid; gap: var(--s3); }
+  .price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px var(--s2); }
+  .price strong { font: 600 2.25rem/1 var(--font-head); color: var(--ink); }
+  .price s { color: var(--text-muted); }
+  .assure { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .assure li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; }
+  .assure svg { width: 24px; height: 24px; color: var(--ink); margin-top: 2px; }
+  .hidden-slot { border: 2px dashed var(--rule); border-radius: var(--r-control); padding: 12px var(--s2); color: var(--text-muted); font-size: var(--fs-small); }
+
+  /* Gallery */
+  .gallery { display: grid; gap: 12px; }
+  .ph { background: var(--mist); border-radius: var(--r-media); display: grid; place-items: center; text-align: center; padding: var(--s2); color: var(--text-muted); font-size: var(--fs-small); }
+  .band .ph { background: var(--paper); border: 1px solid var(--rule); }
+  .ph-main { aspect-ratio: 1; }
+  .thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--s1); }
+  .thumbs .ph { aspect-ratio: 1; padding: 4px; font-size: 0.8rem; line-height: 1.2; min-height: var(--tap); }
+  .thumbs .ph.is-on { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+  /* Trust strip */
+  .trust { list-style: none; margin: 0; padding: var(--s3) 0; display: flex; flex-wrap: wrap; gap: var(--s2) var(--s5); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .trust li { font-weight: 700; color: var(--ink); }
+  .trust a { font-weight: 700; }
+
+  /* Signature component: the Device facts panel, modelled on an OTC "Drug Facts" label */
+  .facts { border: 2px solid var(--ink); border-radius: 2px; padding: 0 var(--s3) var(--s2); background: var(--paper); max-width: 640px; }
+  .facts h3 { font-family: var(--font-body); font-weight: 700; font-size: 1.75rem; padding: 12px 0 8px; border-bottom: 8px solid var(--ink); }
+  .facts dl { margin: 0; }
+  .facts .row { display: grid; grid-template-columns: 170px 1fr; gap: var(--s2); padding: 12px 0; border-bottom: 1px solid var(--ink); }
+  .facts .row:last-child { border-bottom: 0; }
+  .facts dt { font-weight: 700; color: var(--ink); }
+  .facts dd { margin: 0; }
+  @media (max-width: 600px) { .facts .row { grid-template-columns: 1fr; gap: 2px; } }
+
+  /* Guarantee block */
+  .guarantee { border-left: 6px solid var(--amber); background: var(--paper); padding: var(--s4); display: grid; gap: var(--s2); }
+  .guarantee ol { margin: 0; padding-left: 1.4em; display: grid; gap: var(--s1); }
+
+  /* FAQ accordion */
+  .faq { border-top: 2px solid var(--ink); max-width: 760px; }
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq summary { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: var(--s2); cursor: pointer; list-style: none; font-weight: 700; color: var(--ink); font-size: var(--fs-lead); padding: var(--s2) 0; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; font: 400 2rem/1 var(--font-body); }
+  .faq details[open] summary::after { content: '\2212'; }
+  .faq details p { padding-bottom: var(--s3); }
+
+  /* Diagram */
+  .diagram { background: var(--mist); border-radius: var(--r-media); padding: var(--s3); }
+  .diagram svg { width: 100%; height: auto; display: block; }
+
+  /* Sticky mobile bar */
+  .sticky-demo { max-width: 390px; border: 1px solid var(--rule); border-radius: var(--r-media); overflow: hidden; }
+  .sticky-demo .screen { height: 120px; background: var(--mist); display: grid; place-items: center; color: var(--text-muted); font-size: var(--fs-small); }
+  .sticky { display: grid; grid-template-columns: 1fr auto; gap: var(--s2); align-items: center; padding: 12px var(--s2); background: var(--paper); border-top: 2px solid var(--ink); }
+  .sticky b { font: 600 1.375rem/1 var(--font-head); color: var(--ink); display: block; }
+  .sticky small { font-size: var(--fs-small); color: var(--text-muted); }
+  .sticky .btn { padding: 0 var(--s3); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="sheet-head">
+    <h1>Design system v2</h1>
+    <p>Calm, clinical and warm: “your trusted pharmacist.” White and mist, navy for words and structure, amber only on the button that buys. Built for 55+ readers on phones.</p>
+  </header>
+</div>
+
+<section>
+  <div class="wrap stack-lg">
+    <h2>Colour</h2>
+    <div class="swatches">
+      <div class="sw"><i style="background:#1f2d5c"></i><div><b>Ink #1f2d5c</b>Headings, rules. 13.2:1</div></div>
+      <div class="sw"><i style="background:#2b3552"></i><div><b>Text #2b3552</b>Body. 12.1:1 AAA</div></div>
+      <div class="sw"><i style="background:#4a5470"></i><div><b>Muted #4a5470</b>Secondary. 7.5:1 AAA</div></div>
+      <div class="sw"><i style="background:#eef1f6"></i><div><b>Mist #eef1f6</b>Section bands</div></div>
+      <div class="sw"><i style="background:#c9d0de"></i><div><b>Rule #c9d0de</b>Hairlines</div></div>
+      <div class="sw"><i style="background:#f2b544"></i><div><b>Amber #f2b544</b>Buy button only. Navy label 7.2:1</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack-lg">
+    <h2>Type</h2>
+    <div>
+      <div class="type-row"><span>H1 · Source Serif 4, 52px</span><h1 style="font-size:var(--fs-h1)">Relief for minor chronic neck and shoulder pain</h1></div>
+      <div class="type-row"><span>H2 · 36px</span><h2>How a session works</h2></div>
+      <div class="type-row"><span>H3 · 24px</span><h3>Low-level laser and TENS in one head</h3></div>
+      <div class="type-row"><span>Lead · Atkinson Next, 22px</span><p style="font-size:var(--fs-lead)">A handheld, drug-free device you use at home for about two minutes per area.</p></div>
+      <div class="type-row"><span>Body · 18px / 1.6</span><p>Apply a little electrode gel, switch it on and move the head in slow circles over the area. The laser and the electrical stimulation work on the same spot at the same time. Follow the user manual for how often to use it.</p></div>
+      <div class="type-row"><span>Small · 16px</span><p class="note">Small text never goes below 16px.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack-lg">
+    <h2>Buttons</h2>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#">Add to cart, $550</a>
+      <a class="btn btn-secondary" href="#">See how it works</a>
+      <a href="#">Read the FDA document</a>
+      <a class="btn btn-primary is-focus" href="#">Focused</a>
+    </div>
+    <div class="stack">
+      <h3>Accent test: amber vs coral</h3>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#">Add to cart (amber, 7.2:1)</a>
+        <a class="btn btn-coral" href="#">Add to cart (coral, 4.7:1)</a>
+      </div>
+      <p class="note">Recommendation: amber. It passes AAA with a navy label, stays readable for older eyes, and doesn't look like the terracotta used on many templated sites. Coral only passes AA.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid2">
+    <div class="gallery">
+      <div class="ph ph-main">Device cutout on white, 1:1, 2000×2000</div>
+      <div class="thumbs">
+        <div class="ph is-on">Cutout</div><div class="ph">Head</div><div class="ph">In hand</div><div class="ph">In use</div><div class="ph">Kit</div><div class="ph">Video</div>
+      </div>
+    </div>
+    <div class="buybox">
+      <h2 style="font-size:var(--fs-h1)">LaserTouchOne</h2>
+      <div class="hidden-slot">Rating summary: hidden until real reviews exist</div>
+      <p>Low-level laser and TENS electrical stimulation in one handheld, FDA-cleared device.</p>
+      <div class="price"><strong>$550</strong><span>Manufacturer list price <s>$645</s></span></div>
+      <a class="btn btn-primary" href="#" style="width:100%">Add to cart</a>
+      <ul class="assure">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><span><b>Money-back guarantee</b>, backed by the manufacturer</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg><span>Made by <b>Laser Health Technologies</b>, Scottsdale, AZ</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span>Text a real person: <a href="#">(480) 734-4877</a></span></li>
+      </ul>
+      <div class="hidden-slot">“May be HSA/FSA eligible”: hidden until confirmed</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap stack-lg">
+    <h2>Trust strip</h2>
+    <ul class="trust">
+      <li><a href="#">FDA-cleared · 510(k) K100116</a></li>
+      <li>Over the counter, no prescription</li>
+      <li>Drug-free</li>
+      <li>US support</li>
+    </ul>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid2">
+    <div class="stack-lg">
+      <h2>Device facts panel</h2>
+      <p>The one distinctive element. It borrows the layout of the Drug Facts label on every pharmacy box, so older buyers can read the essentials at a glance. Used for the FDA block, specs and what's included.</p>
+    </div>
+    <div class="facts">
+      <h3>Device facts</h3>
+      <dl>
+        <div class="row"><dt>Cleared for</dt><dd>Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin (adjunctive); symptomatic relief of chronic, intractable pain; adjunctive treatment of post-surgical and post-traumatic acute pain</dd></div>
+        <div class="row"><dt>FDA</dt><dd>510(k) K100116, cleared April 15, 2010, over the counter</dd></div>
+        <div class="row"><dt>Technology</dt><dd>670 nm low-level laser and TENS electrical stimulation</dd></div>
+        <div class="row"><dt>Session</dt><dd>About 2 minutes per area</dd></div>
+        <div class="row"><dt>Made by</dt><dd>Laser Health Technologies LLC, Scottsdale, AZ</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap grid2">
+    <div class="guarantee">
+      <h2>Money-back guarantee, backed by the manufacturer</h2>
+      <p>If LaserTouchOne isn’t right for you, we’ll refund the device price. You pay the return shipping.</p>
+      <ol>
+        <li>Text or email us with your order number.</li>
+        <li>We send you the return instructions.</li>
+        <li>Ship the full kit back with tracking.</li>
+        <li>We refund the device price to your card.</li>
+      </ol>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 400 260" role="img" aria-label="Treatment head: laser in the center, a TENS contact on each side">
+        <rect x="70" y="80" width="260" height="100" rx="50" fill="#fff" stroke="#1f2d5c" stroke-width="2"/>
+        <circle cx="130" cy="130" r="24" fill="#c9d0de"/><circle cx="270" cy="130" r="24" fill="#c9d0de"/>
+        <circle cx="200" cy="130" r="18" fill="#1f2d5c"/>
+        <line x1="200" y1="112" x2="200" y2="48" stroke="#1f2d5c" stroke-width="2"/>
+        <text x="200" y="36" text-anchor="middle" font-family="Atkinson Hyperlegible Next, sans-serif" font-size="18" font-weight="700" fill="#1f2d5c">670 nm low-level laser</text>
+        <line x1="130" y1="154" x2="130" y2="214" stroke="#1f2d5c" stroke-width="2"/><line x1="270" y1="154" x2="270" y2="214" stroke="#1f2d5c" stroke-width="2"/><line x1="130" y1="214" x2="270" y2="214" stroke="#1f2d5c" stroke-width="2"/>
+        <text x="200" y="244" text-anchor="middle" font-family="Atkinson Hyperlegible Next, sans-serif" font-size="18" font-weight="700" fill="#1f2d5c">Two TENS contacts</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap grid2">
+    <div class="faq">
+      <details open><summary>Does it hurt?</summary><p>The laser doesn’t heat the skin. [NEEDS NOA: what the electrical stimulation feels like, from the user manual]</p></details>
+      <details><summary>How long is a session?</summary><p>About two minutes per area.</p></details>
+      <details><summary>What if it isn’t right for me?</summary><p>The manufacturer’s money-back guarantee covers the device price. You pay return shipping.</p></details>
+    </div>
+    <div class="stack">
+      <h3>Sticky buy bar (phones)</h3>
+      <div class="sticky-demo">
+        <div class="screen">Page content</div>
+        <div class="sticky"><div><b>$550</b><small>List price <s>$645</s></small></div><a class="btn btn-primary" href="#">Add to cart</a></div>
+      </div>
+      <div class="hidden-slot">Customer video and testimonial cards: built, hidden until real content with disclosures is supplied</div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

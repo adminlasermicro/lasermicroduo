@@ -1,0 +1,46 @@
+/* Laser Micro Duo design tokens, v2 ("trusted pharmacist").
+   Proposal for Phase 4. Not imported by any page yet; the live site still uses lmd-tokens.css.
+   Light only. Contrast ratios are against --paper unless noted. */
+
+:root {
+  /* Color: navy carries text and structure; amber is for primary buttons only. */
+  --ink: #1f2d5c;          /* headings, logo, rules. 13.2:1 */
+  --text: #2b3552;         /* body text. 12.1:1 (AAA) */
+  --text-muted: #4a5470;   /* secondary text. 7.5:1 (AAA) */
+  --paper: #ffffff;        /* page background */
+  --mist: #eef1f6;         /* section background. Body text on mist 10.7:1 */
+  --rule: #c9d0de;         /* hairlines and input borders */
+  --amber: #f2b544;        /* primary button fill only. Navy label on amber 7.2:1 (AAA) */
+  --amber-edge: #a06a0e;   /* 1.5px button edge so the button reads on white and mist */
+  --amber-hover: #f6c76c;
+  --focus: #1f2d5c;        /* 3px focus outline; white on navy sections */
+
+  /* Type: Atkinson Hyperlegible Next for reading (built for low vision),
+     Source Serif 4 for headings only. Two weights per family. */
+  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;  /* 400, 700 */
+  --font-head: 'Source Serif 4', Georgia, serif;                     /* 600 */
+
+  /* Scale: 18px base, ~1.25 ratio. Nothing a customer must read is below 16px. */
+  --fs-small: 1rem;        /* 16px: captions, footnotes */
+  --fs-body: 1.125rem;     /* 18px */
+  --fs-lead: 1.375rem;     /* 22px */
+  --fs-h3: 1.5rem;         /* 24px */
+  --fs-h2: clamp(1.875rem, 1.5rem + 1.2vw, 2.25rem);  /* 30 to 36px */
+  --fs-h1: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem);   /* 36 to 52px */
+  --lh-body: 1.6;
+  --lh-head: 1.15;
+  --measure: 66ch;         /* reading line length */
+
+  /* Space: 8px scale. */
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 48px; --s6: 64px; --s7: 96px;
+  --page-max: 1200px;
+  --gutter: clamp(16px, 4vw, 32px);
+
+  /* Shape: small, consistent radii; hierarchy comes from rules and bands, not cards and shadows. */
+  --r-control: 6px;        /* buttons, inputs */
+  --r-media: 12px;         /* photos and video */
+
+  /* Touch: every control is at least this tall. */
+  --tap: 48px;
+  --btn-h: 56px;           /* primary buttons */
+}
