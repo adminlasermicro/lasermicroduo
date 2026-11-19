@@ -45,13 +45,17 @@ const year = new Date().getFullYear();
       </nav>
     </div>
     )}
+    {bare && (
+      <nav class="footer__policies" aria-label="Policies">
+        <a href="/shipping">Shipping</a><a href="/returns">Returns</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a>
+      </nav>
+    )}
     <p class="footer__legal">
-      LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of
-      chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and
-      adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal
-      origin. LaserTouchOne is made by Laser Health Technologies LLC, Scottsdale, Arizona. Laser Micro Duo
-      (Pinestone Investments LLC) is an independent authorized reseller; LaserTouchOne is a trademark of its owner.
-      This site does not give medical advice. Read the user manual and talk to your doctor about your pain.
+      LaserTouchOne is FDA-cleared (510(k) K100116) for over-the-counter use, including temporary relief of
+      minor chronic neck and shoulder pain, used alongside your other care. It is not intended to diagnose,
+      cure or prevent any disease. Results vary. Read all safety information in the user manual before use,
+      and ask your doctor if you have questions about your health. LaserTouchOne is a trademark of Laser
+      Health Technologies, LLC. Laser Micro Duo is an independent authorized reseller.
     </p>
     <div class="footer__bottom">
       <p>© {year} {SITE.legalName} · <span class="footer__secure"><Icon name="lock" size={16} /> Secure checkout by Wix</span></p>

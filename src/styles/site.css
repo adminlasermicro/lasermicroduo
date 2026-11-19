@@ -670,3 +670,7 @@ button { cursor: pointer; }
 .promises--4 { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin-inline: auto; }
 .promise__text { font-weight: 600; color: var(--color-text); font-size: var(--fs-body); }
 @media (max-width: 900px) { .promises--4 { grid-template-columns: 1fr; } }
+
+/* Footer policy links on ad landing pages (the full link columns are hidden there). */
+.footer__policies { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-bottom: var(--s3); }
+.footer__policies a { color: inherit; padding: 10px 0; text-decoration: underline; text-underline-offset: 3px; }

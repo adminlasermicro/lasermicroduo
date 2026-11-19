@@ -6,35 +6,24 @@ import { SITE, textHref, guaranteeName } from '../site.config.js';
 const days = SITE.guaranteeDays;
 ---
 <PolicyPage
-  title="Returns and money-back guarantee"
-  description={`How the ${guaranteeName} works for LaserTouchOne bought from Laser Micro Duo, and how to return your device.`}
-  lead={`Every LaserTouchOne kit comes with a ${guaranteeName}. Here’s how it works and how to send your device back.`}
-  updated="November 17, 2026"
+  title="Money-back guarantee and returns"
+  lead="If LaserTouchOne isn’t right for you, return it for a refund of the device price."
+  updated="November 18, 2026"
 >
   <h2>The money-back guarantee</h2>
-  <p>
-    If LaserTouchOne isn’t right for you, send it back for a refund of the device price. You cover return
-    shipping. We handle the return and refund for you.
-  </p>
+  <p>If LaserTouchOne isn’t right for you, return it for a refund of the device price.</p>
   <ul>
     <li><strong>How long you have:</strong> {days ? `${days} days from the day your order is delivered.` : 'contact us to confirm the guarantee period for your order before you send anything back.'}</li>
-    <li><strong>What you get back:</strong> a full refund of the device price, to your original payment method.</li>
-    <li><strong>Return shipping:</strong> you cover return shipping.</li>
-    <li><strong>Original shipping:</strong> the shipping you paid on your order is not refunded.</li>
   </ul>
 
   <h2>How to return your device</h2>
   <ol>
-    <li>
-      <strong>Contact us first.</strong>
-      {SITE.textNumber ? <>Text <a href={textHref}>{SITE.textNumber}</a> or email </> : <>Email </>}
-      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> with your order number{days ? `, within ${days} days of delivery` : ''}.
-    </li>
-    <li><strong>Get your return instructions.</strong> We’ll reply with the return address and anything you need to include. Please don’t send a package before you hear from us.</li>
-    <li><strong>Pack the whole kit.</strong> Send back the device and everything that came with it: the zippered travel case, charger, gel, user manual and warranty card.</li>
-    <li><strong>Ship it.</strong> Use a carrier with tracking, and keep your receipt. The return shipping cost is yours.</li>
-    <li><strong>Get your refund.</strong> Once the return arrives and is checked, we refund the device price to your original payment method and confirm by email.</li>
+    <li>{SITE.textNumber ? <>Text <a href={textHref}>{SITE.textNumber}</a> or email </> : <>Email </>}<a href={`mailto:${SITE.contactEmail}`}>us</a> with your order number.</li>
+    <li>We send you return instructions.</li>
+    <li>Ship the full kit back. You cover return shipping.</li>
+    <li>We refund your original payment once it arrives and email you when it’s sent.</li>
   </ol>
+  <p><strong>Note:</strong> Original shipping charges aren’t refunded.</p>
 
   <h2>Warranty</h2>
   <p>

@@ -5,11 +5,12 @@ import PageHero from '../components/site/PageHero.astro';
 import Icon from '../components/site/Icon.astro';
 import CtaBand from '../components/site/CtaBand.astro';
 import { INDICATION, SITE } from '../site.config.js';
+import { CLEARED_FOR } from '../data/shared.js';
 import { breadcrumbSchema } from '../lib/schema.js';
 const PDF = 'https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf';
 ---
 <SiteLayout schema={[breadcrumbSchema([{ name: 'FDA clearance', path: '/fda-clearance' }])]}>
-  <PageHero title="LaserTouchOne’s FDA clearance" lead="Exactly what the FDA cleared LaserTouchOne for, and what “cleared” means." />
+  <PageHero title="LaserTouchOne and the FDA" />
 
   <section class="section section--tight-top">
     <div class="container split split--reverse">
@@ -25,12 +26,15 @@ const PDF = 'https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf';
         <a class="link-arrow" href={PDF} target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
       </div>
       <div class="split__copy">
-        <h2 class="h2">The cleared indication, word for word</h2>
+        <h2 class="h2">What it’s cleared for</h2>
         <blockquote class="quote-card">
           <p>“{INDICATION}”</p>
-          <footer>FDA clearance K100116, indications for use. <a href={PDF} target="_blank" rel="noopener">Read the document</a></footer>
+          <footer>FDA clearance K100116, indications for use</footer>
         </blockquote>
-        <p>Everything we say about LaserTouchOne stays inside this wording.</p>
+        <h3 class="h3">In plain English</h3>
+        <ul class="checklist checklist--lg">
+          {CLEARED_FOR.map((c) => <li><Icon name="check" size={20} />{c}</li>)}
+        </ul>
       </div>
     </div>
   </section>
@@ -38,10 +42,11 @@ const PDF = 'https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf';
   <section class="section band">
     <div class="container">
       <div class="prose">
-        <h2>Cleared, not approved: what’s the difference?</h2>
-        <p>The FDA reviews medical devices in different ways depending on their risk. For a device like LaserTouchOne, the maker submits a “510(k)” showing the device is substantially equivalent to devices already legally on the market. When the FDA agrees, the device is “cleared” for the specific uses listed. “Approved” is a different process, used mainly for higher-risk devices, so “FDA-cleared” is the correct term here. The clearance covers the uses above, not every kind of pain.</p>
-        <h2>What “over the counter” means</h2>
-        <p>LaserTouchOne was cleared for over-the-counter sale, so you can buy it without a prescription. Read the user manual before use, and talk to your doctor about your pain, especially if it is new, severe or unexplained.</p>
+        <h2>Cleared vs. approved</h2>
+        <p>Most moderate-risk medical devices reach the market through FDA clearance, called a 510(k). Clearance means the FDA reviewed the device and found it substantially equivalent to devices already legally on the market. It isn’t the same as FDA approval, and the FDA doesn’t endorse specific products.</p>
+        <h2>Classification</h2>
+        <p>Class II, over-the-counter. FDA product codes NUH (over-the-counter TENS category) and NHN (low-level laser).</p>
+        <p><a href={PDF} target="_blank" rel="noopener">Read the FDA document</a></p>
       </div>
     </div>
   </section>

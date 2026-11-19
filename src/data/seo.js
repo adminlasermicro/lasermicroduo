@@ -34,7 +34,7 @@ export const SEO = {
     description: 'Text (480) 734-4877 or email Laser Micro Duo with questions about LaserTouchOne or your order. Monday to Friday, 9am to 5pm Arizona time.',
   },
   '/returns': {
-    title: 'Returns and Money-Back Guarantee | Laser Micro Duo',
+    title: 'Money-Back Guarantee and Returns | Laser Micro Duo',
     description: 'How the money-back guarantee works for LaserTouchOne, who pays return shipping, and the step-by-step return process.',
   },
   '/shipping': {
