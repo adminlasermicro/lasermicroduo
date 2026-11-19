@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import ProductPhoto from './ProductPhoto.astro';
 import PriceTag from './PriceTag.astro';
 import { PHOTOS } from '../../data/photos.js';
 import { TOP_FAQS } from '../../data/faq.js';
@@ -72,14 +73,12 @@ const whyBuy = [
   <!-- Two technologies -->
   <section class="section" id="how">
     <div class="container split">
-      <div class="product-stage" data-photo-slot="product-hero" data-reveal>
-        <span class="product-stage__note">Product photo coming soon</span>
-      </div>
+      <ProductPhoto file="01_hero-3-4.jpg" />
       <div class="split__copy">
         <h2 class="h2" data-reveal>Two technologies, one small device</h2>
         <p class="lead" data-reveal style="--d:80ms">
-          Most devices do one thing. LaserTouchOne works on the same spot with two at once, from a
-          head small enough to hold like a pen.
+          LaserTouchOne uses both on the same spot at the same time, from a head small enough to hold
+          like a pen.
         </p>
         <div class="feature" data-reveal style="--d:160ms">
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
@@ -135,7 +134,7 @@ const whyBuy = [
   <!-- The kit: open split, no floating card -->
   <section class="section section--tint" id="kits">
     <div class="container offer">
-      <div class="offer__media" data-photo-slot="kit-main" data-reveal><span>Kit photo coming soon</span></div>
+      <ProductPhoto file="08_case-with-device.jpg" class="offer__media" />
       <div class="offer__body">
         <h2 class="h2 offer__name" data-reveal>Everything in one kit</h2>
         <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Made by {SITE.manufacturer} in Scottsdale, Arizona. Every order comes with the manufacturer’s money-back guarantee, the manufacturer’s warranty and support from us.</p>
