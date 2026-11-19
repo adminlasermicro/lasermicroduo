@@ -10,24 +10,27 @@ import { REAL_REVIEWS } from '../../data/reviews.js';
 import CtaBand from './CtaBand.astro';
 import ResellerSeal from './ResellerSeal.astro';
 import StickyBuy from './StickyBuy.astro';
-import { SITE } from '../../site.config.js';
+import { SITE, textHref } from '../../site.config.js';
 
 // The homepage's sales sections, shared by / and the ad landing pages (/lp/...).
 // `lp` drops the parts an ad visitor doesn't need and keeps links on the page.
 const { kit, lp = false } = Astro.props;
 
 const trust = [
-  { icon: 'shield', label: 'FDA-cleared', sub: 'Over the counter, K100116' },
-  { icon: 'file', label: 'Genuine device', sub: `Made by ${SITE.manufacturer}, Scottsdale, AZ` },
-  { icon: 'truck', label: 'Flat-rate shipping', sub: 'US and international' },
-  { icon: 'calendar', label: 'Money-back guarantee', sub: 'Backed by the manufacturer' },
-  { icon: 'message', label: 'Text support', sub: 'A real person helps you' },
+  { icon: 'shield', label: 'FDA-cleared', sub: '510(k) K100116', href: '/fda-clearance' },
+  { icon: 'file', label: 'No prescription needed' },
+  { icon: 'leaf', label: 'Drug-free' },
+  { icon: 'check', label: 'Authorized reseller' },
+  { icon: 'message', label: 'Arizona-based support' },
 ];
 const steps = [
-  { icon: 'droplet', title: 'Apply the gel', text: 'A little electrode gel on the sore spot helps the electrical stimulation (TENS) reach your skin.' },
-  { icon: 'timer', title: 'About two minutes', text: 'Switch it on and glide the head in slow circles over the area for about two minutes.' },
-  { icon: 'repeat', title: 'Repeat up to 5 times a day', text: 'At your desk, on the couch or before bed. Follow the user manual for how often to use it.' },
+  { icon: 'droplet', title: 'Add a little gel', text: 'A thin layer helps the electrical stimulation reach your skin.' },
+  { icon: 'timer', title: 'Glide slowly', text: 'Move the tip in small, slow circles over your neck or shoulder for about 2 minutes.' },
+  { icon: 'repeat', title: 'Repeat as needed', text: 'Up to five times a day, at least two to three hours apart.' },
 ];
+const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+const priceNow = Number.isFinite(kit.amount) ? fmt(kit.amount) : kit.price;
+const priceWas = kit.compareAt && Number.isFinite(kit.compareAmount) ? fmt(kit.compareAmount) : null;
 const whyBuy = [
   { icon: 'file', text: 'Manufacturer’s warranty' },
   { icon: 'calendar', text: 'Manufacturer’s money-back guarantee' },
@@ -39,18 +42,25 @@ const whyBuy = [
     <img class="hero-full__img" src={PHOTOS.hero.src} srcset={PHOTOS.hero.srcset} sizes="100vw" width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
     <div class="container hero-full__in">
       <div class="hero-full__copy">
-        <h1 class="display">FDA-cleared relief for minor chronic neck and shoulder pain, at home in about 2 minutes</h1>
+        <h1 class="display">FDA-cleared relief for minor neck and shoulder pain, at home in about 2 minutes.</h1>
         <p class="lead">
-          LaserTouchOne combines a low-level laser and TENS electrical stimulation in one handheld device.
-          Drug-free, no prescription, about two minutes per area.
+          LaserTouchOne pairs a gentle cold laser with mild electrical stimulation in one small handheld.
+          Drug-free. No prescription. Use it on the couch, at your desk, or on the go.
         </p>
-        <div class="hero-full__actions">
-          <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>
+        {priceNow && (
+          <p class="hero-full__price">
+            <strong>{priceNow}</strong>{priceWas && <> · <span>Manufacturer list price <s>{priceWas}</s></span></>}
+          </p>
+        )}
+        <div class="hero-full__actions hero-full__actions--stack">
+          {kit.productId
+            ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart{priceNow ? ` – ${priceNow}` : ''}</button>
+            : <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>}
+          <p class="hero-full__fact">
+            <Icon name="shield" size={18} /> Money-back guarantee ·{' '}
+            {SITE.textNumber ? <>Text a real person: <a href={textHref}>{SITE.textNumber}</a></> : 'Text a real person'}
+          </p>
           <a class="link-arrow" href={lp ? '#how' : '/how-it-works'}>See how it works <Icon name="arrow" size={18} /></a>
-        </div>
-        <div class="hero-full__meta">
-          {kit.price && <PriceTag kit={kit} size="sm" />}
-          <span class="hero-full__fact"><Icon name="shield" size={18} /> FDA-cleared for over-the-counter use</span>
         </div>
       </div>
     </div>
@@ -63,7 +73,7 @@ const whyBuy = [
         {trust.map((t, i) => (
           <li data-reveal style={`--d:${i * 60}ms`}>
             <span class="icon-badge"><Icon name={t.icon} /></span>
-            <span><strong>{t.label}</strong><span class="trust__sub">{t.sub}</span></span>
+            <span>{t.href ? <a class="trust__link" href={t.href}><strong>{t.label}</strong></a> : <strong>{t.label}</strong>}{t.sub && <span class="trust__sub">{t.sub}</span>}</span>
           </li>
         ))}
       </ul>
@@ -75,25 +85,26 @@ const whyBuy = [
     <div class="container split">
       <ProductPhoto file="01_hero-3-4.jpg" />
       <div class="split__copy">
-        <h2 class="h2" data-reveal>Two technologies, one small device</h2>
+        <h2 class="h2" data-reveal>Two technologies. One small device.</h2>
         <p class="lead" data-reveal style="--d:80ms">
-          LaserTouchOne uses both on the same spot at the same time, from a head small enough to hold
-          like a pen.
+          Most at-home options give you one tool. LaserTouchOne puts two in the same head, working on the
+          same spot at the same time.
         </p>
         <div class="feature" data-reveal style="--d:160ms">
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
           <div>
-            <h3 class="h3">Low-level laser</h3>
-            <p>A gentle 670 nm red light from the center of the head. It doesn’t heat the skin.</p>
+            <h3 class="h3">Cold laser</h3>
+            <p>A low-power red laser (670 nm). No heat, and nothing to feel.</p>
           </div>
         </div>
         <div class="feature" data-reveal style="--d:220ms">
           <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
           <div>
-            <h3 class="h3">TENS electrical stimulation</h3>
-            <p>Mild electrical stimulation through two steel contacts on either side of the laser.</p>
+            <h3 class="h3">Gentle electrical stimulation</h3>
+            <p>Two metal contacts beside the laser deliver a soft tingle you control with a dial.</p>
           </div>
         </div>
+        <p class="tech-note" data-reveal>FDA-cleared in the over-the-counter TENS category. No pads, no wires.</p>
         {!lp && <a class="link-arrow" href="/how-it-works">Learn how they work together <Icon name="arrow" size={18} /></a>}
       </div>
     </div>
@@ -103,8 +114,7 @@ const whyBuy = [
   <section class="section band">
     <div class="container">
       <div class="section-head">
-        <h2 class="h2" data-reveal>Three steps. Two minutes.</h2>
-        <p class="lead" data-reveal style="--d:80ms">No appointments, no wires, nothing to wear. Here’s the whole routine.</p>
+        <h2 class="h2" data-reveal>Three steps. About two minutes.</h2>
       </div>
       <ol class="steps">
         {steps.map((s, i) => (

@@ -12,7 +12,7 @@ export const SITE = {
   textNumber: '(480) 734-4877',
   // Shown under the contact details.
   // Offers in the top announcement bar. Confirm each one is true for you.
-  announcements: ['Flat-rate US shipping', 'Manufacturer’s money-back guarantee', 'Text support from real people'],
+  announcements: ['Flat-rate US shipping', 'Money-back guarantee', 'Text a real person'],
   replyHours: 'We reply Monday to Friday, 9am to 5pm Arizona time (MST).',
   // The company that makes LaserTouchOne. We are an independent authorized reseller.
   manufacturer: 'Laser Health Technologies',
