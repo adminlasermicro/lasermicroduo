@@ -34,8 +34,8 @@ export function productSchema(kit) {
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: 'LaserTouchOne kit',
-    description: 'A handheld, over-the-counter, FDA-cleared (510(k) K100116) low-level laser and TENS electrical stimulation device. The kit includes the device, a zippered carrying case, a charger, electrode gel, the user manual and the warranty card.',
+    name: 'LaserTouchOne Deluxe Travel Kit',
+    description: 'A handheld, over-the-counter, FDA-cleared (510(k) K100116) low-level laser and TENS electrical stimulation device. The kit includes the device, a zippered travel case, a charger, electrode gel, the user manual and the warranty card.',
     brand: { '@type': 'Brand', name: 'LaserTouchOne' },
     manufacturer: { '@type': 'Organization', name: 'Laser Health Technologies LLC', address: { '@type': 'PostalAddress', addressLocality: 'Scottsdale', addressRegion: 'AZ', addressCountry: 'US' } },
     ...(images.length ? { image: images } : {}),

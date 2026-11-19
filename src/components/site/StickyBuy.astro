@@ -7,7 +7,7 @@ const { kit } = Astro.props;
 {kit?.productId && (
   <div class="sticky-buy" data-sticky-buy aria-hidden="true">
     <div>
-      <p class="sticky-buy__name">LaserTouchOne kit</p>
+      <p class="sticky-buy__name">Deluxe Travel Kit</p>
       {kit.price && <PriceTag kit={kit} size="sm" />}
     </div>
     <button type="button" class="btn btn--primary" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount} tabindex="-1">Add to cart</button>

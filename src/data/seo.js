@@ -10,7 +10,7 @@ export const SEO = {
     description: 'An FDA-cleared, drug-free low-level laser + TENS device for minor chronic neck and shoulder pain, used at home. $550 with a money-back guarantee.',
   },
   '/shop': {
-    title: 'Buy the LaserTouchOne Kit, $550 | Laser Micro Duo',
+    title: 'LaserTouchOne Deluxe Travel Kit, $550 | Laser Micro Duo',
     description: 'The LaserTouchOne kit: device, zippered case, charger, electrode gel and manual. FDA-cleared, over the counter. Manufacturer list price $645, our price $550.',
   },
   '/how-it-works': {
@@ -35,7 +35,7 @@ export const SEO = {
   },
   '/returns': {
     title: 'Returns and Money-Back Guarantee | Laser Micro Duo',
-    description: 'How the manufacturer-backed money-back guarantee works for LaserTouchOne, who pays return shipping, and the step-by-step return process.',
+    description: 'How the money-back guarantee works for LaserTouchOne, who pays return shipping, and the step-by-step return process.',
   },
   '/shipping': {
     title: 'Shipping Policy | Laser Micro Duo',

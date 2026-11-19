@@ -5,11 +5,11 @@ import { SITE } from '../site.config.js';
 // product whose name matches SITE.product (see site.config.js), so price changes in the Wix
 // dashboard show up here automatically.
 const KIT_INFO = {
-  name: 'LaserTouchOne kit',
-  blurb: 'Everything you need to start at home, with the carrying case included.',
+  name: 'LaserTouchOne Deluxe Travel Kit',
+  blurb: 'Everything you need, in one travel kit.',
   includes: [
-    'LaserTouchOne device, made by Laser Health Technologies',
-    'Zippered carrying case (a $25 value, included)',
+    'LaserTouchOne device',
+    'Zippered travel case',
     'Charger',
     'Electrode gel',
     'User manual and warranty card',

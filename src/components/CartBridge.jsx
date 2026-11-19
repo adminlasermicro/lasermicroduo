@@ -71,7 +71,7 @@ export default function CartBridge() {
           const addon = add.dataset.addonFrom && document.querySelector(add.dataset.addonFrom);
           if (addon?.value) catalogItems.push(item(addon.value, addon.dataset.variant, quantity));
           await currentCartV2.addLineItemsToCurrentCart({ catalogItems });
-          catalogItems.forEach((ci) => track('AddToCart', { id: ci.catalogReference.catalogItemId, quantity: ci.quantity, name: add.dataset.trackName || 'LaserTouchOne kit', ...(add.dataset.trackPrice ? { price: Number(add.dataset.trackPrice) } : {}) }));
+          catalogItems.forEach((ci) => track('AddToCart', { id: ci.catalogReference.catalogItemId, quantity: ci.quantity, name: add.dataset.trackName || 'LaserTouchOne Deluxe Travel Kit', ...(add.dataset.trackPrice ? { price: Number(add.dataset.trackPrice) } : {}) }));
           setStatus('');
           await refresh();
           setOpen(true);

@@ -650,3 +650,11 @@ button { cursor: pointer; }
 /* Reassurance lines wrap like normal text, with the shield icon inline. */
 .offer__fact, .hero-light__fact { display: block; line-height: 1.6; }
 .offer__fact .icon, .hero-light__fact .icon { display: inline-block; vertical-align: -3px; margin-right: 6px; }
+
+/* /shop buy box and specs (Nov 18). */
+.buybox__included { display: grid; gap: var(--s2); margin-top: var(--s2); }
+.specs { display: grid; gap: 10px; margin-top: var(--s3); }
+.specs > div { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--s2); padding: 12px 16px; border-radius: var(--r-sm); background: var(--color-surface); }
+.specs dt { font-weight: 600; color: var(--color-brand); }
+.specs dd { margin: 0; }
+@media (max-width: 640px) { .specs > div { grid-template-columns: 1fr; gap: 2px; } }

@@ -63,7 +63,7 @@ if (bar && anchor && 'IntersectionObserver' in window) {
 
 // ViewContent for the product, once per page view, on pages that carry [data-view-content].
 const view = document.querySelector('[data-view-content]');
-if (view) track('ViewContent', { id: view.dataset.id, name: 'LaserTouchOne kit', price: Number(view.dataset.price) || undefined, category: 'Devices' });
+if (view) track('ViewContent', { id: view.dataset.id, name: 'LaserTouchOne Deluxe Travel Kit', price: Number(view.dataset.price) || undefined, category: 'Devices' });
 
 // Top bar on phones: rotate through the items every 4 seconds (not for reduced motion).
 const announce = document.querySelector('.announce');
