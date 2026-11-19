@@ -7,7 +7,7 @@
 export const SEO = {
   '/': {
     title: 'LaserTouchOne: FDA-Cleared Laser + TENS | Laser Micro Duo',
-    description: 'An FDA-cleared, drug-free low-level laser + TENS device for minor chronic neck and shoulder pain, used at home. $550 with a manufacturer-backed guarantee.',
+    description: 'An FDA-cleared, drug-free low-level laser + TENS device for minor chronic neck and shoulder pain, used at home. $550 with a money-back guarantee.',
   },
   '/shop': {
     title: 'Buy the LaserTouchOne Kit, $550 | Laser Micro Duo',

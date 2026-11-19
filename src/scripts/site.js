@@ -64,3 +64,19 @@ if (bar && anchor && 'IntersectionObserver' in window) {
 // ViewContent for the product, once per page view, on pages that carry [data-view-content].
 const view = document.querySelector('[data-view-content]');
 if (view) track('ViewContent', { id: view.dataset.id, name: 'LaserTouchOne kit', price: Number(view.dataset.price) || undefined, category: 'Devices' });
+
+// Top bar on phones: rotate through the items every 4 seconds (not for reduced motion).
+const announce = document.querySelector('.announce');
+if (announce && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const items = [...announce.querySelectorAll('.announce__in > span')];
+  if (items.length > 1) {
+    announce.classList.add('announce--rotate');
+    let i = 0;
+    items[0].classList.add('is-current');
+    setInterval(() => {
+      items[i].classList.remove('is-current');
+      i = (i + 1) % items.length;
+      items[i].classList.add('is-current');
+    }, 4000);
+  }
+}

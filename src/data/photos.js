@@ -1,15 +1,6 @@
 import { PRODUCT_PHOTOS } from './productPhotos.js';
-// Stand-in stock photos (CC0 / public domain via rawpixel). Replace with your own any time:
-// drop a new file in public/photos and change `src` here.
-export const PHOTOS = {
-  hero: {
-    src: '/photos/couple-walking-1024.webp', width: 1024, height: 680,
-    srcset: '/photos/couple-walking-640.webp 640w, /photos/couple-walking-800.webp 800w, /photos/couple-walking-1024.webp 1024w',
-    alt: 'An older couple walking arm in arm down a country lane',
-    credit: '“Free old couple walking together”, CC0, via rawpixel',
-    page: 'https://www.rawpixel.com/image/5903561/photo-image-public-domain-free-couple',
-  },
-};
+// No stock photos are used any more (the homepage hero shows the real product), so no credits are needed.
+export const PHOTOS = {};
 
 // Real product photos for Google's product data (paths in /public). Google wants at least one before
 // it shows the product as a merchant listing. Add them here as they arrive, e.g. '/photos/device.webp'.

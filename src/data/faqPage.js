@@ -6,9 +6,9 @@ export const FAQ_PAGE_GROUPS = [
   {
     title: 'About LaserTouchOne',
     items: [
-      { top: true, q: 'What is the LaserTouchOne?',
+      { q: 'What is the LaserTouchOne?',
         a: 'A handheld pain relief device with two technologies in one small head: a cold (low-level) laser and mild electrical stimulation. It’s FDA-cleared for over-the-counter use for temporary relief of minor chronic neck and shoulder pain, and it’s meant to work alongside the care you already get.' },
-      { top: true, q: 'How do the two parts work together?',
+      { q: 'How do the two parts work together?',
         a: 'Look at the tip. The red laser sits in the middle, and the two metal contacts beside it deliver the electrical stimulation. Hold it on one spot and you get both at once, with no pads or wires.' },
       { top: true, q: 'Is it FDA-cleared?',
         a: `Yes. It was cleared on April 15, 2010 (510(k) number K100116) for use without a prescription. The FDA lists it as a Class II device in its over-the-counter TENS category. <a href="${FDA_PDF}" target="_blank" rel="noopener">Read the FDA document</a>` },

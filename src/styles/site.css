@@ -599,3 +599,54 @@ button { cursor: pointer; }
 .trust__link { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 .tech-note { font-weight: 600; color: var(--color-brand); }
 @media (max-width: 760px) { .hero-full__actions--stack { align-items: stretch; } }
+
+/* Homepage hero (Nov 18): the real product on a light background, dark navy text for easy reading. */
+.hero-light { background: var(--color-bg); padding-block: clamp(24px, 4vw, 64px) clamp(40px, 6vw, 88px); }
+.hero-light__in { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+.hero-light__media { order: 2; }
+.hero-light__copy { display: grid; gap: var(--s3); max-width: 620px; }
+.hero-light .display { color: var(--color-brand); font-size: clamp(2rem, 1.4rem + 2.4vw, 3.25rem); line-height: 1.1; }
+.hero-light .lead { color: var(--color-brand); font-weight: 500; max-width: 46ch; }
+.hero-light__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; color: var(--color-text-muted); }
+.hero-light__price strong { color: var(--color-brand); font-size: 1.5rem; font-weight: 700; }
+.hero-light__actions { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); }
+.hero-light__fact { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; color: var(--color-text); font-size: var(--fs-small); }
+.hero-light__fact .icon { color: var(--color-brand); }
+.hero-light__fact a { color: var(--color-brand); font-weight: 600; }
+@media (max-width: 900px) {
+  .hero-light__in { grid-template-columns: 1fr; gap: var(--s3); }
+  .hero-light__media { order: 0; }
+  /* The device is long and flat: a wide frame keeps the photo big without pushing the button down. */
+  .hero-light__photo { aspect-ratio: 16 / 10; }
+  .hero-light__actions { align-items: stretch; }
+  .hero-light__actions .btn { width: 100%; }
+}
+
+/* Top bar on phones: the three items take turns in one line (site.js adds .announce--rotate). */
+@media (max-width: 640px) {
+  .announce--rotate .announce__in { display: grid; justify-items: center; }
+  .announce--rotate .announce__in > span { grid-area: 1 / 1; display: block; opacity: 0; transition: opacity 0.5s ease; }
+  .announce--rotate .announce__in > span.is-current { opacity: 1; }
+}
+/* Visitors who ask for less motion see all three items at once instead. */
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .announce__in { flex-wrap: wrap; gap: 2px 12px; }
+  .announce__extra { display: inline; }
+}
+
+/* Homepage kit box (Nov 18): price line, one button, reassurance line, plain-text badges. */
+.offer__foot--stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s2); }
+.offer__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; color: var(--color-text-muted); }
+.offer__price strong { color: var(--color-brand); font-size: 1.75rem; font-weight: 700; }
+.offer__save { color: var(--color-brand); font-weight: 600; }
+.offer__fact { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: var(--fs-small); }
+.offer__fact .icon { color: var(--color-brand); }
+.offer__fact a { color: var(--color-brand); font-weight: 600; }
+.badges-plain { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: var(--s3); font-size: var(--fs-small); font-weight: 600; color: var(--color-brand); }
+.badges-plain a { color: inherit; }
+.small-print { font-size: var(--fs-small); color: var(--color-text-muted); max-width: 60ch; }
+.faq-more { margin-top: var(--s4); }
+@media (max-width: 640px) { .offer__foot--stack { align-items: stretch; } .offer__foot--stack .btn, .faq-more { width: 100%; } }
+/* Reassurance lines wrap like normal text, with the shield icon inline. */
+.offer__fact, .hero-light__fact { display: block; line-height: 1.6; }
+.offer__fact .icon, .hero-light__fact .icon { display: inline-block; vertical-align: -3px; margin-right: 6px; }

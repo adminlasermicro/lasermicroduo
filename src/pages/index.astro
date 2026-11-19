@@ -2,9 +2,10 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import SalesPage from '../components/site/SalesPage.astro';
 import { loadStore } from '../lib/kits.js';
-import { PHOTOS } from '../data/photos.js';
+import { PRODUCT_PHOTOS } from '../data/productPhotos.js';
+const HERO = PRODUCT_PHOTOS[0];
 const { kit } = await loadStore();
 ---
-<SiteLayout preloadImage={PHOTOS.hero}>
+<SiteLayout preloadImage={{ src: HERO.src, srcset: HERO.srcset, sizes: '(max-width: 900px) calc(100vw - 40px), 560px' }}>
   <SalesPage kit={kit} />
 </SiteLayout>

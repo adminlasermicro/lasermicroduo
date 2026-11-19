@@ -1,14 +1,11 @@
 ---
 import Icon from './Icon.astro';
 import ProductPhoto from './ProductPhoto.astro';
-import PriceTag from './PriceTag.astro';
-import { PHOTOS } from '../../data/photos.js';
 import { TOP_FAQ_PAGE as TOP_FAQS } from '../../data/faqPage.js';
 import FaqList from './FaqList.astro';
 import ReviewGrid from './ReviewGrid.astro';
 import { REAL_REVIEWS } from '../../data/reviews.js';
 import CtaBand from './CtaBand.astro';
-import ResellerSeal from './ResellerSeal.astro';
 import StickyBuy from './StickyBuy.astro';
 import { SITE, textHref } from '../../site.config.js';
 
@@ -31,32 +28,31 @@ const steps = [
 const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 const priceNow = Number.isFinite(kit.amount) ? fmt(kit.amount) : kit.price;
 const priceWas = kit.compareAt && Number.isFinite(kit.compareAmount) ? fmt(kit.compareAmount) : null;
-const whyBuy = [
-  { icon: 'file', text: 'Manufacturer’s warranty' },
-  { icon: 'calendar', text: 'Manufacturer’s money-back guarantee' },
-  { icon: 'message', text: 'Text support' },
-];
+const saving = priceWas && kit.compareAmount > kit.amount ? fmt(kit.compareAmount - kit.amount) : null;
+const kitIncludes = ['LaserTouchOne device', 'Zippered travel case', 'Charger', 'Electrode gel', 'User manual and warranty card'];
 ---
-  <!-- Hero: one full-width photo, text on a soft scrim -->
-  <section class="hero-full">
-    <img class="hero-full__img" src={PHOTOS.hero.src} srcset={PHOTOS.hero.srcset} sizes="100vw" width={PHOTOS.hero.width} height={PHOTOS.hero.height} alt={PHOTOS.hero.alt} fetchpriority="high" />
-    <div class="container hero-full__in">
-      <div class="hero-full__copy">
+  <!-- Hero: the product on a light background, dark text beside it -->
+  <section class="hero-light">
+    <div class="container hero-light__in">
+      <div class="hero-light__media">
+        <ProductPhoto file="01_hero-3-4.jpg" class="hero-light__photo" sizes="(max-width: 900px) calc(100vw - 40px), 560px" eager />
+      </div>
+      <div class="hero-light__copy">
         <h1 class="display">FDA-cleared relief for minor neck and shoulder pain, at home in about 2 minutes.</h1>
         <p class="lead">
           LaserTouchOne pairs a gentle cold laser with mild electrical stimulation in one small handheld.
           Drug-free. No prescription. Use it on the couch, at your desk, or on the go.
         </p>
         {priceNow && (
-          <p class="hero-full__price">
+          <p class="hero-light__price">
             <strong>{priceNow}</strong>{priceWas && <> · <span>Manufacturer list price <s>{priceWas}</s></span></>}
           </p>
         )}
-        <div class="hero-full__actions hero-full__actions--stack">
+        <div class="hero-light__actions">
           {kit.productId
             ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart{priceNow ? ` – ${priceNow}` : ''}</button>
             : <a class="btn btn--primary btn--lg" href="#kits">Shop LaserTouchOne</a>}
-          <p class="hero-full__fact">
+          <p class="hero-light__fact">
             <Icon name="shield" size={18} /> Money-back guarantee ·{' '}
             {SITE.textNumber ? <>Text a real person: <a href={textHref}>{SITE.textNumber}</a></> : 'Text a real person'}
           </p>
@@ -83,7 +79,7 @@ const whyBuy = [
   <!-- Two technologies -->
   <section class="section" id="how">
     <div class="container split">
-      <ProductPhoto file="01_hero-3-4.jpg" />
+      <ProductPhoto file="04_tip-front.jpg" />
       <div class="split__copy">
         <h2 class="h2" data-reveal>Two technologies. One small device.</h2>
         <p class="lead" data-reveal style="--d:80ms">
@@ -146,22 +142,30 @@ const whyBuy = [
     <div class="container offer">
       <ProductPhoto file="08_case-with-device.jpg" class="offer__media" />
       <div class="offer__body">
-        <h2 class="h2 offer__name" data-reveal>Everything in one kit</h2>
-        <p class="lead" data-reveal style="--d:80ms">{kit.blurb} Made by {SITE.manufacturer} in Scottsdale, Arizona. Every order comes with the manufacturer’s money-back guarantee, the manufacturer’s warranty and support from us.</p>
+        <h2 class="h2 offer__name" data-reveal>Everything you need, in one travel kit</h2>
+        <p class="lead" data-reveal style="--d:80ms">The LaserTouchOne Deluxe Travel Kit</p>
         <ul class="checklist" data-reveal style="--d:140ms">
-          {kit.includes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
+          {kitIncludes.map((item) => <li><Icon name="check" size={18} />{item}</li>)}
         </ul>
-        <div class="offer__foot" data-buy-anchor>
-          {kit.price ? <PriceTag kit={kit} /> : <p class="kit__ask">Price on request</p>}
+        <div class="offer__foot offer__foot--stack" data-buy-anchor>
+          {priceNow && (
+            <p class="offer__price">
+              <strong>{priceNow}</strong>{priceWas && <> · <span>Manufacturer list price <s>{priceWas}</s></span></>}{saving && <> · <span class="offer__save">You save {saving}</span></>}
+            </p>
+          )}
           {kit.productId
-            ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart</button>
+            ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart{priceNow ? ` – ${priceNow}` : ''}</button>
             : <a class="btn btn--primary btn--lg" href="/contact">Ask about price</a>}
+          <p class="offer__fact">
+            <Icon name="shield" size={18} /> Money-back guarantee ·{' '}
+            {SITE.textNumber ? <>Text a real person: <a href={textHref}>{SITE.textNumber}</a></> : 'Text a real person'}
+          </p>
         </div>
-        <ul class="why-buy" aria-label="Why buy from us">
-          {whyBuy.map((w) => <li><Icon name={w.icon} size={18} />{w.text}</li>)}
+        <ul class="badges-plain" aria-label="Product facts">
+          <li><a href="/fda-clearance">FDA-cleared · 510(k) K100116</a></li>
+          <li>Over the counter, no prescription</li>
+          <li><a href="/about">Authorized reseller</a></li>
         </ul>
-        <p class="kits__note"><Icon name="truck" size={18} /> Flat-rate shipping in the US. International shipping is calculated at checkout.</p>
-        <div class="seals"><ResellerSeal /><ResellerSeal kind="fda" /></div>
       </div>
     </div>
   </section>
@@ -182,16 +186,17 @@ const whyBuy = [
         <a class="link-arrow" href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
       </div>
       <div class="split__copy">
-        <h2 class="h2" data-reveal>FDA-cleared, explained simply</h2>
+        <h2 class="h2" data-reveal>What “FDA-cleared” means</h2>
         <p class="lead" data-reveal style="--d:80ms">
-          “FDA-cleared” means the FDA reviewed LaserTouchOne and cleared it for sale for specific uses.
-          For this device, that means:
+          The FDA cleared LaserTouchOne in 2010 (510(k) K100116) for over-the-counter use, so no
+          prescription is needed. It’s cleared to provide:
         </p>
         <ul class="checklist checklist--lg" data-reveal style="--d:140ms">
-          <li><Icon name="check" size={20} />Symptomatic relief of chronic, intractable pain</li>
-          <li><Icon name="check" size={20} />Adjunctive treatment of acute pain after surgery or an injury, alongside your other care</li>
-          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin, alongside your other care</li>
+          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain from muscles and joints, used alongside your other care</li>
+          <li><Icon name="check" size={20} />Symptom relief for chronic pain</li>
+          <li><Icon name="check" size={20} />Added support, alongside your other care, for short-term pain after surgery or an injury</li>
         </ul>
+        <p class="small-print" data-reveal>FDA clearance means the FDA reviewed the device and found it substantially equivalent to devices already on the market. It is not the same as FDA approval.</p>
       </div>
     </div>
   </section>
@@ -202,21 +207,20 @@ const whyBuy = [
   <section class="section band" aria-labelledby="guarantee-title">
     <div class="container split">
       <div class="split__copy">
-        <h2 class="h2" id="guarantee-title">Money-back guarantee, backed by the manufacturer</h2>
-        <p class="lead">Every kit is covered by {SITE.manufacturer}’ money-back guarantee. If LaserTouchOne isn’t right for you, you get a full refund of the device price. You pay the return shipping, and the original shipping isn’t refunded.</p>
+        <h2 class="h2" id="guarantee-title">Try it at home, with a money-back guarantee</h2>
+        <p class="lead">If LaserTouchOne isn’t right for you, send it back for a refund of the device price. You cover return shipping.</p>
         <a class="link-arrow" href="/returns">Read the full guarantee <Icon name="arrow" size={18} /></a>
       </div>
       <ol class="steps steps--compact">
         {[
-          { icon: 'message', title: 'Text or email us', text: 'Send us your order number and we’ll take it from there.' },
-          { icon: 'file', title: 'Get your instructions', text: 'We reply with the return address and what to include.' },
-          { icon: 'truck', title: 'Ship the kit back', text: 'Send the full kit with tracking. Return shipping is yours.' },
-          { icon: 'wallet', title: 'Get your refund', text: 'We refund the device price to your original payment method.' },
+          { icon: 'message', title: 'Text or email us' },
+          { icon: 'file', title: 'We send return instructions' },
+          { icon: 'truck', title: 'Ship it back' },
+          { icon: 'wallet', title: 'Get your refund once it arrives' },
         ].map((s, i) => (
           <li class="step">
             <span class="step__icon"><Icon name={s.icon} size={28} /><span class="step__num" aria-hidden="true">{i + 1}</span></span>
             <h3 class="h3">{s.title}</h3>
-            <p>{s.text}</p>
           </li>
         ))}
       </ol>
@@ -228,11 +232,11 @@ const whyBuy = [
     <div class="container faq-wrap">
       <div class="section-head">
         <h2 class="h2" data-reveal>Questions, answered</h2>
-        <p class="lead">Can’t find yours? <a href="/faq">See all questions</a> or text us.</p>
       </div>
       <FaqList items={TOP_FAQS} />
+      <a class="btn btn--light btn--lg faq-more" href="/faq">See all questions</a>
     </div>
   </section>
 
-  <CtaBand />
+  <CtaBand title="Questions before you buy?" text="Text or email us. A real person answers, Monday to Friday, 9am to 5pm Arizona time." hours={false} />
   <StickyBuy kit={kit} />

@@ -5,10 +5,11 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import SalesPage from '../../components/site/SalesPage.astro';
 import { loadStore } from '../../lib/kits.js';
-import { PHOTOS } from '../../data/photos.js';
+import { PRODUCT_PHOTOS } from '../../data/productPhotos.js';
+const HERO = PRODUCT_PHOTOS[0];
 const { kit } = await loadStore();
 ---
-<SiteLayout bare noindex preloadImage={PHOTOS.hero}>
+<SiteLayout bare noindex preloadImage={{ src: HERO.src, srcset: HERO.srcset, sizes: '(max-width: 900px) calc(100vw - 40px), 560px' }}>
   <span hidden data-view-content data-id={kit.productId} data-price={kit.amount}></span>
   <SalesPage kit={kit} lp />
 </SiteLayout>
