@@ -19,6 +19,7 @@ const promises = [
     lead={`A small ${SITE.ownerPlace} business owned by ${SITE.owner}, and an independent authorized reseller of LaserTouchOne. We stay with you after you buy.`}
   />
 
+  {STORY.length > 0 && (
   <section class="section section--tight-top">
     <div class="container split">
       <div class="product-stage" data-photo-slot="vicki">
@@ -26,13 +27,12 @@ const promises = [
       </div>
       <div class="split__copy">
         <h2 class="h2">Hi, I’m {SITE.owner}</h2>
-        {STORY.length > 0
-          ? STORY.map((para) => <p class="story">{para}</p>)
-          : <p class="story">[NEEDS NOA: Vicki’s story, in her words and with her OK: why she sells LaserTouchOne and what customers can expect from her]</p>}
+        {STORY.map((para) => <p class="story">{para}</p>)}
         <p>LaserTouchOne is made by {SITE.manufacturer} LLC in {SITE.manufacturerPlace}. {SITE.name} is the trading name of {SITE.legalName}.</p>
       </div>
     </div>
   </section>
+  )}
 
   <section class="section band">
     <div class="container">

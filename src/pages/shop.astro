@@ -21,7 +21,7 @@ const details = [
   { q: 'Safety', a: 'Never point the laser at your eyes or anyone else’s. If you are pregnant, or have a heart condition or epilepsy, talk to your doctor before using it. Read the user manual before your first session.' },
   { q: 'Shipping and returns', a: 'Flat-rate shipping within the US, and international shipping calculated at checkout, with tracking by text or email. Every kit is covered by the manufacturer’s money-back guarantee. If it isn’t right for you, contact us and we’ll walk you through the return; you pay the return shipping. See our returns page for details.' },
   { q: 'Warranty', a: 'As an authorized reseller, we sell genuine devices that come with the full warranty from the manufacturer, Laser Health Technologies of Scottsdale, Arizona. We’ll help you with any claim.' },
-  { q: 'Specifications', a: '670 nm low-level laser (under 1 mW) and TENS electrical stimulation in one head. About 2 minutes per area. Built-in rechargeable battery, charger included. [NEEDS NOA: laser class, battery life and charge time, from the user manual]' },
+  { q: 'Specifications', a: '670 nm low-level laser (under 1 mW) and TENS electrical stimulation in one head. About 2 minutes per area. Built-in rechargeable battery, charger included.' },
   { q: 'FDA clearance', a: 'LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.' },
 ];
 ---
@@ -117,7 +117,7 @@ const details = [
         <div class="accessories">
           {accessories.map((a) => (
             <article class="accessory">
-              <div class="accessory__media" data-photo-slot={`accessory-${a.key}`}><span>Photo coming soon</span></div>
+              
               <div class="accessory__body">
                 <h3 class="h3">{a.name}</h3>
                 <p>{a.text}</p>
