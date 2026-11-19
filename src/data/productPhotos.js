@@ -13,4 +13,19 @@ export const PRODUCT_PHOTOS = [
   { file: '09_carry-case.jpg', alt: 'The black zippered LaserTouchOne carrying case with a wrist strap' },
   { file: '10_rear-3-4.jpg', alt: 'LaserTouchOne from the rear, three-quarter view' },
   { file: '11_dial-side.jpg', alt: 'The other side of the device, showing the intensity control' },
-].map((p) => ({ ...p, src: `/photos/product/${p.file}`, width: 2048, height: 2048 }));
+].map((p) => {
+  const base = p.file.replace(/\.jpg$/, '');
+  const sized = (suffix) => `/photos/product/sized/${base}-${suffix}.webp`;
+  return {
+    ...p,
+    src: `/photos/product/${p.file}`, // the untouched original, also used for Google's product data
+    width: 2048,
+    height: 2048,
+    // Smaller copies made by scripts/make-photo-copies.mjs; the browser picks the right size.
+    srcset: `${sized('640')} 640w, ${sized('1024')} 1024w, /photos/product/${p.file} 2048w`,
+    thumb: sized('thumb'),
+  };
+});
+
+// How wide the main gallery photo is shown: full width on phones and tablets, about 600px on desktop.
+export const GALLERY_SIZES = '(max-width: 900px) calc(100vw - 40px), 600px';
