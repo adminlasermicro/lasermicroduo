@@ -3,7 +3,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/site/PageHero.astro';
 import FaqList from '../components/site/FaqList.astro';
 import CtaBand from '../components/site/CtaBand.astro';
-import { FAQ_GROUPS, ALL_FAQS, faqSchema } from '../data/faq.js';
+import { faqSchema } from '../data/faq.js';
+import { FAQ_PAGE_GROUPS as FAQ_GROUPS, ALL_FAQ_PAGE as ALL_FAQS } from '../data/faqPage.js';
 import { breadcrumbSchema } from '../lib/schema.js';
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 ---
