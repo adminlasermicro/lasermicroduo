@@ -15,11 +15,8 @@ export function productSchema(kit) {
     availability: 'https://schema.org/InStock',
     itemCondition: 'https://schema.org/NewCondition',
     seller: { '@id': `${SITE.url}/#org` },
-    shippingDetails: {
-      '@type': 'OfferShippingDetails',
-      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
-      // [NEEDS NOA] flat US rate and delivery times; Google wants shippingRate and deliveryTime.
-    },
+    // shippingDetails: add once the flat US rate and delivery times are known (Google wants
+    // shippingRate and deliveryTime; a block without them shows as an error in Search Console).
     hasMerchantReturnPolicy: {
       '@type': 'MerchantReturnPolicy',
       applicableCountry: 'US',
@@ -35,7 +32,7 @@ export function productSchema(kit) {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: 'LaserTouchOne Deluxe Travel Kit',
-    description: 'A handheld, over-the-counter, FDA-cleared (510(k) K100116) low-level laser and TENS electrical stimulation device. The kit includes the device, a zippered travel case, a charger, electrode gel, the user manual and the warranty card.',
+    description: 'A handheld device that pairs a cold laser with gentle electrical stimulation, FDA-cleared for temporary relief of minor chronic neck and shoulder pain. Drug-free, no prescription, about 2 minutes per area. Includes the device, zippered travel case, charger, electrode gel, user manual and warranty card.',
     brand: { '@type': 'Brand', name: 'LaserTouchOne' },
     manufacturer: { '@type': 'Organization', name: 'Laser Health Technologies LLC', address: { '@type': 'PostalAddress', addressLocality: 'Scottsdale', addressRegion: 'AZ', addressCountry: 'US' } },
     ...(images.length ? { image: images } : {}),
