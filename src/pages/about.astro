@@ -7,17 +7,20 @@ import { STORY } from '../data/about.js';
 import { SITE } from '../site.config.js';
 
 const promises = [
-  { icon: 'shield', title: 'Genuine devices', text: 'As an independent authorized reseller, every LaserTouchOne we sell comes from the manufacturer, Laser Health Technologies of Scottsdale, Arizona.' },
-  { icon: 'calendar', title: 'The manufacturer’s guarantee and warranty', text: 'You get the manufacturer’s warranty and money-back guarantee, and we’ll walk you through the details if you need them.' },
-  { icon: 'message', title: 'A real person to text', text: 'Questions before you buy, help with your first session, or a quick check-in later. Just text us.' },
+  { icon: 'calendar', text: 'Money-back guarantee (you cover return shipping)' },
+  { icon: 'file', text: 'The manufacturer’s warranty card in every kit' },
+  { icon: 'message', text: 'A real person answers your texts, Monday to Friday, 9am to 5pm Arizona time' },
+  { icon: 'shield', text: 'Honest information: we only describe what the device is FDA-cleared for' },
 ];
 ---
 <SiteLayout>
   <PageHero
-    title="Meet Laser Micro Duo"
-    lead={`A small ${SITE.ownerPlace} business owned by ${SITE.owner}, and an independent authorized reseller of LaserTouchOne. We stay with you after you buy.`}
+    title="A family business, with real people on the other end"
+    lead={`Laser Micro Duo is run by ${SITE.owner} and her family in ${SITE.ownerPlace}. We’re an authorized reseller of the LaserTouchOne, made by ${SITE.manufacturer} in Scottsdale, AZ.`}
   />
 
+  {/* Hidden until Vicki's story is added to src/data/about.js (with her photo). */}
+  {STORY.length > 0 && (
   <section class="section section--tight-top">
     <div class="container split">
       <div class="product-stage" data-photo-slot="vicki">
@@ -25,31 +28,27 @@ const promises = [
       </div>
       <div class="split__copy">
         <h2 class="h2">Hi, I’m {SITE.owner}</h2>
-        {STORY.length > 0
-          ? STORY.map((para) => <p class="story">{para}</p>)
-          : <p class="story">[NEEDS NOA: Vicki’s story, in her words and with her OK: why she sells LaserTouchOne and what customers can expect from her]</p>}
-        <p>LaserTouchOne is made by {SITE.manufacturer} LLC in {SITE.manufacturerPlace}. {SITE.name} is the trading name of {SITE.legalName}.</p>
+        {STORY.map((para) => <p class="story">{para}</p>)}
       </div>
     </div>
   </section>
+  )}
 
   <section class="section band">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2 class="h2">Why buy from an authorized reseller</h2>
-        <p class="lead">The same device, with a team in your corner.</p>
+        <h2 class="h2">Our promise</h2>
       </div>
-      <div class="promises">
+      <div class="promises promises--4">
         {promises.map((p) => (
           <div class="promise">
             <span class="icon-badge icon-badge--lg"><Icon name={p.icon} size={24} /></span>
-            <h3 class="h3">{p.title}</h3>
-            <p>{p.text}</p>
+            <p class="promise__text">{p.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <CtaBand title="Say hello" text="Have a question about LaserTouchOne or your order? We’d love to hear from you." />
+  <CtaBand title="Questions before you buy?" text="Text or email us. A real person answers, Monday to Friday, 9am to 5pm Arizona time." hours={false} />
 </SiteLayout>

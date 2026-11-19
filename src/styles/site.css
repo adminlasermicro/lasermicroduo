@@ -658,3 +658,15 @@ button { cursor: pointer; }
 .specs dt { font-weight: 600; color: var(--color-brand); }
 .specs dd { margin: 0; }
 @media (max-width: 640px) { .specs > div { grid-template-columns: 1fr; gap: 2px; } }
+
+/* How it works: closing buy block and plain safety text. */
+.buy-end { display: grid; justify-items: center; gap: var(--s2); text-align: center; }
+.buy-end .offer__fact { text-align: center; }
+.safety__text { margin-top: 12px; }
+.safety__text a { color: var(--color-brand); font-weight: 600; }
+@media (max-width: 640px) { .buy-end { justify-items: stretch; } }
+
+/* About: four promises, two per row on desktop. */
+.promises--4 { grid-template-columns: repeat(2, 1fr); max-width: 900px; margin-inline: auto; }
+.promise__text { font-weight: 600; color: var(--color-text); font-size: var(--fs-body); }
+@media (max-width: 900px) { .promises--4 { grid-template-columns: 1fr; } }

@@ -8,6 +8,7 @@ import { REAL_REVIEWS } from '../../data/reviews.js';
 import CtaBand from './CtaBand.astro';
 import StickyBuy from './StickyBuy.astro';
 import { SITE, textHref } from '../../site.config.js';
+import { STEPS, CLEARED_FOR } from '../../data/shared.js';
 
 // The homepage's sales sections, shared by / and the ad landing pages (/lp/...).
 // `lp` drops the parts an ad visitor doesn't need and keeps links on the page.
@@ -20,11 +21,7 @@ const trust = [
   { icon: 'check', label: 'Authorized reseller' },
   { icon: 'message', label: 'Arizona-based support' },
 ];
-const steps = [
-  { icon: 'droplet', title: 'Add a little gel', text: 'A thin layer helps the electrical stimulation reach your skin.' },
-  { icon: 'timer', title: 'Glide slowly', text: 'Move the tip in small, slow circles over your neck or shoulder for about 2 minutes.' },
-  { icon: 'repeat', title: 'Repeat as needed', text: 'Up to five times a day, at least two to three hours apart.' },
-];
+const steps = STEPS;
 const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
 const priceNow = Number.isFinite(kit.amount) ? fmt(kit.amount) : kit.price;
 const priceWas = kit.compareAt && Number.isFinite(kit.compareAmount) ? fmt(kit.compareAmount) : null;
@@ -192,9 +189,7 @@ const kitIncludes = ['LaserTouchOne device', 'Zippered travel case', 'Charger', 
           prescription is needed. It’s cleared to provide:
         </p>
         <ul class="checklist checklist--lg" data-reveal style="--d:140ms">
-          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain from muscles and joints, used alongside your other care</li>
-          <li><Icon name="check" size={20} />Symptom relief for chronic, hard-to-treat pain</li>
-          <li><Icon name="check" size={20} />Added support, alongside your other care, for short-term pain after surgery or an injury</li>
+          {CLEARED_FOR.map((c) => <li><Icon name="check" size={20} />{c}</li>)}
         </ul>
         <p class="small-print" data-reveal>FDA clearance means the FDA reviewed the device and found it substantially equivalent to devices already on the market. It is not the same as FDA approval.</p>
       </div>

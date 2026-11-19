@@ -3,20 +3,20 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import PageHero from '../components/site/PageHero.astro';
 import Icon from '../components/site/Icon.astro';
 import ProductPhoto from '../components/site/ProductPhoto.astro';
-import CtaBand from '../components/site/CtaBand.astro';
 import StudyList from '../components/site/StudyList.astro';
+import { STEPS, CLEARED_FOR, FDA_PDF } from '../data/shared.js';
+import { SITE, textHref } from '../site.config.js';
+import { loadStore } from '../lib/kits.js';
 
-const routine = [
-  { icon: 'droplet', title: 'Apply the gel', text: 'Squeeze a small amount of electrode gel onto the skin over the sore spot. The gel carries the electrical stimulation from the device into your skin.' },
-  { icon: 'zap', title: 'Switch it on', text: 'Press the single on/off button. The laser and the TENS electrical stimulation start together, so there’s nothing to set up or adjust.' },
-  { icon: 'timer', title: 'About two minutes', text: 'Hold the head against your skin and move it in slow circles or paint strokes over the area for about two minutes.' },
-  { icon: 'repeat', title: 'Repeat through the day', text: 'Use it as often as the user manual says for each area. Wipe the gel off the head and your skin when you’re done.' },
-];
+const { kit } = await loadStore();
+const routine = STEPS;
+const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+const priceNow = Number.isFinite(kit.amount) ? fmt(kit.amount) : kit.price;
 ---
 <SiteLayout>
   <PageHero
     title="How LaserTouchOne works"
-    lead="Two gentle technologies, one small head, two minutes at a time. Here’s what happens when you switch it on."
+    lead="Two gentle technologies in one small head, working on the same spot at the same time."
   />
 
   <section class="section section--tight-top">
@@ -34,24 +34,30 @@ const routine = [
           <text x="200" y="48" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">670 nm low-level laser</text>
           <line x1="130" y1="178" x2="130" y2="240" stroke="#5b6660" stroke-width="1.5" />
           <line x1="270" y1="178" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
-          <text x="200" y="262" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">Two TENS contacts</text>
+          <text x="200" y="262" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="15" font-weight="600" fill="#1f2b26">Two steel contacts</text>
           <line x1="130" y1="240" x2="270" y2="240" stroke="#5b6660" stroke-width="1.5" />
         </svg>
       </div>
       <div class="split__copy">
-        <h2 class="h2">Two technologies working on one spot</h2>
         <div class="feature">
           <span class="icon-badge icon-badge--lg"><Icon name="sun" size={24} /></span>
           <div>
-            <h3 class="h3">Low-level cold laser</h3>
-            <p>A single 670 nm red laser diode under 1 mW sits in the middle of the head. It’s often called a cold laser because it doesn’t heat the skin.</p>
+            <h2 class="h3">The cold laser</h2>
+            <p>A single low-power red laser (670 nm, 1 mW) sits in the center of the tip. It doesn’t heat your skin, and you won’t feel it.</p>
           </div>
         </div>
         <div class="feature">
           <span class="icon-badge icon-badge--lg"><Icon name="zap" size={24} /></span>
           <div>
-            <h3 class="h3">TENS electrical stimulation</h3>
-            <p>Two stainless steel contacts deliver mild, pulsed electrical stimulation through the gel at the same time as the laser, so both reach the same area.</p>
+            <h2 class="h3">Gentle electrical stimulation</h2>
+            <p>Two steel contacts beside the laser deliver mild electrical stimulation. You’ll feel a soft tingle, and a dial lets you set the strength. A thin layer of gel carries it to your skin.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="icon-badge icon-badge--lg"><Icon name="check" size={24} /></span>
+          <div>
+            <h2 class="h3">Why both in one device</h2>
+            <p>Most at-home options use one technology. LaserTouchOne puts both in one handheld, so there are no sticky pads, no wires and no second device.</p>
           </div>
         </div>
       </div>
@@ -61,8 +67,7 @@ const routine = [
   <section class="section band">
     <div class="container">
       <div class="section-head section-head--center">
-        <h2 class="h2">Your two-minute routine</h2>
-        <p class="lead">No appointments and nothing to wear. Use it on the couch, at your desk or before bed.</p>
+        <h2 class="h2">Using it</h2>
       </div>
       <ol class="routine">
         {routine.map((s, i) => (
@@ -82,16 +87,10 @@ const routine = [
     <div class="container split">
       <div class="split__copy">
         <h2 class="h2">What it’s cleared for</h2>
-        <p class="lead">LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116). It is cleared for:</p>
         <ul class="checklist checklist--lg">
-          <li><Icon name="check" size={20} />Symptomatic relief of chronic, intractable pain</li>
-          <li><Icon name="check" size={20} />Adjunctive treatment of acute pain after surgery or an injury, alongside your other care</li>
-          <li><Icon name="check" size={20} />Temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin, alongside your other care</li>
+          {CLEARED_FOR.map((c) => <li><Icon name="check" size={20} />{c}</li>)}
         </ul>
-        <blockquote class="quote-card">
-          <p>“Symptomatic relief of chronic, intractable pain, and is indicated for adjunctive treatment of post-surgical and post-traumatic acute pain and for adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.”</p>
-          <footer>FDA clearance K100116, indications for use. <a href="https://www.accessdata.fda.gov/cdrh_docs/pdf10/K100116.pdf" target="_blank" rel="noopener">Read the document</a></footer>
-        </blockquote>
+        <a class="link-arrow" href={FDA_PDF} target="_blank" rel="noopener">Read the FDA document <Icon name="arrow" size={18} /></a>
       </div>
       <ProductPhoto file="04_tip-front.jpg" />
     </div>
@@ -104,17 +103,22 @@ const routine = [
       <div class="safety">
         <span class="icon-badge icon-badge--lg"><Icon name="shield" size={24} /></span>
         <div>
-          <h2 class="h3">Use it safely</h2>
-          <ul class="safety__list">
-            <li>Never point the laser at your eyes or anyone else’s.</li>
-            <li>If you are pregnant, or have a heart condition or epilepsy, talk to your doctor first.</li>
-            <li>If your pain is new, severe or unexplained, see a doctor before using any device.</li>
-            <li>Read the user manual before your first session.</li>
-          </ul>
+          <h2 class="h3">Before you start</h2>
+          <p class="safety__text">Read the safety information in your user manual. Questions? Text us at <a href={textHref}>{SITE.textNumber}</a>.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <CtaBand title="Ready to try it?" text="Pick your kit, or text us if you’d like help choosing." />
+  <section class="section section--tight-top">
+    <div class="container buy-end">
+      {kit.productId
+        ? <button type="button" class="btn btn--primary btn--lg" data-add-to-cart={kit.productId} data-variant={kit.variantId ?? ''} data-track-price={kit.amount}>Add to cart{priceNow ? ` – ${priceNow}` : ''}</button>
+        : <a class="btn btn--primary btn--lg" href="/shop">See the kit</a>}
+      <p class="offer__fact">
+        <Icon name="shield" size={18} /> Money-back guarantee ·{' '}
+        {SITE.textNumber ? <>Text a real person: <a href={textHref}>{SITE.textNumber}</a></> : 'Text a real person'}
+      </p>
+    </div>
+  </section>
 </SiteLayout>
