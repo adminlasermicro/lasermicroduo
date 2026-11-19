@@ -12,6 +12,7 @@ import ResellerSeal from '../components/site/ResellerSeal.astro';
 import StudyList from '../components/site/StudyList.astro';
 import { SITE, textHref } from '../site.config.js';
 import { productSchema, breadcrumbSchema } from '../lib/schema.js';
+import { PRODUCT_PHOTOS } from '../data/productPhotos.js';
 
 const { kit, accessories } = await loadStore();
 const details = [
@@ -24,16 +25,18 @@ const details = [
   { q: 'FDA clearance', a: 'LaserTouchOne is FDA-cleared for over-the-counter use (510(k) K100116) for symptomatic relief of chronic, intractable pain, adjunctive treatment of post-surgical and post-traumatic acute pain, and adjunctive use in providing temporary relief of minor chronic neck and shoulder pain of musculoskeletal origin.' },
 ];
 ---
-<SiteLayout schema={[productSchema(kit), breadcrumbSchema([{ name: 'Shop', path: '/shop' }])]}>
+<SiteLayout preloadImage={PRODUCT_PHOTOS[0].src} schema={[productSchema(kit), breadcrumbSchema([{ name: 'Shop', path: '/shop' }])]}>
   <section class="product">
     <div class="container product__grid">
       <div class="gallery" data-gallery>
-        <div class="gallery__main" data-photo-slot="product-main">
-          <span class="product-stage__note">Product photo coming soon</span>
+        <div class="gallery__main gallery__main--photo">
+          <img class="gallery__img" data-gallery-main src={PRODUCT_PHOTOS[0].src} alt={PRODUCT_PHOTOS[0].alt} width="2048" height="2048" fetchpriority="high" />
         </div>
-        <div class="gallery__thumbs">
-          {['Device', 'Treatment head', 'Kit contents', 'In use'].map((t, i) => (
-            <button type="button" class={`gallery__thumb ${i === 0 ? 'is-active' : ''}`} aria-label={`Show photo: ${t}`} data-photo-slot={`product-thumb-${i + 1}`}><span>{t}</span></button>
+        <div class="gallery__thumbs gallery__thumbs--photos" role="group" aria-label="Product photos">
+          {PRODUCT_PHOTOS.map((p, i) => (
+            <button type="button" class={`gallery__thumb gallery__thumb--photo ${i === 0 ? 'is-active' : ''}`} aria-pressed={i === 0 ? 'true' : 'false'} aria-label={`Photo ${i + 1} of ${PRODUCT_PHOTOS.length}: ${p.alt}`} data-src={p.src} data-alt={p.alt}>
+              <img src={p.src} alt="" width="2048" height="2048" loading="lazy" decoding="async" />
+            </button>
           ))}
         </div>
       </div>
@@ -134,8 +137,14 @@ const details = [
   <StickyBuy kit={kit} />
 
   <script>
-    document.querySelectorAll('[data-gallery] .gallery__thumb').forEach((t, _, all) => t.addEventListener('click', () => {
-      all.forEach((x) => x.classList.toggle('is-active', x === t));
-    }));
+    // Gallery: a thumbnail shows its photo in the main frame.
+    document.querySelectorAll('[data-gallery]').forEach((g) => {
+      const main = g.querySelector('[data-gallery-main]');
+      const thumbs = g.querySelectorAll('.gallery__thumb');
+      thumbs.forEach((t) => t.addEventListener('click', () => {
+        if (main && t.dataset.src) { main.src = t.dataset.src; main.alt = t.dataset.alt || ''; }
+        thumbs.forEach((x) => { x.classList.toggle('is-active', x === t); x.setAttribute('aria-pressed', String(x === t)); });
+      }));
+    });
   </script>
 </SiteLayout>

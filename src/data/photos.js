@@ -1,3 +1,4 @@
+import { PRODUCT_PHOTOS } from './productPhotos.js';
 // Stand-in stock photos (CC0 / public domain via rawpixel). Replace with your own any time:
 // drop a new file in public/photos and change `src` here.
 export const PHOTOS = {
@@ -12,4 +13,4 @@ export const PHOTOS = {
 
 // Real product photos for Google's product data (paths in /public). Google wants at least one before
 // it shows the product as a merchant listing. Add them here as they arrive, e.g. '/photos/device.webp'.
-export const PRODUCT_IMAGES = [];
+export const PRODUCT_IMAGES = PRODUCT_PHOTOS.map((p) => p.src);

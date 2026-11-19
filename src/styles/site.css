@@ -568,3 +568,19 @@ button { cursor: pointer; }
 /* Guarantee steps beside the guarantee text: two columns of two. */
 .steps--compact { grid-template-columns: repeat(2, 1fr); gap: var(--s4); }
 @media (max-width: 600px) { .steps--compact { grid-template-columns: 1fr; } }
+
+/* Shop gallery with real photos: white background like the photos, no placeholder disc. */
+.gallery__main--photo { background: #fff; border: 1px solid var(--color-border); }
+.gallery__main--photo::before { display: none; }
+.gallery__img { width: 100%; height: 100%; object-fit: contain; }
+.gallery__thumbs--photos { grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.gallery__thumb--photo { padding: 0; overflow: hidden; background: #fff; border: 1px solid var(--color-border); min-height: 44px; }
+.gallery__thumb--photo img { width: 100%; height: 100%; object-fit: contain; }
+.gallery__thumb--photo.is-active { background: #fff; outline: 2px solid var(--color-brand); outline-offset: 2px; }
+.gallery__thumb--photo:hover { background: #fff; border-color: var(--color-border-strong); }
+@media (max-width: 960px) {
+  /* Photos first on phones and tablets, above the buy box. */
+  .gallery { order: 0; }
+  .gallery__thumbs--photos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 6px 10px; scroll-padding-inline: 6px; }
+  .gallery__thumbs--photos .gallery__thumb { flex: 0 0 72px; width: 72px; height: 72px; scroll-snap-align: start; }
+}
