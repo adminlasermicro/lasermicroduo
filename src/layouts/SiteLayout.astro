@@ -33,8 +33,10 @@ const {
   preloadImage,
 } = Astro.props;
 
-// Set to true once the titles in src/data/seo.js are copied into the Wix dashboard
-// (SEO Settings > Main Pages). Wix then injects one title, description and canonical per page.
+// This layout prints each page's title, description and share tags from src/data/seo.js.
+// Wix would also inject its own "{page} | Laser Micro Duo" title and share tags, so on Nov 18, 2026 the
+// site's STATIC_PAGE SEO pattern (Wix dashboard > SEO Settings > Main pages > Customize defaults) was set
+// to disable Wix's title, og:* and twitter:* tags. Wix still adds the canonical link. Leave this false.
 const wixSeo = false;
 
 const org = {

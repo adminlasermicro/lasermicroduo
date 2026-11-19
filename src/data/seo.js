@@ -1,9 +1,6 @@
-// Title and meta description for every page, in one place, all inside the FDA-cleared indication.
-//
-// On the live site Wix injects the title, description, canonical and social tags from the dashboard
-// (SEO & GEO > SEO Settings > Main Pages). When we publish, these values are copied into the dashboard
-// and the layout stops printing its own <title>/<meta description> (see SiteLayout `wixSeo`), so each
-// page has one title, not two. Until then the layout prints them, so local and preview builds show them.
+// Title and meta description for every page (also used for the og:/twitter: share tags), all inside the
+// FDA-cleared indication. These are the only titles on the site: Wix's own injected title and share tags
+// are switched off in the site's STATIC_PAGE SEO pattern (see SiteLayout.astro). Wix still adds canonicals.
 export const SEO = {
   "/": {
     title: "LaserTouchOne FDA-Cleared Laser Device | Laser Micro Duo",
